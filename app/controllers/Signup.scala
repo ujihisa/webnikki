@@ -1,12 +1,11 @@
 package controllers
 
 import play.api._
-import play.api.db._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-// import models.Member
-// import anorm.NotAssigned
+
+import models.Member
 
 object SignupController extends Controller {
   // http://dev.classmethod.jp/server-side/play-yabe-2/
@@ -27,8 +26,8 @@ object SignupController extends Controller {
 
   val memberForm = Form(
     tuple(
-      "uname" -> text,
-      "password" -> text,
+      "uname" -> nonEmptyText,
+      "password" -> nonEmptyText,
       "email" -> email
     )
   )
@@ -47,14 +46,11 @@ object SignupController extends Controller {
 
   def indexPost = Action {
     implicit request => memberForm.bindFromRequest.fold(
-      errors => {
-        println(errors)
-        println(errors.getClass)
-        Ok("なんかエラー")
-      }, value => {
-        println(value)
-        println(value.getClass)
-        Ok("こっちに来てればとりあえずおｋ")
+      errors => { BadRequest(views.html.signup("error" /* FIXME errors should be passed. */ )) },
+      { case (uname, password, email) => {
+          Member.create(uname, password, email)
+          Ok(views.html.signup("good"))
+        }
       }
     )
   }

@@ -35,11 +35,11 @@ object Member {
   def create(
     uname: String,
     password: String,
-    password_salt: String,
     email: String) {
+    val password_salt = "tekito-"
     val sql =
       "INSERT INTO member (uname, password, password_salt, email) " +
-      "VALUES ({uname, password, password_salt, email})"
+      "VALUES ({uname}, {password}, {password_salt}, {email})"
 
     DB.withConnection {
       implicit c => SQL(sql).on(
