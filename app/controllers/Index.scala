@@ -18,7 +18,7 @@ object IndexController extends Controller {
   }
 
   def test2 = Action {
-    Ok("天才のそれに近いな。")
+    Ok("日本語")
   }
 
   def test3 = Action {
@@ -33,7 +33,7 @@ object IndexController extends Controller {
       session.get("sample-key").map { value =>
         Ok(value)
       }.getOrElse {
-        Ok("が、ダメっ!")
+        Ok("化ける")
       }
     }
   }

@@ -47,9 +47,13 @@ object SignupController extends Controller {
 
   def indexPost = Action {
     implicit request => memberForm.bindFromRequest.fold(
-      errors => Ok("なんかエラー"),
-      value => {
+      errors => {
+        println(errors)
+        println(errors.getClass)
+        Ok("なんかエラー")
+      }, value => {
         println(value)
+        println(value.getClass)
         Ok("こっちに来てればとりあえずおｋ")
       }
     )

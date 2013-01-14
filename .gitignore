@@ -12,3 +12,9 @@ dist
 /.classpath
 /.project
 /RUNNING_PID
+
+bin
+.cache
+.DS_Store
+/.settings
+/.target
