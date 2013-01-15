@@ -48,7 +48,11 @@ object SignupController extends Controller {
     implicit request => memberForm.bindFromRequest.fold(
       errors => { BadRequest(views.html.signup("error" /* FIXME errors should be passed. */ )) },
       { case (uname, password, email) => {
-          Member.create(uname, password, email)
+          try {
+            Member.create(uname, password, email)
+          } catch {
+            case e: Exception => println("exception caught: " + e.getMessage) /* need more concrete error handling */
+          }
           Ok(views.html.signup("good"))
         }
       }
