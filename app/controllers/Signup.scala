@@ -5,25 +5,10 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 
+import views._
 import models.Member
 
 object SignupController extends Controller {
-  // http://dev.classmethod.jp/server-side/play-yabe-2/
-  // val memberForm: Form[Member] = Form(
-  //   mapping(
-  //     "id" -> number,
-  //     "uname" -> text(minLength = 1),
-  //     "password" -> text(minLength = 1),
-  //     "password_salt" -> text(minLength = 1),
-  //     "email" -> email
-  //   ) {
-  //     // (uname, password, password_salt, email) => Member(NotAssigned, uname, password, password_salt, email)
-  //     (id, uname, password, password_salt, email) => Member(id, uname, password, password_salt, email)
-  //   } {
-  //     member => Some(member.id, member.uname, member.password, member.password_salt, member.email)
-  //   }
-  // )
-
   val memberForm = Form(
     tuple(
       "uname" -> nonEmptyText,
@@ -33,27 +18,25 @@ object SignupController extends Controller {
   )
 
   def index = Action {
-    Ok(views.html.signup("Hello, this is signup!"))
+    Ok(html.signup(memberForm))
   }
-
-  // def indexPost = Action {
-  //   implicit request => {
-  //     println(request.body.asFormUrlEncoded.get("uname"))
-  //     println(request.body.asFormUrlEncoded.get("uname").toString())
-  //     Ok("Postされた")
-  //   }
-  // }
 
   def indexPost = Action {
     implicit request => memberForm.bindFromRequest.fold(
-      errors => { BadRequest(views.html.signup("error" /* FIXME errors should be passed. */ )) },
-      { case (uname, password, email) => {
+      formWithErrors => {
+        println(formWithErrors)
+        BadRequest(html.signup(formWithErrors))
+      }, {
+        case (uname, password, email) => {
           try {
             Member.create(uname, password, email)
+            Ok(html.signupSuccess(""))
           } catch {
-            case e: Exception => println("exception caught: " + e.getMessage) /* need more concrete error handling */
+            case e: Exception => {
+              println("exception caught: " + e.getMessage)
+              BadRequest(html.signup(memberForm)) // 2nd argumentにOption型のエラーメッセージ付ける
+            }
           }
-          Ok(views.html.signup("good"))
         }
       }
     )
