@@ -3,10 +3,10 @@
 CREATE SEQUENCE member_id_seq;
 CREATE TABLE member (
     id integer NOT NULL DEFAULT nextval('member_id_seq'),
-    uname varchar(255) NOT NULL,
+    uname varchar(255) UNIQUE NOT NULL,
+    email varchar(511) UNIQUE NOT NULL,
     password varchar(255) NOT NULL,
-    password_salt varchar(255) NOT NULL,
-    email varchar(511) NOT NULL
+    password_salt varchar(255) NOT NULL
 );
 
 # --- !Downs
