@@ -1,4 +1,4 @@
-@(memberForm: Form[(String, String, String)])
+@(memberForm: Form[(String, String, String)], errorMessage: Option[String])
 
 @import helper._
 
@@ -14,6 +14,10 @@
   (start) @value.message (end)<br />
 }
 -->
+
+<p class="error-message">
+@errorMessage
+</p>
 
 @form(action = routes.SignupController.indexPost) {
 <table>

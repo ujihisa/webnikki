@@ -12,29 +12,29 @@ object SignupController extends Controller {
   val memberForm = Form(
     tuple(
       "uname" -> nonEmptyText,
-      "password" -> nonEmptyText,
-      "email" -> email
+      "email" -> email,
+      "password" -> nonEmptyText
     )
   )
 
   def index = Action {
-    Ok(html.signup(memberForm))
+    Ok(html.signup(memberForm, None))
   }
 
   def indexPost = Action {
     implicit request => memberForm.bindFromRequest.fold(
       formWithErrors => {
-        println(formWithErrors)
-        BadRequest(html.signup(formWithErrors))
+        BadRequest(html.signup(formWithErrors, None))
       }, {
-        case (uname, password, email) => {
+        case (uname, email, password) => {
           try {
-            Member.create(uname, password, email)
+            Member.create(uname, email, password)
             Ok(html.signupSuccess(""))
           } catch {
             case e: Exception => {
-              println("exception caught: " + e.getMessage)
-              BadRequest(html.signup(memberForm)) // 2nd argumentにOption型のエラーメッセージ付ける
+              BadRequest(
+                  html.signup(memberForm.bind(Map("uname" -> uname, "email" -> email, "password" -> password)),
+                  Some("ごめんなさい...ユーザ名かメールアドレスが既に使われているみたいです。"))) // FIXME 2nd argument should be more specific
             }
           }
         }
