@@ -1,18 +1,45 @@
 @(memberForm: Form[(String, String, String)])
 
+@import helper._
+
 @main("constantな文字列を渡してみるよー") {
 
 <p>
 ｳｧｰﾝ･ﾟ･(ﾉД`)ヽ(ﾟДﾟ )ﾅｸﾅ
 </p>
 
-<div>
-<form method="POST">
-お名前: <input type="text" name="uname" /><br />
-メール: <input type="text" name="email" /><br />
-パスワード: <input type="password" name="password" /><br />
-パスワード表示したい?: <input type="checkbox" /><br />
-<input type="submit" />
-</form>
-</div>
+<!--
+@for(value <- memberForm.errors) {
+  (start) @value.key (end)<br />
+  (start) @value.message (end)<br />
 }
+-->
+
+@form(action = routes.SignupController.indexPost) {
+<table>
+  <tr>
+    <td>お名前を教えてください</td>
+    <td><input type="text" name="uname" size="48" placeholder="お名前を入力してください" value="@memberForm("uname").value" /></td>
+  </tr>
+  <tr>
+    <td>メールアドレスを教えてください</td>
+    <td><input type="text" name="email" size="48" placeholder="メールアドレスを入力してください" value="@memberForm("email").value" /></td>
+  </tr>
+  <tr>
+    <td>パスワードを教えてください</td>
+    <td>
+      <input type="password" name="password" size="48" placeholder="パスワードを入力してください" value="" />
+      <label>
+        <input id="password-check" type="checkbox" />
+        <span>パスワードを確認しますか?</span>
+      </label>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><input type="submit" value="登録" /></td>
+  </tr>
+</table>
+}
+
+}
+
