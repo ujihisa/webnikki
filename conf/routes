@@ -6,6 +6,7 @@ GET     /                           controllers.IndexController.index
 GET     /signup                     controllers.SignupController.index
 POST    /signup                     controllers.SignupController.indexPost
 GET     /login                      controllers.LoginController.index
+GET     /api/exist/:category/:name   controllers.ApiController.exist(category, name)
 
 # this will be removed
 GET     /test                       controllers.IndexController.test

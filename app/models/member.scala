@@ -28,8 +28,31 @@ object Member {
     }
   }
 
-  def all(): List[Member] = DB.withConnection {
-    implicit c => SQL("SELECT * FROM member").as(member *)
+//  def all(): List[Member] = DB.withConnection {
+//    implicit c => SQL("SELECT * FROM member").as(member *)
+//  }
+
+  // this should be private method
+  def selectBy(field: String, value: String) = {
+    DB.withConnection {
+      implicit c => {
+        val member = SQL("SELECT id FROM member WHERE {field}= {value}").on(field -> value).apply()
+        if (member.isEmpty) None else Some(member.head)
+      }
+    }
+  }
+
+  def selectByUname(uname: String) = {
+//    DB.withConnection {
+//      implicit c => {
+//        val member = SQL("SELECT id FROM member WHERE uname = {uname}").on("uname" -> uname).apply()
+//        if (member.isEmpty) None else Some(member.head)
+//      }
+//    }
+    selectBy("uname", uname)
+  }
+
+  def selectByEmail(email: String) = {
   }
 
   def create(
