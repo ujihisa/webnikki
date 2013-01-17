@@ -36,7 +36,9 @@ object Member {
   def selectBy(field: String, value: String) = {
     DB.withConnection {
       implicit c => {
-        val member = SQL("SELECT id FROM member WHERE {field}= {value}").on(field -> value).apply()
+        println(field, value)
+        // val member = SQL("SELECT id FROM member WHERE {field} = {value}").on("field" -> field, "value" -> value).apply()
+        val member = SQL("SELECT id FROM member WHERE " + field + " = {value}").on("value" -> value).apply()
         if (member.isEmpty) None else Some(member.head)
       }
     }
