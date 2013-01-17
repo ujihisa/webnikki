@@ -42,18 +42,11 @@ object Member {
     }
   }
 
-  def selectByUname(uname: String) = {
-//    DB.withConnection {
-//      implicit c => {
-//        val member = SQL("SELECT id FROM member WHERE uname = {uname}").on("uname" -> uname).apply()
-//        if (member.isEmpty) None else Some(member.head)
-//      }
-//    }
+  def selectByUname(uname: String) =
     selectBy("uname", uname)
-  }
 
-  def selectByEmail(email: String) = {
-  }
+  def selectByEmail(email: String) =
+    selectBy("email", email)
 
   def create(
     uname: String,
