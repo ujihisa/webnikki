@@ -13,7 +13,7 @@ object SignupController extends Controller {
     tuple(
       "uname" -> nonEmptyText,
       "email" -> email,
-      "password" -> nonEmptyText
+      "password" -> nonEmptyText(minLength = 4) // FIXME this should *not* be hard coded
     )
   )
 
@@ -34,7 +34,7 @@ object SignupController extends Controller {
             case e: Exception => {
               BadRequest(
                   html.signup(memberForm.bind(Map("uname" -> uname, "email" -> email, "password" -> password)),
-                  Some("ごめんなさい...ユーザ名かメールアドレスが既に使われているみたいです。"))) // FIXME 2nd argument should be more specific
+                  Some("ごめんなさい...ユーザ名かメールアドレスが既に使われているみたいです。")))
             }
           }
         }
