@@ -32,13 +32,11 @@ object Member {
 //    implicit c => SQL("SELECT * FROM member").as(member *)
 //  }
 
-  // this should be private method
-  def selectBy(field: String, value: String) = {
+  private def selectBy(field: String, value: String) = {
     DB.withConnection {
       implicit c => {
         println(field, value)
-        // val member = SQL("SELECT id FROM member WHERE {field} = {value}").on("field" -> field, "value" -> value).apply()
-        val member = SQL("SELECT id FROM member WHERE " + field + " = {value}").on("value" -> value).apply()
+        val member = SQL("SELECT id FROM member WHERE %s = {value}" format field).on("value" -> value).apply()
         if (member.isEmpty) None else Some(member.head)
       }
     }
