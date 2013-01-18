@@ -2,11 +2,11 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                           controllers.IndexController.index
-GET     /signup                     controllers.SignupController.index
-POST    /signup                     controllers.SignupController.indexPost
-GET     /login                      controllers.LoginController.index
-GET     /api/exist/:category/:name   controllers.ApiController.exist(category, name)
+GET     /                                   controllers.IndexController.index
+GET     /signup                             controllers.SignupController.index
+POST    /signup                             controllers.SignupController.indexPost
+GET     /login                              controllers.LoginController.index
+GET     /api/exist/:category/$name<[\w\d]*> controllers.ApiController.exist(category, name)
 
 # this will be removed
 GET     /test                       controllers.IndexController.test

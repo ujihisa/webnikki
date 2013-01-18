@@ -9,6 +9,7 @@ import models.Member
 
 object ApiController extends Controller {
   def exist(category: String, name: String) = Action {
+    // this can be refactored
     category match {
       case "uname" => {
         Member.selectByUname(name) match {
