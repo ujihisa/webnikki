@@ -9,15 +9,22 @@ import models.Member
 
 object ApiController extends Controller {
   def exist(category: String, name: String) = Action {
-    if (category == "uname") {
-      Member.selectByUname(name) match {
-        case Some(member) => Ok(Json.toJson(Map("exist" -> 1)))
-        case None => Ok(Json.toJson(Map("exist" -> 0)))
+    category match {
+      case "uname" => {
+        Member.selectByUname(name) match {
+          case Some(member) => Ok(Json.toJson(Map("exist" -> 1)))
+          case None => Ok(Json.toJson(Map("exist" -> 0)))
+        }
       }
-    } else if (category == "email") {
-      Ok(Json.toJson("まだ実装してない..."))
-    } else {
-      Ok(Json.toJson("まだ実装してない..."))
+      case "email" => {
+        Member.selectByEmail(name) match {
+          case Some(member) => Ok(Json.toJson(Map("exist" -> 1)))
+          case None => Ok(Json.toJson(Map("exist" -> 0)))
+        }
+      }
+      case _ => {
+        Ok(Json.toJson("まだ実装してない..."))
+      }
     }
   }
 }
