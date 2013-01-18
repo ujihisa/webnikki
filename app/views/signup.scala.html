@@ -22,15 +22,15 @@
 @form(action = routes.SignupController.indexPost) {
 <table>
   <tr>
-    <td>お名前を教えてください</td>
+    <td>お名前</td>
     <td><input id="uname" type="text" name="uname" size="48" placeholder="お名前を入力してください" value="@memberForm("uname").value" /> <span id="uname-info" class="form-info"></span></td>
   </tr>
   <tr>
-    <td>メールアドレスを教えてください</td>
+    <td>メールアドレス</td>
     <td><input id="email" type="text" name="email" size="48" placeholder="メールアドレスを入力してください" value="@memberForm("email").value" /> <span id="email-info" class="form-info"></span></td>
   </tr>
   <tr>
-    <td>パスワードを教えてください</td>
+    <td>パスワード</td>
     <td>
       <input id="password" type="password" name="password" size="48" placeholder="パスワードを入力してください" value="" />
       <label>
