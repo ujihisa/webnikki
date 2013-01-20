@@ -2,37 +2,34 @@
 
 @import helper._
 
-@main("constantな文字列を渡してみるよー") {
+@main("ユーザー登録") {
 
 <p>
 ｳｧｰﾝ･ﾟ･(ﾉД`)ヽ(ﾟДﾟ )ﾅｸﾅ
 </p>
 
-<!--
-@for(value <- memberForm.errors) {
-  (start) @value.key (end)<br />
-  (start) @value.message (end)<br />
-}
--->
+<div id="errors" style="display: none;">@for(value <- memberForm.errors) { <div id="data-@value.key">@value.message</div> }</div>
 
-<p class="error-message">
-@errorMessage
-</p>
+<div id="error-messages">
+<ul id="error-messages-list">
+@if(errorMessage) { <li>@errorMessage</li> }
+</ul>
+</div>
 
 @form(action = routes.SignupController.indexPost) {
 <table>
-  <tr>
+  <tr id="uname-tr">
     <td>お名前</td>
     <td><input id="uname" type="text" name="uname" size="48" placeholder="お名前を入力してください" value="@memberForm("uname").value" /> <span id="uname-info" class="form-info"></span></td>
   </tr>
-  <tr>
+  <tr id="email-tr">
     <td>メールアドレス</td>
     <td><input id="email" type="text" name="email" size="48" placeholder="メールアドレスを入力してください" value="@memberForm("email").value" /> <span id="email-info" class="form-info"></span></td>
   </tr>
-  <tr>
+  <tr id="password-tr">
     <td>パスワード</td>
     <td>
-      <input id="password" type="password" name="password" size="48" placeholder="4文字以上のパスワードを入力してください" />  <span id="password-info" class="form-info"></span>
+      <input id="password" type="password" name="password" size="48" placeholder="4文字以上のパスワードを入力してください" value="@memberForm("password").value" />  <span id="password-info" class="form-info"></span>
       <div>
       <label>
         <input id="password-check" type="checkbox" /> <span>パスワードを確認しますか?</span>

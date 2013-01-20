@@ -1,4 +1,8 @@
 span.form-info {
-  color: #ff0000;
-  font-weight: bold;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+tr.warning {
+    background-color: #ffaaaa;
 }

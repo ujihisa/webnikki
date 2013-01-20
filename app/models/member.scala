@@ -7,7 +7,6 @@ import play.api.db._
 import play.api.Play.current
 
 case class Member(
-  // id: Pk[Long],
   id: Long,
   uname: String,
   password: String,
