@@ -2,6 +2,7 @@ package controllers
 
 import play.api._
 import play.api.mvc._
+import library.Random
 
 object IndexController extends Controller {
   def index = Action {
@@ -18,6 +19,7 @@ object IndexController extends Controller {
   }
 
   def test2 = Action {
+    println(Random.randomString(10))
     Ok("日本語")
   }
 
