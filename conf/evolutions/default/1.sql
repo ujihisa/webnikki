@@ -6,7 +6,7 @@ CREATE TABLE member (
     uname varchar(255) UNIQUE NOT NULL,
     email varchar(511) UNIQUE NOT NULL,
     password varchar(255) NOT NULL,
-    password_salt varchar(255) NOT NULL
+    salt varchar(255) NOT NULL
 );
 
 # --- !Downs
