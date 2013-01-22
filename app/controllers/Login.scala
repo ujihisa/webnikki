@@ -23,13 +23,11 @@ object LoginController extends Controller {
     implicit request =>
       memberForm.bindFromRequest.fold(
           formWithErrors => {
-            // println(formWithErrors)
             BadRequest(html.login(formWithErrors, Some("メールアドレスかパスワードを間違えちゃってるみたいです...。")))
           }, {
             case(email, password) => {
-              println(email, password, Member.isValidPassword(email, password))
               if (Member.isValidPassword(email, password)) {
-                Ok("それ正しいパスワードだよ! おめでとう!")
+                Ok("それ正しいパスワードだよ! おめでとう!").withSession("login" -> "1")
               } else {
                 BadRequest(
                     html.login(

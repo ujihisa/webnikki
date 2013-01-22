@@ -7,6 +7,7 @@ GET     /signup                             controllers.SignupController.index
 POST    /signup                             controllers.SignupController.indexPost
 GET     /login                              controllers.LoginController.index
 POST    /login                              controllers.LoginController.indexPost
+GET     /logout                             controllers.LogoutController.index
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
 
 # this will be removed
@@ -14,6 +15,7 @@ GET     /test                       controllers.IndexController.test
 GET     /test2                      controllers.IndexController.test2
 GET     /test3                      controllers.IndexController.test3
 GET     /test4                      controllers.IndexController.test4
+GET     /test5                      controllers.IndexController.test5
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

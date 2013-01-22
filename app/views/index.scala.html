@@ -1,4 +1,4 @@
-@(message: String)
+@(message: String, login: Option[String])
 
 @main(message) {
 <p>
@@ -6,7 +6,11 @@
 </p>
 
 <ul>
+@if(login) {
+  <li><a href="/logout">ログアウト</a></li>
+} else {
   <li><a href="/signup">ユーザー登録</a></li>
   <li><a href="/login">ログイン</a></li>
+}
 </ul>
 }
