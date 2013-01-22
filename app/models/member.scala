@@ -5,6 +5,9 @@ import anorm.SqlParser._
 
 import play.api.db._
 import play.api.Play.current
+
+import java.security.MessageDigest
+
 import library.Random
 
 case class Member(
@@ -26,7 +29,7 @@ object Member {
       }
   }
   val saltLength = 64
-  val strechNum = 1000
+  val stretchNum = 1000
 
   //  def all(): List[Member] = DB.withConnection {
   //    implicit c => SQL("SELECT * FROM member").as(member *)
@@ -43,9 +46,11 @@ object Member {
   }
 
   private def stretch(password: String, num: Int): String = {
+    val md = MessageDigest.getInstance("SHA-512")
+
     num match {
       case 0 => password
-      case _ => stretch(password, num - 1)
+      case _ => stretch(md.digest(password.getBytes).map(_ & 0xFF).map(_.toHexString).mkString, num - 1)
     }
   }
 
@@ -57,22 +62,22 @@ object Member {
 
   def create(
     uname: String,
-    password: String,
-    email: String) {
+    email: String,
+    password: String) {
     val salt = Random.randomString(saltLength)
-    val stretchedPassword = salt
+    val stretchedPassword = stretch(password + salt, stretchNum)
     val sql =
-      "INSERT INTO member (uname, password, salt, email) " +
-        "VALUES ({uname}, {password}, {salt}, {email})"
+      "INSERT INTO member (uname, email, stretchedPassword, salt) " +
+      "VALUES ({uname}, {email}, {password}, {salt})"
 
     DB.withConnection {
       implicit c =>
         SQL(sql).on(
           "uname" -> uname,
+          "email" -> email,
           "password" -> password,
-          // "salt" -> salt,
-          "salt" -> salt,
-          "email" -> email).executeUpdate()
+          "salt" -> salt
+          ).executeUpdate()
     }
   }
 
