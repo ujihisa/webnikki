@@ -28,16 +28,14 @@ object SignupController extends Controller {
         }, {
           case (uname, email, password) => {
             try {
-              println(uname, email, password)
               Member.create(uname, email, password)
               Ok(html.signupSuccess(""))
             } catch {
               case e: Exception => {
-                println(e.getMessage)
                 BadRequest(
                   html.signup(
                     memberForm.bind(Map("uname" -> uname, "email" -> email, "password" -> password)),
-                    Some("ごめんなさい...ユーザ名かメールアドレスが既に使われているみたいです。")))
+                    Some("ごめんなさい...ユーザ名かメールアドレスが既に使われているみたいです...。")))
               }
             }
           }

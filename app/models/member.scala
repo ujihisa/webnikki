@@ -24,8 +24,7 @@ object Member {
       get[String]("password") ~
       get[String]("salt") ~
       get[String]("email") map {
-        case id ~ uname ~ password ~ salt ~ email => Member(
-          id, uname, password, salt, email)
+        case id ~ uname ~ password ~ salt ~ email => Member(id, uname, password, salt, email)
       }
   }
   val saltLength = 64
@@ -39,7 +38,7 @@ object Member {
     DB.withConnection {
       implicit c =>
         {
-          val member = SQL("SELECT id FROM member WHERE %s = {value}" format field).on("value" -> value).apply()
+          val member = SQL("SELECT id, uname, password, salt, email FROM member WHERE %s = {value}" format field).on("value" -> value).apply()
           if (member.isEmpty) None else Some(member.head)
         }
     }
@@ -87,5 +86,13 @@ object Member {
         SQL("DELETE FROM member WHERE id = {id}").on(
           "id" -> id).executeUpdate()
     }
+  }
+
+  def isValidPassword(email: String, password: String): Boolean = {
+    val member= selectBy("email", email)
+    if (member.isEmpty) return false
+
+    // return stretch(password + member.get.salt, stretchNum) == member.get.password
+    return stretch(password + member.get[String]("salt"), stretchNum) == member.get[String]("password")
   }
 }
