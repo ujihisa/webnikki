@@ -8,6 +8,8 @@ POST    /signup                             controllers.SignupController.indexPo
 GET     /login                              controllers.LoginController.index
 POST    /login                              controllers.LoginController.indexPost
 GET     /logout                             controllers.LogoutController.index
+GET     /post                               controllers.PostController.index
+POST    /post                               controllers.PostController.indexPost
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
 
 # this will be removed
