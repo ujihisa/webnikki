@@ -67,7 +67,7 @@ object Member {
     val salt = Random.randomString(saltLength)
     val stretchedPassword = stretch(password + salt, stretchNum)
     val sql =
-      "INSERT INTO member (uname, email, stretchedPassword, salt) " +
+      "INSERT INTO member (uname, email, password, salt) " +
       "VALUES ({uname}, {email}, {password}, {salt})"
 
     DB.withConnection {
@@ -75,7 +75,7 @@ object Member {
         SQL(sql).on(
           "uname" -> uname,
           "email" -> email,
-          "password" -> password,
+          "password" -> stretchedPassword,
           "salt" -> salt
           ).executeUpdate()
     }
