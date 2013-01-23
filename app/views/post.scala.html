@@ -1,0 +1,29 @@
+@(postForm: Form[(String, String)], errorMessage: Option[String])
+
+@import helper._
+
+@main("記事投稿") {
+
+<p>
+ｽﾞｻｰc⌒っﾟДﾟ)っ
+</p>
+
+@form(action = routes.PostController.indexPost) {
+<table>
+  <tr id="title-tr">
+    <td>タイトル</td>
+    <td><input id="title" type="text" name="text" size="48" placeholder="タイトルを入力してください" value="@postForm("title").value" /> <span id="title-info" class="form-info"></td>
+  </tr>
+  <tr id="content-tr">
+    <td>記事</td>
+    <td>
+    <textarea placeholder="記事を書いてください">@postForm("content").value</textarea>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><input type="submit" value="投稿" /></td>
+  </tr>
+</table>
+}
+
+}

@@ -20,12 +20,12 @@ case class Member(
 object Member {
   val member = {
     get[Long]("id") ~
-      get[String]("uname") ~
-      get[String]("password") ~
-      get[String]("salt") ~
-      get[String]("email") map {
-        case id ~ uname ~ password ~ salt ~ email => Member(id, uname, password, salt, email)
-      }
+    get[String]("uname") ~
+    get[String]("password") ~
+    get[String]("salt") ~
+    get[String]("email") map {
+      case id ~ uname ~ password ~ salt ~ email => Member(id, uname, password, salt, email)
+    }
   }
   val saltLength = 64
   val stretchNum = 1000
@@ -76,7 +76,7 @@ object Member {
           "email" -> email,
           "password" -> stretchedPassword,
           "salt" -> salt
-          ).executeUpdate()
+          ).executeUpdate
     }
   }
 
@@ -84,7 +84,7 @@ object Member {
     DB.withConnection {
       implicit c =>
         SQL("DELETE FROM member WHERE id = {id}").on(
-          "id" -> id).executeUpdate()
+          "id" -> id).executeUpdate
     }
   }
 
