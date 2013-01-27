@@ -26,9 +26,10 @@ object Post {
 
   def create(
     title: String,
-    content: String,
-    created_at: Long,
-    modified_at: Long) {
+    content: String) {
+
+    if (content.trim.isEmpty) throw new Exception("記事の内容を入力してください。")
+
     val sql =
       "INSERT INTO post (title, content, created_at, modified_at) " +
       "VALUES ({title}, {content}, {created_at}, {modified_at})"
@@ -36,10 +37,10 @@ object Post {
     DB.withConnection {
       implicit c =>
         SQL(sql).on(
-          "title" -> title,
-          "content" -> content,
-          "created_at" -> created_at,
-          "modified_at" -> modified_at
+          "title" -> title.trim,
+          "content" -> content.trim,
+          "created_at" -> (System.currentTimeMillis / 1000).toLong,
+          "modified_at" -> (System.currentTimeMillis / 1000).toLong
           ).executeUpdate
     }
   }

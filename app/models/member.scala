@@ -63,7 +63,7 @@ object Member {
     uname: String,
     email: String,
     password: String) {
-    val salt = Random.randomString(saltLength)
+    val salt = Random.randomPrintableString(saltLength)
     val stretchedPassword = stretch(password + salt, stretchNum)
     val sql =
       "INSERT INTO member (uname, email, password, salt) " +
@@ -92,7 +92,6 @@ object Member {
     val member= selectBy("email", email)
     if (member.isEmpty) return false
 
-    // return stretch(password + member.get.salt, stretchNum) == member.get.password
     return stretch(password + member.get[String]("salt"), stretchNum) == member.get[String]("password")
   }
 }

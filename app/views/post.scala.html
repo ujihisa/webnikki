@@ -1,4 +1,4 @@
-@(postForm: Form[(String, String)], errorMessage: Option[String])
+@(postForm: Form[(String, String, String)], errorMessage: Option[String])
 
 @import helper._
 
@@ -8,7 +8,8 @@
 ｽﾞｻｰc⌒っﾟДﾟ)っ
 </p>
 
-@form(action = routes.PostController.indexPost) {
+<form id="submit">
+@if(!postForm("token").value.isEmpty) { <input id="token" type="hidden" name="token" value="@postForm("token").value" /> }
 <table>
   <tr id="title-tr">
     <td>タイトル</td>
@@ -24,6 +25,6 @@
     <td colspan="2"><input type="submit" value="投稿" /></td>
   </tr>
 </table>
-}
 
+<script src="@routes.Assets.at("javascripts/post.js")" type="text/javascript"></script>
 }

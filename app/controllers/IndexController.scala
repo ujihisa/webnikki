@@ -9,7 +9,8 @@ import views._
 object IndexController extends Controller {
   def index = Action {
     implicit request => {
-      Ok(html.index("Hello, this is index!", request.session.get("login")))
+      println(Play.current.configuration.getString("service.domain"))
+      Ok(html.index("Hello, this is index!", request.session.get("uname")))
     }
   }
 
@@ -23,7 +24,7 @@ object IndexController extends Controller {
   }
 
   def test2 = Action {
-    println(Random.randomString(10))
+    println(Random.randomAlphanumeriString(10))
     Ok("日本語")
   }
 

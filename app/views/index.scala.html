@@ -1,12 +1,17 @@
-@(message: String, login: Option[String])
+@(message: String, uname: Option[String])
 
 @main(message) {
 <p>
 (ﾟДﾟ#)ｺﾞﾙｧ!!
 </p>
 
+<p>
+@{play.api.Play.current.configuration.getString("service.domain")}.localhost
+</p>
+
 <ul>
-@if(login) {
+@if(uname) {
+  <li><a href="@{uname}.localhost">自分の日記を眺めてみまする</li>
   <li><a href="/post">新しい記事の投稿</a></li>
   <li><a href="/logout">ログアウト</a></li>
 } else {

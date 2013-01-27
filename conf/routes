@@ -10,6 +10,7 @@ POST    /login                              controllers.LoginController.indexPos
 GET     /logout                             controllers.LogoutController.index
 GET     /post                               controllers.PostController.index
 POST    /post                               controllers.PostController.indexPost
+# POST    /post                               controllers.PostController.indexTest
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
 
 # this will be removed
