@@ -30,7 +30,6 @@ object LoginController extends Controller {
             case(email, password) => {
               if (Member.isValidPassword(email, password)) {
                 val member = Member.selectByEmail(email)
-                // println(member.get[String]("uname"))
                 Ok("それ正しいパスワードだよ! おめでとう!").withSession("uname" -> member.get[String]("uname"), "token" -> Random.randomAlphanumeriString(64))
               } else {
                 BadRequest(
