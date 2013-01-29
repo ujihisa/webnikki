@@ -6,6 +6,7 @@ import play.api.data._
 import play.api.data.Forms._
 
 import views._
+import models.Member
 import models.Post
 
 object PostController extends Controller {
@@ -48,7 +49,8 @@ object PostController extends Controller {
       val (token, title, content) = postForm.bindFromRequest().get
       try {
         if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
-        Post.create(1, title, content) // FIXME: 1 is not the appropriate member_id
+        val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
+        Post.create(member.get[Long]("id"), title, content)
         Ok("書き込み成功！")
       } catch {
         case e: Exception => BadRequest("エラー: " + e)

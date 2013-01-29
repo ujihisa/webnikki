@@ -38,8 +38,8 @@ object Post {
     if (content.trim.isEmpty) throw new Exception("記事の内容を入力してください。")
 
     val sql =
-      "INSERT INTO post (title, content, created_at, modified_at) " +
-      "VALUES ({title}, {content}, {created_at}, {modified_at})"
+      "INSERT INTO post (member_id, title, content, created_at, modified_at) " +
+      "VALUES ({member_id}, {title}, {content}, {created_at}, {modified_at})"
 
     DB.withConnection {
       implicit c =>
