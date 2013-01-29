@@ -8,6 +8,7 @@ import play.api.Play.current
 
 case class Post(
   id: Long,
+  member_id: Long,
   title: String,
   content: String,
   created_at: Long,
@@ -16,15 +17,21 @@ case class Post(
 object Post {
   val post = {
     get[Long]("id") ~
+    get[Long]("member_id") ~
     get[String]("title") ~
     get[String]("content") ~
     get[Long]("created_at") ~
     get[Long]("modified_at") map {
-      case id ~ title ~ content ~ created_at ~ modified_at => Post(id, title, content, created_at, modified_at)
+      case id ~ member_id ~ title ~ content ~ created_at ~ modified_at => Post(id, member_id, title, content, created_at, modified_at)
     }
   }
 
+  def postsByMemberId(memberId: Int) {
+    ""
+  }
+
   def create(
+    member_id: Long,
     title: String,
     content: String) {
 
@@ -37,6 +44,7 @@ object Post {
     DB.withConnection {
       implicit c =>
         SQL(sql).on(
+          "member_id" -> member_id,
           "title" -> title.trim,
           "content" -> content.trim,
           "created_at" -> (System.currentTimeMillis / 1000).toLong,

@@ -7,7 +7,7 @@
 
 <ul>
 @if(uname) {
-  <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}">自分の日記を眺めてみまする</li>
+  <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記を眺めてみまする</li>
   <li><a href="/post">新しい記事の投稿</a></li>
   <li><a href="/logout">ログアウト</a></li>
 } else {

@@ -48,7 +48,7 @@ object PostController extends Controller {
       val (token, title, content) = postForm.bindFromRequest().get
       try {
         if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
-        Post.create(title, content)
+        Post.create(1, title, content) // FIXME: 1 is not the appropriate member_id
         Ok("書き込み成功！")
       } catch {
         case e: Exception => BadRequest("エラー: " + e)

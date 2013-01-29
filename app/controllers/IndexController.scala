@@ -9,8 +9,12 @@ import views._
 object IndexController extends Controller {
   def index = Action {
     implicit request => {
-      println(Play.current.configuration.getString("service.domain"))
-      Ok(html.index("Hello, this is index!", request.session.get("uname")))
+      if (request.domain.startsWith(Play.current.configuration.getString("service.domain").getOrElse(""))) {
+        Ok(html.index("Hello, this is index!", request.session.get("uname")))
+      } else {
+        
+        Ok("各人のページを表示しないとね...")
+      }
     }
   }
 
