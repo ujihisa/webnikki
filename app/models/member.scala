@@ -38,7 +38,7 @@ object Member {
     DB.withConnection {
       implicit c =>
         {
-          val member = SQL("SELECT id, uname, password, salt, email FROM member WHERE %s = {value}" format field).on("value" -> value).apply()
+          val member = SQL("SELECT id, uname, password, salt, email FROM member WHERE %s = {value}" format field).on("value" -> value).apply
           if (member.isEmpty) None else Some(member.head)
         }
     }

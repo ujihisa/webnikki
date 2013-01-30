@@ -26,8 +26,16 @@ object Post {
     }
   }
 
-  def postsByMemberId(memberId: Int) {
-    ""
+  def postsByMemberId(memberId: Long) {
+    val sql = "SELECT id, member_id, title, content, created_at, modified_at FROM post WHERE member_id = {member_id}"
+
+    DB.withConnection {
+      implicit c => {
+          val posts = SQL(sql).on("member_id" -> memberId).as(post *)
+          println(posts.head)
+          posts
+        }
+    }
   }
 
   def create(

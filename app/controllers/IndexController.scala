@@ -5,6 +5,8 @@ import play.api.mvc._
 import library.Random
 
 import views._
+import models.Member
+import models.Post
 
 object IndexController extends Controller {
   def index = Action {
@@ -12,7 +14,9 @@ object IndexController extends Controller {
       if (request.domain.startsWith(Play.current.configuration.getString("service.domain").getOrElse(""))) {
         Ok(html.index("Hello, this is index!", request.session.get("uname")))
       } else {
-        
+        val memberId = Member.selectByUname(request.session.get("uname").getOrElse("")).get[Long]("id")
+        println(memberId)
+        println(Post.postsByMemberId(memberId))
         Ok("各人のページを表示しないとね...")
       }
     }

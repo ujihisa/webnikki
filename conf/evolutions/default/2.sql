@@ -9,6 +9,8 @@ CREATE TABLE post (
     created_at INTEGER NOT NULL,
     modified_at INTEGER NOT NULL
 );
+CREATE INDEX member_id_idx ON post (member_id);
+CREATE INDEX created_at_idx ON post (created_at);
 
 # --- !Downs
  
