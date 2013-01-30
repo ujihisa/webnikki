@@ -17,7 +17,8 @@ object IndexController extends Controller {
         val memberId = Member.selectByUname(request.session.get("uname").getOrElse("")).get[Long]("id")
         println(memberId)
         println(Post.postsByMemberId(memberId))
-        Ok("各人のページを表示しないとね...")
+        // Ok("各人のページを表示しないとね...")
+        Ok(html.myindex("各人のページを表示しないとね"))
       }
     }
   }

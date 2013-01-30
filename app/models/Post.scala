@@ -31,8 +31,9 @@ object Post {
 
     DB.withConnection {
       implicit c => {
-          val posts = SQL(sql).on("member_id" -> memberId).as(post *)
-          println(posts.head)
+          val posts = SQL(sql).on("member_id" -> memberId) .as(post *)
+//          println(posts.head)
+//          println(posts)
           posts
         }
     }
