@@ -1,7 +1,13 @@
-@(message: String, posts: List[models.Post])
+@(message: String, uname: Option[String], posts: List[models.Post])
 
 @main(message) {
 
 眠いわー
+
+<ul>
+@for(post <- posts) {
+  <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}/entry/@post.created_at">@post.title</a> / @post.content</li>
+} 
+</ul>
 
 }
