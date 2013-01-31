@@ -9,8 +9,7 @@ GET     /login                              controllers.LoginController.index
 POST    /login                              controllers.LoginController.indexPost
 GET     /logout                             controllers.LogoutController.index
 GET     /post                               controllers.PostController.index
-POST    /post                               controllers.PostController.indexPost
-# POST    /post                               controllers.PostController.indexTest
+GET     /entry/:createdAt                   controllers.EntryController.index(createdAt)
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
 
 # this will be removed
