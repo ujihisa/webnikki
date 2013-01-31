@@ -3,6 +3,7 @@ package controllers
 import play.api._
 import play.api.mvc._
 import library.Random
+import library.Util
 
 import views._
 import models.Member
@@ -14,8 +15,7 @@ object IndexController extends Controller {
       if (request.domain.startsWith(Play.current.configuration.getString("service.domain").getOrElse(""))) {
         Ok(html.index("Hello, this is index!", request.session.get("uname")))
       } else {
-        val memberId = Member.selectByUname(request.session.get("uname").getOrElse("")).get[Long]("id")
-        println(Post.postsByMemberId(memberId))
+        val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get[Long]("id")
         Ok(html.myindex("各人のページを表示しないとね", request.session.get("uname"), Post.postsByMemberId(memberId)))
       }
     }
