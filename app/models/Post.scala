@@ -38,7 +38,7 @@ object Post {
     val sql = "SELECT id, member_id, title, content, created_at, modified_at FROM post WHERE member_id = {member_id} AND created_at = {created_at}"
 
     DB.withConnection {
-      implicit c => SQL(sql)
+      implicit c => SQL(sql).on("member_id" -> memberId, "created_at" -> createdAt).as(post *).headOption
     }
   }
 

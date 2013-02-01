@@ -14,10 +14,12 @@ object EntryController extends Controller {
   def index(createdAt: String) = Action {
     implicit request => {
       val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get[Long]("id")
-      println(request.domain)
       val entry = Post.postByMemberIdAndCreatedAt(memberId, createdAt.toLong)
-      println(entry)
-      Ok("Hey " + createdAt)
+      
+      entry match {
+        case Some(entry) => Ok(html.entry("", entry))
+        case None => BadRequest("その記事存在しないです...")
+      }
     }
   }
 }
