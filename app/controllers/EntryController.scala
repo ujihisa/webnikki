@@ -9,9 +9,10 @@ import library.Util
 import views._
 import models.Member
 import models.Post
+import models.Comment
 
 object EntryController extends Controller {
-  val entryForm = Form(
+  val commentForm = Form(
       tuple(
           "post_id" -> number,
           "uname" -> text,
@@ -32,12 +33,9 @@ object EntryController extends Controller {
 
   def indexPost = Action {
     implicit request => {
-      val (post_id, uname, content) = entryForm.bindFromRequest().get
+      val (post_id, uname, content) = commentForm.bindFromRequest().get
       try {
-        // TODO コメントをDBにツッコむ
-        println(post_id)
-        println(uname)
-        println(content)
+        Comment.create(post_id, 0, uname, content, true)
         Ok("ポストされると、ここにリクエストくるはず。")
       } catch {
         case e: Exception => BadRequest("エラー: " + e)
