@@ -1,5 +1,24 @@
 @(message: String, post: models.Post)
 
+@import java.util.Date
+
 @main(message) {
-title: @post.title
+<div>
+<ul>
+<li>タイトル: @post.title</li>
+<li>記事: @post.content</li>
+<li>投稿日時: @{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(post.modified_at)}</li>
+</ul>
+</div>
+
+<div>
+<form id="submit">
+<input id="post_id" type="hidden" name="post_id" value="@post.id" />
+<input id="uname" type="text" name="uname" value="" />
+<textarea id="content" name="content"></textarea><br />
+<input type="submit" value="投稿" />
+</form>
+</div>
+
+<script src="@routes.Assets.at("javascripts/entry.js")" type="text/javascript"></script>
 }

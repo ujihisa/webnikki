@@ -1,9 +1,9 @@
 $(function() {
     $('#submit').submit(function() {
         $.ajax({
-            type: "POST",
-            url: "/post",
-            data: "token=" + $('#token').val() + "&title=" + $('#title').val() + "&content=" + $('#content').val(),
+            type: 'POST',
+            url: '/post',
+            data: 'token=' + $('#token').val() + '&title=' + $('#title').val() + '&content=' + $('#content').val(),
         }).done(function(data) {
             console.debug('done');
             console.debug(data);

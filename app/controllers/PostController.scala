@@ -22,28 +22,6 @@ object PostController extends Controller {
       Ok(html.post(postForm.bind(Map("token" -> request.session.get("token").getOrElse(""))), None))
   }
 
-//  def indexPost = Action {
-//    implicit request =>
-//      postForm.bindFromRequest.fold(
-//          formWithErrors => {
-//            BadRequest(html.post(formWithErrors, None))
-//          }, {
-//            case (token, title, content) => {
-//              try {
-//                Ok(html.postSuccess(""))
-//              } catch {
-//                case e: Exception => {
-//                  BadRequest(
-//                      html.post(
-//                          postForm.bind(Map("token" -> token, "title" -> title, "content" -> content)),
-//                          Some("ここで例外が投げられるのってどういうときなんだろう...ちょっと想像つかないな。")
-//                          ))
-//                }
-//              }
-//            }
-//          })
-//  }
-
   def indexPost = Action {
     implicit request => {
       val (token, title, content) = postForm.bindFromRequest().get

@@ -59,8 +59,8 @@ object Post {
           "member_id" -> member_id,
           "title" -> title.trim,
           "content" -> content.trim,
-          "created_at" -> (System.currentTimeMillis / 1000).toLong,
-          "modified_at" -> (System.currentTimeMillis / 1000).toLong
+          "created_at" -> System.currentTimeMillis,
+          "modified_at" -> System.currentTimeMillis
           ).executeUpdate
     }
   }
