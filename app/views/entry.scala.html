@@ -1,4 +1,4 @@
-@(message: String, post: models.Post)
+@(message: String, post: models.Post, comments: List[models.Comment])
 
 @import java.util.Date
 
@@ -10,6 +10,12 @@
 <li>投稿日時: @{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(post.modified_at)}</li>
 </ul>
 </div>
+
+<ul>
+@for(comment <- comments) {
+  <li>@comment.uname / @comment.content</li>
+}
+</ul>
 
 <div>
 <form id="submit">
