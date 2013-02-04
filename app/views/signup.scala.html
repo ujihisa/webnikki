@@ -16,18 +16,21 @@
 </ul>
 </div>
 
-@form(action = routes.SignupController.indexPost) {
+<form id="submit">
 <table>
   <tr id="uname-tr">
     <td>お名前</td>
+    <td><span id="uname-check"></span></td>
     <td><input id="uname" type="text" name="uname" size="48" placeholder="お名前を入力してください" value="@memberForm("uname").value" /> <span id="uname-info" class="form-info"></span></td>
   </tr>
   <tr id="email-tr">
     <td>メールアドレス</td>
+    <td></td>
     <td><input id="email" type="text" name="email" size="48" placeholder="メールアドレスを入力してください" value="@memberForm("email").value" /> <span id="email-info" class="form-info"></span></td>
   </tr>
   <tr id="password-tr">
     <td>パスワード</td>
+    <td></td>
     <td>
       <input id="password" type="password" name="password" size="48" placeholder="4文字以上のパスワードを入力してください" value="@memberForm("password").value" />  <span id="password-info" class="form-info"></span>
       <div>
@@ -38,10 +41,10 @@
     </td>
   </tr>
   <tr>
-    <td colspan="2"><input type="submit" value="登録" /></td>
+    <td colspan="3"><input type="submit" value="登録" /></td>
   </tr>
 </table>
-}
+</form>
 
 <script src="@routes.Assets.at("javascripts/signup.js")" type="text/javascript"></script>
 }
