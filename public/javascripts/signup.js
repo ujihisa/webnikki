@@ -43,9 +43,24 @@ $(function() {
                 if ($('#uname-info').html().trim() === '' &&
                     $('#email-info').html().trim() === '' &&
                     $('#password-info').html().trim() === '') {
-                    // request
 
                     console.debug('ここで実際のリクエストしますねー');
+                    $.ajax({
+                        type: 'POST',
+                        url: '/signup',
+                        data: 'uname=' + $('#uname').val().trim() +
+                            '&email=' + $('#email').val().trim() +
+                            '&password=' + $('#password').val().trim()
+                    }).done(function(data) {
+                        console.debug('success');
+                        console.debug(data);
+                        return false; // 本当はアラートを出して redirect させる
+                    }).fail(function(data) {
+                        // alert(data);
+                        console.debug('failure');
+                        console.debug(data);
+                        return false;
+                    });
                 }
         });
 
