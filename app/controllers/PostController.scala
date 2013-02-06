@@ -24,7 +24,7 @@ object PostController extends Controller {
 
   def indexPost = Action {
     implicit request => {
-      val (token, title, content) = postForm.bindFromRequest().get
+      val (token, title, content) = postForm.bindFromRequest.get
       try {
         if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
         val member = Member.selectByUname(request.session.get("uname").getOrElse(""))

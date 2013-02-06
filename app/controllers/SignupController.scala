@@ -4,6 +4,7 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import play.api.libs.json.Json
 
 import views._
 import models.Member
@@ -21,24 +22,14 @@ object SignupController extends Controller {
   }
 
   def indexPost = Action {
-    implicit request =>
-      memberForm.bindFromRequest.fold(
-        formWithErrors => {
-          BadRequest(html.signup(formWithErrors, None))
-        }, {
-          case (uname, email, password) => {
-            try {
-              Member.create(uname, email, password)
-              Ok(html.signupSuccess(""))
-            } catch {
-              case e: Exception => {
-                BadRequest(
-                  html.signup(
-                    memberForm.bind(Map("uname" -> uname, "email" -> email, "password" -> password)),
-                    Some("ごめんなさい...ユーザ名かメールアドレスが既に使われているみたいです...。")))
-              }
-            }
-          }
-        })
+    implicit request => {
+      val (uname, email, password) = memberForm.bindFromRequest.get
+      try {
+        Member.create(uname, email, password)
+        Ok(Json.toJson(Map("success" -> Json.toJson(1))))
+      } catch {
+        case e: Exception => BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
+      }
+    }
   }
 }
