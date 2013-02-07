@@ -6,8 +6,11 @@ $(function() {
 
         $().toastmessage('showToast', {
             text: 'Some information for you ...',
+            position: 'top-center',
             type: 'success',
-            close: function() { alert('Hello'); }
+            stayTime: 2000,
+            // close: function() { alert('Hello'); }
+            close: function() { location.href = '/test'; }
         });
 
     });

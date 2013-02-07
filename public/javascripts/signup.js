@@ -44,7 +44,6 @@ $(function() {
                     $('#email-info').html().trim() === '' &&
                     $('#password-info').html().trim() === '') {
 
-                    console.debug('ここで実際のリクエストしますねー');
                     $.ajax({
                         type: 'POST',
                         url: '/signup',
@@ -52,13 +51,20 @@ $(function() {
                             '&email=' + $('#email').val().trim() +
                             '&password=' + $('#password').val().trim()
                     }).done(function(data) {
-                        console.debug('success');
-                        console.debug(data);
-                        return false; // 本当はアラートを出して redirect させる
+                        $().toastmessage('showToast', {
+                            text: 'ユーザー登録に成功しました！',
+                            position: 'top-center',
+                            type: 'success',
+                            stayTime: 2000,
+                            close: function() { location.href = '/'; }
+                        });
                     }).fail(function(data) {
-                        // alert(data);
-                        console.debug('failure');
-                        console.debug(data);
+                        $().toastmessage('showToast', {
+                            text: 'ユーザー登録に失敗しました... エラー: ' + (data.message ? data.message : '不明なエラー'),
+                            position: 'top-center',
+                            type: 'error'
+                        });
+
                         return false;
                     });
                 }

@@ -9,6 +9,8 @@ import play.api.libs.json.Json
 import views._
 import models.Member
 
+import library.Random
+
 object SignupController extends Controller {
   val memberForm = Form(
     tuple(
@@ -26,7 +28,7 @@ object SignupController extends Controller {
       val (uname, email, password) = memberForm.bindFromRequest.get
       try {
         Member.create(uname, email, password)
-        Ok(Json.toJson(Map("success" -> Json.toJson(1))))
+        Ok(Json.toJson(Map("success" -> Json.toJson(1)))).withSession("uname" -> uname, "token" -> Random.randomAlphanumeriString(64))
       } catch {
         case e: Exception => BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
       }
