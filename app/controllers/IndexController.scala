@@ -23,10 +23,7 @@ object IndexController extends Controller {
 
   def test = Action {
     implicit request => {
-      println(request)
-      println(request.host)
-      println(request.domain)
-      Ok(html.index("Hello, this is..., whatever :-)", None))
+      Ok(html.test("Hello, this is..., whatever :-)"))
     }
   }
 
