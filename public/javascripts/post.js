@@ -3,12 +3,31 @@ $(function() {
         $.ajax({
             type: 'POST',
             url: '/post',
-            data: 'token=' + $('#token').val() + '&title=' + $('#title').val() + '&content=' + $('#content').val(),
+            data: {
+                token: $('#token').val(),
+                title: $('#title').val(),
+                content: $('#content').val()
+            }
         }).done(function(data) {
-            alert('記事投稿に成功しました!');
-            // TODO: 記事トップへ飛ばすか、もしくは記事トップへのリンクを表示する。あとダイアログは自動的に消えるべきだと思う。
+            $().toastmessage('showToast', {
+                text: '記事投稿に成功しました！',
+                position: 'top-center',
+                type: 'success',
+                stayTime: 3000,
+                close: function() {
+                    console.debug('TODO: 該当ページへのリンクなどをここで表示する。');
+                }
+            });
         }).fail(function(data) {
-            alert('記事投稿に失敗しちゃったみたい...');
+            $().toastmessage('showToast', {
+                text: '記事投稿に失敗しました...。',
+                position: 'top-center',
+                type: 'error',
+                stayTime: 2000,
+                close: function() {
+                    console.debug('TODO: エラーメッセージをここで表示する。');
+                }
+            });
         }).always(function(data) {});
 
         return false;

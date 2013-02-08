@@ -2,8 +2,6 @@
 
 @main(message) {
 
-眠いわー
-
 <ul>
 @for(post <- posts) {
   <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}/entry/@post.created_at">@post.title</a> / @post.content</li>
