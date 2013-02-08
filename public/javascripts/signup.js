@@ -52,10 +52,10 @@ $(function() {
                             '&password=' + $('#password').val().trim()
                     }).done(function(data) {
                         $().toastmessage('showToast', {
-                            text: 'ユーザー登録に成功しました！',
+                            text: 'ユーザー登録に成功しました！<br />トップページに移動します！',
                             position: 'top-center',
                             type: 'success',
-                            stayTime: 2000,
+                            stayTime: 3000,
                             close: function() { location.href = '/'; }
                         });
                     }).fail(function(data) {
