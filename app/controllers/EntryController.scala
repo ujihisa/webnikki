@@ -36,7 +36,7 @@ object EntryController extends Controller {
         Comment.create(post_id, 0, uname, content, true)
         Ok("ポストされると、ここにリクエストくるはず。")
       } catch {
-        case e: Exception => BadRequest("エラー: " + e)
+        case e: Exception => BadRequest(s"エラー: $e")
       }
     }
   }
