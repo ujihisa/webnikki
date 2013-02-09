@@ -35,7 +35,7 @@ object Member {
   //    implicit c => SQL("SELECT * FROM member").as(member *)
   //  }
 
-  private def selectBy(field: String, value: String) = {
+  private def selectBy(field: String, value: String): Option[SqlRow] = {
     DB.withConnection {
       implicit c =>
         {
