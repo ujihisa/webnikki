@@ -55,11 +55,8 @@ object Member {
     }
   }
 
-  def selectByUname(uname: String) =
-    selectBy("uname", uname)
-
-  def selectByEmail(email: String) =
-    selectBy("email", email)
+  def selectByUname(uname: String) = selectBy("uname", uname)
+  def selectByEmail(email: String) = selectBy("email", email)
 
   def create(
     uname: String,
@@ -91,9 +88,10 @@ object Member {
   }
 
   def isValidPassword(email: String, password: String): Boolean = {
-    val member= selectBy("email", email)
-    if (member.isEmpty) return false
-
-    return stretch(password + member.get[String]("salt"), stretchNum) == member.get[String]("password")
+    selectBy("email", email) match {
+      case Some(member) =>
+        stretch(password + member.get[String]("salt"), stretchNum) == member.get[String]("password")
+      case None => false
+    }
   }
 }
