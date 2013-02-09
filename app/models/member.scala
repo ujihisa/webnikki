@@ -9,6 +9,7 @@ import play.api.Play.current
 import java.security.MessageDigest
 
 import library.Random
+import scala.annotation.tailrec
 
 case class Member(
   id: Long,
@@ -44,8 +45,9 @@ object Member {
     }
   }
 
+  @tailrec
   private def stretch(password: String, num: Int): String = {
-    val md = MessageDigest.getInstance("SHA-512")
+    lazy val md = MessageDigest.getInstance("SHA-512")
 
     num match {
       case 0 => password
