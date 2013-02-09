@@ -25,12 +25,15 @@ object SignupController extends Controller {
 
   def indexPost = Action {
     implicit request => {
-      val (uname, email, password) = memberForm.bindFromRequest.get
-      try {
-        Member.create(uname, email, password)
-        Ok(Json.toJson(Map("success" -> Json.toJson(1)))).withSession("uname" -> uname, "token" -> Random.randomAlphanumeriString(64))
-      } catch {
-        case e: Exception => BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
+      memberForm.bindFromRequest.value map { case (uname, email, password) =>
+        try {
+          Member.create(uname, email, password)
+          Ok(Json.toJson(Map("success" -> Json.toJson(1)))).withSession("uname" -> uname, "token" -> Random.randomAlphanumeriString(64))
+        } catch {
+          case e: Exception => BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
+        }
+      } getOrElse {
+        BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("なんかformがヤバい"))))
       }
     }
   }
