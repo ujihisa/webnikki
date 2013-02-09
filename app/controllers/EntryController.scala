@@ -22,9 +22,7 @@ object EntryController extends Controller {
   def index(createdAt: String) = Action {
     implicit request => {
       val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get[Long]("id")
-      val entry = Post.postByMemberIdAndCreatedAt(memberId, createdAt.toLong)
-
-      entry match {
+      Post.postByMemberIdAndCreatedAt(memberId, createdAt.toLong) match {
         case Some(entry) => Ok(html.entry("", entry, Comment.commentsByPostId(entry.id)))
         case None => BadRequest("その記事存在しないです...")
       }
