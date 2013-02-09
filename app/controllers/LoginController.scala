@@ -44,16 +44,19 @@ object LoginController extends Controller {
 
   def indexPost = Action {
     implicit request => {
-      val (email, password) = memberForm.bindFromRequest.get
-      try {
-        if (Member.isValidPassword(email, password)) {
-          val member = Member.selectByEmail(email)
-          Ok(Json.toJson(Map("success" -> Json.toJson(1)))).withSession("uname" -> member.get[String]("uname"), "token" -> Random.randomAlphanumeriString(64))
-        } else {
-          Ok(Json.toJson(Map("success" -> Json.toJson(0))))
+      memberForm.bindFromRequest.value map { case (email, password) =>
+        try {
+          if (Member.isValidPassword(email, password)) {
+            val member = Member.selectByEmail(email)
+            Ok(Json.toJson(Map("success" -> Json.toJson(1)))).withSession("uname" -> member.get[String]("uname"), "token" -> Random.randomAlphanumeriString(64))
+          } else {
+            Ok(Json.toJson(Map("success" -> Json.toJson(0))))
+          }
+        } catch {
+          case e: Exception => BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
         }
-      } catch {
-        case e: Exception => BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
+      } getOrElse {
+        BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: form is ヤバい"))))
       }
     }
   }
