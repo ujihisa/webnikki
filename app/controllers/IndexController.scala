@@ -12,11 +12,13 @@ import models.Post
 object IndexController extends Controller {
   def index = Action {
     implicit request => {
-      if (request.domain.startsWith(Play.current.configuration.getString("service.domain").getOrElse(""))) {
-        Ok(html.index("トップページ", request.session.get("uname")))
-      } else {
-        val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get[Long]("id")
-        Ok(html.myindex("各人のページ", request.session.get("uname"), Post.postsByMemberId(memberId)))
+      Play.current.configuration.getString("service.domain") match {
+        case Some(x) if request.domain.startsWith(x) =>
+          Ok(html.index("トップページ", request.session.get("uname")))
+        case _ => {
+          val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get[Long]("id")
+          Ok(html.myindex("各人のページ", request.session.get("uname"), Post.postsByMemberId(memberId)))
+        }
       }
     }
   }
