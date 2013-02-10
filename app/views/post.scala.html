@@ -1,4 +1,4 @@
-@(postForm: Form[(String, String, String)], errorMessage: Option[String])
+@(postForm: Form[(String, String, String, String)], errorMessage: Option[String])
 
 @import helper._
 
@@ -7,6 +7,7 @@
 <p id="link"></p>
 
 <form id="submit">
+<input id="created_at" type="hidden" name="created_at" value="" />
 @if(!postForm("token").value.isEmpty) { <input id="token" type="hidden" name="token" value="@postForm("token").value" /> }
 <table>
   <tr id="title-tr">

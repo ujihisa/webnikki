@@ -6,7 +6,8 @@ $(function() {
             data: {
                 token: $('#token').val(),
                 title: $('#title').val(),
-                content: $('#content').val()
+                content: $('#content').val(),
+                created_at: $('#created_at').val()
             }
         }).done(function(data) {
             $().toastmessage('showToast', {
@@ -15,7 +16,8 @@ $(function() {
                 type: 'success',
                 stayTime: 3000,
                 close: function() {
-                    $('#link').html('<a href="' + data['entry_url'] + '">ページを確認する</a>');
+                    $('#created_at').val(data['created_at']);
+                    $('#link').html('<a href="' + data['url'] + '">ページを確認する</a>');
                 }
             });
         }).fail(function(data) {

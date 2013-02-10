@@ -42,6 +42,30 @@ object Post {
     }
   }
 
+  def update(
+      member_id: Long,
+      title: String,
+      content: String,
+      created_at: Long
+      ) = {
+
+    if (content.trim.isEmpty) throw new Exception("記事の内容を入力してください。")
+
+    val sql = "UPDATE post SET title = {title}, content = {content} WHERE member_id = {member_id} AND created_at = {created_at}"
+
+    DB.withConnection {
+      implicit c =>
+        SQL(sql).on(
+          "member_id" -> member_id,
+          "title" -> title.trim,
+          "content" -> content.trim,
+          "created_at" -> created_at
+        ).executeUpdate
+    }
+
+    created_at
+  }
+
   def create(
     member_id: Long,
     title: String,
