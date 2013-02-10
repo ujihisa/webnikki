@@ -21,7 +21,21 @@ object PostController extends Controller {
 
   def index = Action {
     implicit request =>
-      Ok(html.post(postForm.bind(Map("token" -> request.session.get("token").getOrElse(""))), None))
+      Ok(html.post(postForm.bind(Map("token" -> request.session.get("token").getOrElse("")))))
+  }
+
+  def indexEdit(createdAt: String) = Action {
+    implicit request => {
+      val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
+
+      val post = Post.postByMemberIdAndCreatedAt(member.get[Long]("id"), createdAt.toLong).get
+      Ok(html.post(postForm.bind(Map(
+          "token" -> request.session.get("token").getOrElse(""),
+          "title" -> post.title,
+          "content" -> post.content,
+          "created_at" -> post.created_at.toString
+          ))))
+    }
   }
 
   def indexPost = Action {
@@ -50,7 +64,7 @@ object PostController extends Controller {
     }
   }
 
-  private def createEntryUrl(uname: String, created_at: Long) = {
+  private def createEntryUrl(uname: String, createdAt: Long) = {
     "http://%s.%s%s/entry/%s" format
         (uname,
          Play.current.configuration.getString("service.domain").getOrElse(""),
@@ -59,6 +73,6 @@ object PostController extends Controller {
          } else {
            ":" + Play.current.configuration.getString("service.port").get
          },
-         created_at.toString)
+         createdAt.toString)
   }
 }

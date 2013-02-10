@@ -7,7 +7,7 @@ CREATE TABLE post (
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
     created_at BIGINT NOT NULL,
-    modified_at BIGINT NOT NULL
+    published_at BIGINT NOT NULL
 );
 CREATE INDEX member_id_idx ON post (member_id);
 CREATE INDEX member_id_created_at_idx ON post (member_id, created_at);

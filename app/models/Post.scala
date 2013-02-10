@@ -12,7 +12,7 @@ case class Post(
   title: String,
   content: String,
   created_at: Long,
-  modified_at: Long)
+  published_at: Long)
 
 object Post {
   val post = {
@@ -21,13 +21,13 @@ object Post {
     get[String]("title") ~
     get[String]("content") ~
     get[Long]("created_at") ~
-    get[Long]("modified_at") map {
-      case id ~ member_id ~ title ~ content ~ created_at ~ modified_at => Post(id, member_id, title, content, created_at, modified_at)
+    get[Long]("published_at") map {
+      case id ~ member_id ~ title ~ content ~ created_at ~ published_at => Post(id, member_id, title, content, created_at, published_at)
     }
   }
 
   def postsByMemberId(memberId: Long) = {
-    val sql = "SELECT id, member_id, title, content, created_at, modified_at FROM post WHERE member_id = {member_id}"
+    val sql = "SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id}"
 
     DB.withConnection {
       implicit c => SQL(sql).on("member_id" -> memberId).as(post *)
@@ -35,7 +35,7 @@ object Post {
   }
 
   def postByMemberIdAndCreatedAt(memberId: Long, createdAt: Long) = {
-    val sql = "SELECT id, member_id, title, content, created_at, modified_at FROM post WHERE member_id = {member_id} AND created_at = {created_at}"
+    val sql = "SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id} AND created_at = {created_at}"
 
     DB.withConnection {
       implicit c => SQL(sql).on("member_id" -> memberId, "created_at" -> createdAt).as(post *).headOption
@@ -74,8 +74,8 @@ object Post {
     if (content.trim.isEmpty) throw new Exception("記事の内容を入力してください。")
 
     val sql =
-      "INSERT INTO post (member_id, title, content, created_at, modified_at) " +
-      "VALUES ({member_id}, {title}, {content}, {created_at}, {modified_at})"
+      "INSERT INTO post (member_id, title, content, created_at, published_at) " +
+      "VALUES ({member_id}, {title}, {content}, {created_at}, {published_at})"
     val createdAt = System.currentTimeMillis
 
     DB.withConnection {
@@ -85,7 +85,7 @@ object Post {
           "title" -> title.trim,
           "content" -> content.trim,
           "created_at" -> createdAt,
-          "modified_at" -> createdAt
+          "published_at" -> createdAt
           ).executeUpdate
     }
 
