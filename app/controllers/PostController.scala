@@ -29,11 +29,12 @@ object PostController extends Controller {
       try {
         if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
         val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
-        val postTime = Post.create(member.get[Long]("id"), title, content)
+        val createdAt = Post.create(member.get[Long]("id"), title, content)
 
         Ok(Json.toJson(Map(
             "success" -> Json.toJson(1),
-            "entry-url" -> Json.toJson(createEntryUrl(request.session.get("uname").getOrElse(""), postTime))
+            "created_at" -> Json.toJson(createdAt),
+            "url" -> Json.toJson(createEntryUrl(request.session.get("uname").getOrElse(""), createdAt))
             )))
       } catch {
         case e: Exception => BadRequest(Json.toJson(Map(
@@ -44,7 +45,7 @@ object PostController extends Controller {
     }
   }
 
-  private def createEntryUrl(uname: String, postTime: Long) = {
+  private def createEntryUrl(uname: String, createdAt: Long) = {
     "http://%s.%s%s/entry/%s" format
         (uname,
          Play.current.configuration.getString("service.domain").getOrElse(""),
@@ -53,6 +54,6 @@ object PostController extends Controller {
          } else {
            ":" + Play.current.configuration.getString("service.port").get
          },
-         postTime.toString)
+         createdAt.toString)
   }
 }

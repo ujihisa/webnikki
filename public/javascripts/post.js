@@ -15,7 +15,7 @@ $(function() {
                 type: 'success',
                 stayTime: 3000,
                 close: function() {
-                    console.debug('TODO: 該当ページへのリンクなどをここで表示する。');
+                    $('#link').html('<a href="' + data['entry_url'] + '">ページを確認する</a>');
                 }
             });
         }).fail(function(data) {
