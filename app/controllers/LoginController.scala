@@ -22,33 +22,13 @@ object LoginController extends Controller {
     Ok(html.login(memberForm, None))
   }
 
-//  def indexPost = Action {
-//    implicit request =>
-//      memberForm.bindFromRequest.fold(
-//          formWithErrors => {
-//            BadRequest(html.login(formWithErrors, Some("メールアドレスかパスワードを間違えちゃってるみたいです...。")))
-//          }, {
-//            case(email, password) => {
-//              if (Member.isValidPassword(email, password)) {
-//                val member = Member.selectByEmail(email)
-//                Ok("それ正しいパスワードだよ! おめでとう!").withSession("uname" -> member.get[String]("uname"), "token" -> Random.randomAlphanumeriString(64))
-//              } else {
-//                BadRequest(
-//                    html.login(
-//                      memberForm.bind(Map("email" -> email, "password" -> password)),
-//                      Some("パスワードを間違えちゃってるみたいです...。")))
-//              }
-//            }
-//          })
-//  }
-
   def indexPost = Action {
     implicit request => {
       memberForm.bindFromRequest.value map { case (email, password) =>
         try {
           if (Member.isValidPassword(email, password)) {
             val member = Member.selectByEmail(email)
-            Ok(Json.toJson(Map("success" -> Json.toJson(1)))).withSession("uname" -> member.get[String]("uname"), "token" -> Random.randomAlphanumeriString(64))
+            Ok(Json.toJson(Map("success" -> Json.toJson(1)))).withSession("uname" -> member.get.uname, "token" -> Random.randomAlphanumeriString(64))
           } else {
             Ok(Json.toJson(Map("success" -> Json.toJson(0))))
           }

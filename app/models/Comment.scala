@@ -34,11 +34,7 @@ object Comment {
     val sql = "SELECT id, post_id, member_id, uname, content, is_public, created_at, modified_at FROM comment WHERE post_id = {post_id}"
 
     DB.withConnection {
-      implicit c => {
-        val comments = SQL(sql).on("post_id" -> postId).as(comment *)
-        // println(comments)
-        comments
-      }
+      implicit c => SQL(sql).on("post_id" -> postId).as(comment *)
     }
   }
 

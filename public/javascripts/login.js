@@ -10,7 +10,8 @@ $(function() {
                     text: 'ログインに成功しました！<br />トップページに移動します！',
                     position: 'top-center',
                     type: 'success',
-                    stayTime: 3000,
+                    // stayTime: 3000,
+                    sticky: true,
                     close: function() { location.href = '/'; }
                 });
             } else {

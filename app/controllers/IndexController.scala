@@ -16,7 +16,7 @@ object IndexController extends Controller {
         case Some(x) if request.domain.startsWith(x) =>
           Ok(html.index("トップページ", request.session.get("uname")))
         case _ => {
-          val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get[Long]("id")
+          val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
           Ok(html.myindex("各人のページ", request.session.get("uname"), Post.postsByMemberId(memberId)))
         }
       }

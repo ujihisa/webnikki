@@ -31,17 +31,11 @@ object Member {
   val saltLength = 64
   val stretchNum = 1000
 
-  //  def all(): List[Member] = DB.withConnection {
-  //    implicit c => SQL("SELECT * FROM member").as(member *)
-  //  }
-
-  private def selectBy(field: String, value: String): Option[SqlRow] = {
+  private def selectBy(field: String, value: String) = {
     DB.withConnection {
       implicit c =>
-        {
-          val member = SQL("SELECT id, uname, password, salt, email FROM member WHERE %s = {value}" format field).on("value" -> value).apply
-          if (member.isEmpty) None else Some(member.head)
-        }
+        // val member = SQL("SELECT id, uname, password, salt, email FROM member WHERE %s = {value}" format field).on("value" -> value).as(member *).headOption
+        SQL("SELECT id, uname, password, salt, email FROM member WHERE %s = {value}" format field).on("value" -> value).as(member *).headOption
     }
   }
 
@@ -90,7 +84,8 @@ object Member {
   def isValidPassword(email: String, password: String): Boolean = {
     selectBy("email", email) match {
       case Some(member) =>
-        stretch(password + member.get[String]("salt"), stretchNum) == member.get[String]("password")
+        // stretch(password + member.get[String]("salt"), stretchNum) == member.get[String]("password")
+        stretch(password + member.salt, stretchNum) == member.password
       case None => false
     }
   }

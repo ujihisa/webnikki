@@ -28,7 +28,7 @@ object PostController extends Controller {
     implicit request => {
       val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
 
-      val post = Post.postByMemberIdAndCreatedAt(member.get[Long]("id"), createdAt.toLong).get
+      val post = Post.postByMemberIdAndCreatedAt(member.get.id, createdAt.toLong).get
       Ok(html.post(postForm.bind(Map(
           "token" -> request.session.get("token").getOrElse(""),
           "title" -> post.title,
@@ -45,9 +45,9 @@ object PostController extends Controller {
         if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
         val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
         val _created_at = if (created_at.isEmpty) {
-          Post.create(member.get[Long]("id"), title, content)
+          Post.create(member.get.id, title, content)
         } else {
-          Post.update(member.get[Long]("id"), title, content, created_at.toLong)
+          Post.update(member.get.id, title, content, created_at.toLong)
         }
 
         Ok(Json.toJson(Map(
