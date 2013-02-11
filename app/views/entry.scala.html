@@ -11,20 +11,34 @@
 </ul>
 </div>
 
+<hr />
+
 <ul>
 @for(comment <- comments) {
   <li>@comment.uname / @comment.content</li>
 }
 </ul>
 
-<div>
+<hr />
+
 <form id="submit">
 <input id="post_id" type="hidden" name="post_id" value="@post.id" />
-<input id="uname" type="text" name="uname" value="" />
-<textarea id="content" name="content"></textarea><br />
-<input type="submit" value="投稿" />
+<table>
+  <tr id="uname-tr">
+    <td>お名前</td>
+    <td><input id="uname" type="text" name="uname" placeholder="(省略可能) お名前を入力してください" /></td>
+  </tr>
+  <tr id="content-tr">
+    <td>コメント</td>
+    <td>
+      <textarea id="content" name="content" placeholder="コメントを書いて下さい"></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><input type="submit" value="投稿" /></td>
+  </tr>
+</table>
 </form>
-</div>
 
 <script src="@routes.Assets.at("javascripts/entry.js")" type="text/javascript"></script>
 }
