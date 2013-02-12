@@ -1,4 +1,6 @@
 $(function() {
+    console.debug(_.template($('#comment-template').text(), {name: "Yasu"}));
+
     var addComment = function(uname, content, created_at) {
         if ($('#comments > .comments').length) {
             // 普通に追加する
