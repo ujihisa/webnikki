@@ -76,7 +76,7 @@ object Post {
     val sql =
       "INSERT INTO post (member_id, title, content, created_at, published_at) " +
       "VALUES ({member_id}, {title}, {content}, {created_at}, {published_at})"
-    val createdAt = System.currentTimeMillis
+    val created_at = System.currentTimeMillis
 
     DB.withConnection {
       implicit c =>
@@ -84,11 +84,11 @@ object Post {
           "member_id" -> member_id,
           "title" -> title.trim,
           "content" -> content.trim,
-          "created_at" -> createdAt,
-          "published_at" -> createdAt
+          "created_at" -> created_at,
+          "published_at" -> created_at
           ).executeUpdate
     }
 
-    createdAt
+    created_at
   }
 }

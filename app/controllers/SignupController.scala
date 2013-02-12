@@ -33,7 +33,7 @@ object SignupController extends Controller {
           case e: Exception => BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
         }
       } getOrElse {
-        BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("なんかformがヤバい"))))
+        BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("memberForm に関するエラー"))))
       }
     }
   }

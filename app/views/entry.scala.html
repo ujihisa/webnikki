@@ -13,11 +13,20 @@
 
 <hr />
 
-<ul>
-@for(comment <- comments) {
-  <li>@comment.uname / @comment.content</li>
+<div id="comments">
+@if(0 < comments.size) {
+  @for(comment <- comments) {
+    <div class="comments" style="border-style: dotted; padding: 5px; margin-top: 5px;">
+      <span class="comment-uname" style="font-weight: bold;">@comment.uname</span>
+      -
+      <span class="comment-timestamp" style="color: #555;">@{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(comment.created_at)}</span>
+      <span class="comment-content" style="display: block;">@comment.content</span>
+    </div>
+  }
+} else {
+  <div>この記事にはまだコメントがありません。</div>
 }
-</ul>
+</div>
 
 <hr />
 

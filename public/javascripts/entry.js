@@ -1,4 +1,15 @@
 $(function() {
+    var addComment = function(uname, content, created_at) {
+        if ($('#comments > .comments').length) {
+            // 普通に追加する
+            console.debug('hi');
+            $('#comments').append('<div class="comments"><p>' + uname + '</p><p>' + content + '</p></div>');
+        } else {
+            // 中身を消してから追加する
+            console.debug('ho');
+        }
+    };
+
     $('#submit').submit(function() {
         $.ajax({
             type: 'POST',
@@ -17,6 +28,9 @@ $(function() {
                     stayTime: 3000,
                     close: function() {
                         // TODO: コメントを同ページに追記
+                        addComment($('#uname').val(),
+                                   $('#content').val(),
+                                   data.created_at);
                     }
                 });
             }

@@ -38,10 +38,11 @@ object Comment {
     }
   }
 
-  def create(post_id: Long, member_id: Long, uname: String, content: String, isPublic: Boolean) {
+  def create(post_id: Long, member_id: Long, uname: String, content: String, isPublic: Boolean) = {
     val sql =
       "INSERT INTO comment (post_id, member_id, uname, content, is_public, created_at, modified_at) " +
       "VALUES ({post_id}, {member_id}, {uname}, {content}, {is_public}, {created_at}, {modified_at})"
+    val created_at = System.currentTimeMillis
 
     DB.withConnection {
       implicit c =>
@@ -51,9 +52,11 @@ object Comment {
             "uname" -> uname,
             "content" -> content,
             "is_public" -> isPublic,
-            "created_at" -> System.currentTimeMillis,
-            "modified_at" -> System.currentTimeMillis
+            "created_at" -> created_at,
+            "modified_at" -> created_at
             ).executeUpdate
     }
+
+    created_at
   }
 }
