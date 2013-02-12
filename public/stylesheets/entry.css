@@ -1,0 +1,17 @@
+div.comments {
+    border-style: dotted;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+span.comment-uname {
+    font-weight: bold;
+}
+
+span.comment-timestamp {
+    color: #555;
+}
+
+span.comment-content {
+    display: block;
+}
