@@ -2,14 +2,13 @@
 
 @main(message) {
 
-<p>
-こんにちは。テストページです。
-</p>
+<script type="text/template" id="template">
+<p><span>Hey: </span><span style="color: #f00"><%= someData %></span></p>
+</script>
 
-<link rel="stylesheet" media="screen" href="@routes.Assets.at("lib/jquery-toastmessage-plugin/resources/css/jquery.toastmessage.css")">
-<script src="@routes.Assets.at("lib/jquery-toastmessage-plugin/javascript/jquery.toastmessage.js")" type="text/javascript"></script>
+<div id="viewContainer"></div>
+
+<input id="text" type="text" value="" />
+<input id="button" type="button" value="button" />
 <script src="@routes.Assets.at("javascripts/test.js")" type="text/javascript"></script>
-
-<input id="button" type="button" value="ボタン" />
-
 }

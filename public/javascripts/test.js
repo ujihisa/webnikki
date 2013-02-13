@@ -1,18 +1,44 @@
 $(function() {
     console.debug('Hello, this is test.js');
 
-    $('#button').click(function() {
-        console.debug('やふう');
+    // var Person = Backbone.Model.extend({
+    //     defaults: {
+    //         name: 'Fetus',
+    //         age: 0
+    //     },
+    //     initialize: function() {
+    //         console.debug('initializing Person...');
+    //         this.on('change:name', function(model) {
+    //             var name = model.get('name');
+    //             console.debug('Changed my name to ' + name);
+    //         });
+    //     }
+    // });
+    // var person = new Person({ name: 'Thomas', age: 67 });
+    // 
+    // $('#button').click(function() {
+    //     console.debug($('#text').val());
+    //     person.set({name: $('#text').val()});
+    //     console.debug(person.toJSON());
+    // });
 
-        $().toastmessage('showToast', {
-            text: 'Some information for you ...',
-            position: 'top-center',
-            type: 'success',
-            stayTime: 2000,
-            // close: function() { alert('Hello'); }
-            close: function() { location.href = '/test'; }
-        });
-
+    var View = Backbone.View.extend({
+        initialize: function() {
+            console.debug('initializing View...');
+            this.render();
+        },
+        render: function() {
+            var template = _.template($('#template').html(), { someData: 'data from render method.' });
+            this.$el.html(template);
+        },
+        events: {
+            "click input[type=button]": "doSomething"
+        },
+        doSomething: function(event) {
+            console.debug(event);
+        }
     });
+
+    var view = new View({el: $('#viewContainer')});
 });
 
