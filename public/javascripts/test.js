@@ -22,23 +22,33 @@ $(function() {
     //     console.debug(person.toJSON());
     // });
 
-    var View = Backbone.View.extend({
+    // var View = Backbone.View.extend({
+    //     initialize: function() {
+    //         console.debug('initializing View...');
+    //         this.render();
+    //     },
+    //     render: function() {
+    //         var template = _.template($('#template').html(), { someData: 'data from render method.' });
+    //         this.$el.html(template);
+    //     },
+    //     events: {
+    //         "click input[type=button]": "doSomething"
+    //     },
+    //     doSomething: function(event) {
+    //         console.debug(event);
+    //     }
+    // });
+    // 
+    // var view = new View({el: $('#viewContainer')});
+
+    var Comment = Backbone.Model.extend({
+        defaults: {
+            content: '',
+            created_at: 0
+        },
         initialize: function() {
-            console.debug('initializing View...');
-            this.render();
-        },
-        render: function() {
-            var template = _.template($('#template').html(), { someData: 'data from render method.' });
-            this.$el.html(template);
-        },
-        events: {
-            "click input[type=button]": "doSomething"
-        },
-        doSomething: function(event) {
-            console.debug(event);
+            console.debug('initializing Comment...');
         }
     });
-
-    var view = new View({el: $('#viewContainer')});
 });
 
