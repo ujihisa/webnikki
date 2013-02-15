@@ -68,11 +68,7 @@ object PostController extends Controller {
     "http://%s.%s%s/entry/%s" format
         (uname,
          Play.current.configuration.getString("service.domain").getOrElse(""),
-         if (Play.current.configuration.getString("service.port").getOrElse("").isEmpty) {
-           ""
-         } else {
-           ":" + Play.current.configuration.getString("service.port").get
-         },
+         Play.current.configuration.getString("service.port").map { x => ":%s" format x }.getOrElse(""),
          createdAt.toString)
   }
 }
