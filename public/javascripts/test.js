@@ -50,5 +50,45 @@ $(function() {
             console.debug('initializing Comment...');
         }
     });
+
+    var CommentList = Backbone.Collection.extend({
+        model: Comment,
+        initialize: function() {
+            console.debug('CommentList initialize');
+            // this.bind('add', this._onAdd);
+        }// ,
+        // _onAdd: function() {
+        //     console.debug('nanikore', this);
+        // }
+    });
+
+    var CommentListView = Backbone.View.extend({
+        el: $("#viewComment"),
+        events: {
+            'click #comment-button': '_onAddInputClick'
+            // 'click input': '_onAddComment'
+        },
+        initialize: function() {
+            // this.model.bind('add', this.render, this);
+            this.model.bind('add', this.render);
+            console.debug('CommentListView initialize', this.model);
+        },
+        render: function() {
+            console.debug('rendering should be written here...');
+        },
+        _onAddInputClick: function() {
+            var comment = new Comment({comment: $('#comment').val()});
+            $('#comment').val('');
+
+            this.model.add(comment);
+            console.debug('Hey, yo-', this.model);
+        }
+    });
+
+    // var commentListView = new CommentListView({ model: new CommentList() });
+    window.App = new CommentListView({ model: new CommentList() });
+    // $('#comment-button').click(function() {
+    //     var commnet = new Comment({comment: $('#comment').val()});
+    // });
 });
 
