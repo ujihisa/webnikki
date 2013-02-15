@@ -1,46 +1,4 @@
 $(function() {
-    console.debug('Hello, this is test.js');
-
-    // var Person = Backbone.Model.extend({
-    //     defaults: {
-    //         name: 'Fetus',
-    //         age: 0
-    //     },
-    //     initialize: function() {
-    //         console.debug('initializing Person...');
-    //         this.on('change:name', function(model) {
-    //             var name = model.get('name');
-    //             console.debug('Changed my name to ' + name);
-    //         });
-    //     }
-    // });
-    // var person = new Person({ name: 'Thomas', age: 67 });
-    // 
-    // $('#button').click(function() {
-    //     console.debug($('#text').val());
-    //     person.set({name: $('#text').val()});
-    //     console.debug(person.toJSON());
-    // });
-
-    // var View = Backbone.View.extend({
-    //     initialize: function() {
-    //         console.debug('initializing View...');
-    //         this.render();
-    //     },
-    //     render: function() {
-    //         var template = _.template($('#template').html(), { someData: 'data from render method.' });
-    //         this.$el.html(template);
-    //     },
-    //     events: {
-    //         "click input[type=button]": "doSomething"
-    //     },
-    //     doSomething: function(event) {
-    //         console.debug(event);
-    //     }
-    // });
-    // 
-    // var view = new View({el: $('#viewContainer')});
-
     var Comment = Backbone.Model.extend({
         defaults: {
             content: '',
@@ -55,38 +13,57 @@ $(function() {
         model: Comment,
         initialize: function() {
             console.debug('CommentList initialize');
-            // this.bind('add', this._onAdd);
-        }// ,
-        // _onAdd: function() {
-        //     console.debug('nanikore', this);
-        // }
+        }
+    });
+
+    var CommentView = Backbone.View.extend({
+        tagName: 'div',
+        template: _.template($('#comment-template').html()),
+        initialize: function() {
+            console.log('initializing CommentView');
+        },
+        render: function() {
+            var data = this.model.toJSON();
+            var html = this.template({someData: 'Hello'});
+            console.debug('data on CommentView', data);
+
+            $(this.el).html(html);
+            console.debug('rendering in CommentView', $(this.el), html);
+        }
     });
 
     var CommentListView = Backbone.View.extend({
-        el: $("#viewComment"),
+        el: $("#view-comment"),
         events: {
             'click #comment-button': '_onAddInputClick'
-            // 'click input': '_onAddComment'
         },
         initialize: function() {
-            // this.model.bind('add', this.render, this);
-            this.model.bind('add', this.render);
+            this.model.bind('add', this.render, this); // ?? don't know about last this
             console.debug('CommentListView initialize', this.model);
         },
         render: function() {
             console.debug('rendering should be written here...');
+            var commentListEl = $('#comment-list');
+            commentListEl.empty();
+
+            this.model.each(function(comment) {
+                var view = new CommentView({model: comment});
+                view.render();
+                console.debug('view.render', view, view.render);
+                commentListEl.append(view.el);
+            });
         },
         _onAddInputClick: function() {
             var comment = new Comment({comment: $('#comment').val()});
             $('#comment').val('');
 
             this.model.add(comment);
-            console.debug('Hey, yo-', this.model);
+            console.debug('Hey, yo-', this.model, this.model.each);
         }
     });
 
     // var commentListView = new CommentListView({ model: new CommentList() });
-    window.App = new CommentListView({ model: new CommentList() });
+    new CommentListView({ model: new CommentList() });
     // $('#comment-button').click(function() {
     //     var commnet = new Comment({comment: $('#comment').val()});
     // });

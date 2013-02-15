@@ -2,18 +2,14 @@
 
 @main(message) {
 
-<script type="text/template" id="template">
+<script type="text/template" id="comment-template">
 <p><span>Hey: </span><span style="color: #f00"><%= someData %></span></p>
 </script>
 
-<div id="viewContainer"></div>
-
-<input id="text" type="text" value="" />
-<input id="button" type="button" value="button" />
-
 <!-- ここからコメントシステム -->
 
-<div id="viewComment">
+<div id="view-comment">
+<div id="comment-list"></div>
 <input id="comment" type="text" name="comment" /> <input id="comment-button" type="button" value="comment" >
 </div>
 
