@@ -27,6 +27,6 @@ Add following lines to /etc/hosts
     $ cd web-nikki
     $ play "run 9005"
 
-Now, you can access to the service via http://localhost:9005
+Now, you can access to the service via http://localhost.com:9005
 
 
