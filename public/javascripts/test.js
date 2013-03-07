@@ -4,25 +4,19 @@ $(function() {
 			uname: 'no-name',
             content: '',
             created_at: 0
-        }// ,
-        // initialize: function() {
-        //     console.debug('initializing Comment...');
-        // }
+        },
+        initialize: function() {}
     });
 
     var CommentList = Backbone.Collection.extend({
         model: Comment,
-        initialize: function() {
-            console.debug('CommentList initialize');
-        }
+        initialize: function() {}
     });
 
     var CommentView = Backbone.View.extend({
         tagName: 'div',
         template: _.template($('#comment-template').html()),
-        // initialize: function() {
-        //     console.log('initializing CommentView');
-        // },
+        initialize: function() {},
         render: function() {
             var data = this.model.toJSON();
             var html = this.template({someData: data});
@@ -38,8 +32,7 @@ $(function() {
             'click #comment-button': '_onAddInputClick'
         },
         initialize: function() {
-            this.model.bind('add', this.render, this); // ?? don't know about last this
-            // console.debug('CommentListView initialize', this.model);
+            this.model.bind('add', this.render, this);
         },
         render: function() {
             var commentListEl = $('#comment-list');

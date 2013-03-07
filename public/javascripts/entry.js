@@ -37,7 +37,6 @@ $(function() {
                 });
             }
         }).fail(function(data) {
-            // TODO: toast を使ったものに書き換える
             alert('コメント投稿に失敗しちゃったみたい...');
         }).always(function(data) {});
 
