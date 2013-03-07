@@ -40,7 +40,7 @@ object EntryController extends Controller {
 //      } catch {
 //        case e: Exception => BadRequest(s"エラー: $e")
 //      }
-      commentForm.bindFromRequest.value map { case(post_id, uname, content) =>
+      commentForm.bindFromRequest.value map { case (post_id, uname, content) =>
         try {
           val created_at = Comment.create(post_id, 0, uname, content, true)
           Ok(Json.toJson(Map(
