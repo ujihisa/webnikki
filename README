@@ -1,4 +1,15 @@
-This is your new Play 2.1 application
-=====================================
+# web-nikki Starting Guide
 
-This file will be packaged with your application, when using `play dist`.
+## Setup on MacOS X
+
+It requires following software:
+
+* Play Framework
+* PostgreSQL
+
+    $ brew install play # requires Play Framework version 2.1.0 or above
+    $ brew install postgresql
+
+* FIXME: How to setup PostgreSQL
+* FIXME: How to setup Play Framework
+

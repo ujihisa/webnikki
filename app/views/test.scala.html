@@ -3,7 +3,10 @@
 @main(message) {
 
 <script type="text/template" id="comment-template">
-<p><span>Hey: </span><span style="color: #f00"><%= someData %></span></p>
+<p>
+  <span><%= someData.created_at %></span>
+  <span style="color: #f00"><%= someData.content %></span>
+</p>
 </script>
 
 <!-- ここからコメントシステム -->
