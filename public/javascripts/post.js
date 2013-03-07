@@ -10,15 +10,14 @@ $(function() {
                 created_at: $('#created_at').val()
             }
         }).done(function(data) {
+            $('#created_at').val(data['created_at']);
+            $('#link').html('<a href="' + data['url'] + '">ページを確認する</a>');
             $().toastmessage('showToast', {
                 text: '記事投稿に成功しました！',
                 position: 'top-center',
                 type: 'success',
-                stayTime: 3000,
-                close: function() {
-                    $('#created_at').val(data['created_at']);
-                    $('#link').html('<a href="' + data['url'] + '">ページを確認する</a>');
-                }
+                stayTime: 1500,
+                close: function() {}
             });
         }).fail(function(data) {
             $().toastmessage('showToast', {
@@ -27,7 +26,7 @@ $(function() {
                 type: 'error',
                 stayTime: 2000,
                 close: function() {
-                    console.debug('TODO: エラーメッセージをここで表示する。');
+                    console.debug('FIXME: エラーメッセージをここで表示する。');
                 }
             });
         }).always(function(data) {});

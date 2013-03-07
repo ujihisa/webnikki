@@ -23,16 +23,16 @@ $(function() {
             }
         }).done(function(data) {
             if (data.success) {
+                // TODO: コメントを同ページに追記
+                addComment($('#uname').val(),
+                           $('#content').val(),
+                           data.created_at);
                 $().toastmessage('showToast', {
                     text: 'コメントに成功しました！',
                     position: 'top-center',
                     type: 'success',
                     stayTime: 3000,
                     close: function() {
-                        // TODO: コメントを同ページに追記
-                        addComment($('#uname').val(),
-                                   $('#content').val(),
-                                   data.created_at);
                     }
                 });
             }
