@@ -1,15 +1,16 @@
 # web-nikki Starting Guide
 
-## Setup on MacOS X
+## Setup
 
 It requires following software:
 
-* Play Framework
-* PostgreSQL
+* Play Framework (version 2.1.0 or above)
+* PostgreSQL (version 9.1.8 or above)
 
-    $ brew install play # requires Play Framework version 2.1.0 or above
-    $ brew install postgresql
+    $ git clone git@bitbucket.org:mahata/web-nikki.git 
+    $ cd web-nikki
+    $ play "run 9005"
+    
+You can access to the service via http://localhost:9005
 
-* FIXME: How to setup PostgreSQL
-* FIXME: How to setup Play Framework
 
