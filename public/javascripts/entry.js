@@ -1,5 +1,67 @@
 $(function() {
-    console.debug(_.template($('#comment-template').text(), {name: "Yasu"}));
+    // console.debug(_.template($('#comment-template').text(), {name: "Yasu"}));
+
+    // Backbone code begin
+    var Comment = Backbone.Model.extend({
+        defaults: {},
+        initialize: function() {}
+    });
+
+    var CommentList = Backbone.Collection.extend({
+        model: Comment,
+        initialize: function() {}
+    });
+
+    var CommentView = Backbone.View.extend({
+        tagName: 'div',
+        template: _.template($('#comment-template').html()),
+        initialize: function() {},
+        render: function() {
+            var data = this.model.toJSON();
+            var html = this.template({
+                uname: data.uname,
+                content: data.content,
+                timestamp: data.timestamp
+            });
+
+            $(this.el).html(html);
+            console.debug('rendering in CommentView', $(this.el), html);
+        }
+    });
+
+    var CommentListView = Backbone.View.extend({
+        el: $('#view-comment'),
+        events: {
+            'click #comment-button': '_onAddInputClick'
+        },
+        initialize: function() {
+            this.model.bind('add', this.render, this);
+            // ここで this.model.add(...) みたいにする
+        },
+        render: function() {
+            var commentListEl = $('#comment-list');
+            commentListEl.empty();
+
+            this.model.each(function(comment) {
+                var view = new CommentView({ model: comment });
+                view.render();
+                commentListEl.append(view.el);
+            });
+        },
+        _onAddInputClick: function() {
+            var comment = new Comment({
+                uname: 'uname-dayo',
+                content: $('#comment').val(),
+                timestamp: 'timestamp-dayo'
+            });
+            $('#comment').val('');
+
+            this.model.add(comment);
+        }
+    });
+
+    var commentListView = new CommentListView({ model: new CommentList() });
+    // Backbone code end
 
     var addComment = function(uname, content, created_at) {
         if ($('#comments > .comments').length) {
