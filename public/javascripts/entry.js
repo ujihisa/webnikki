@@ -36,7 +36,14 @@ $(function() {
         },
         initialize: function() {
             this.model.bind('add', this.render, this);
-            // ここで this.model.add(...) みたいにする
+            var self = this;
+            $.each($('#initial-comments > .comments'), function(index, value) {
+                self.model.add(new Comment({
+                    uname: $(value).find('.comment-uname').html(),
+                    content: $(value).find('.comment-content').html(),
+                    timestamp: $(value).find('.comment-timestamp').html()
+                }));
+            });
         },
         render: function() {
             var commentListEl = $('#comment-list');

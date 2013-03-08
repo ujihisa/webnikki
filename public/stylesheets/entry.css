@@ -1,3 +1,7 @@
+div#initial-comments {
+    display: none;
+}
+
 div.comments {
     border-style: dotted;
     margin-top: 5px;

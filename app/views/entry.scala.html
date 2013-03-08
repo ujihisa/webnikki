@@ -14,6 +14,16 @@
 
 <hr />
 
+<div id="initial-comments">
+  @for(comment <- comments) {
+    <span class="comments">
+      <span class="comment-uname">@comment.uname</span>
+      <span class="comment-timestamp">@{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(comment.created_at)}</span>
+      <span class="comment-content">@comment.content</span>
+    </span>
+  }
+</div>
+
 <div id="comments">
 @if(0 < comments.size) {
   @for(comment <- comments) {
