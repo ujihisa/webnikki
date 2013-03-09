@@ -16,7 +16,7 @@ $(function() {
                 text: '記事投稿に成功しました！',
                 position: 'top-center',
                 type: 'success',
-                stayTime: 1500,
+                stayTime: 3000,
                 close: function() {}
             });
         }).fail(function(data) {
@@ -24,12 +24,10 @@ $(function() {
                 text: '記事投稿に失敗しました...。',
                 position: 'top-center',
                 type: 'error',
-                stayTime: 2000,
-                close: function() {
-                    console.debug('FIXME: エラーメッセージをここで表示する。');
-                }
+                stayTime: 3000,
+                close: function() {}
             });
-        }).always(function(data) {});
+        });
 
         return false;
     });

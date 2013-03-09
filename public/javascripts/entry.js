@@ -1,7 +1,4 @@
 $(function() {
-    // console.debug(_.template($('#comment-template').text(), {name: "Yasu"}));
-
-    // Backbone code begin
     var Comment = Backbone.Model.extend({
         defaults: {},
         initialize: function() {}
@@ -32,7 +29,7 @@ $(function() {
     var CommentListView = Backbone.View.extend({
         el: $('#view-comment'),
         events: {
-            'click #comment-button': '_onAddInputClick'
+            'click #submit-button': '_onAddInputClick'
         },
         initialize: function() {
             this.model.bind('add', this.render, this);
@@ -56,30 +53,45 @@ $(function() {
             });
         },
         _onAddInputClick: function() {
-            var comment = new Comment({
-                uname: 'uname-dayo',
-                content: $('#comment').val(),
-                timestamp: 'timestamp-dayo'
+            var self = this;
+            $.ajax({
+                type: 'POST',
+                url: '/entry',
+                data: {
+                    post_id: $('#post_id').val(),
+                    uname: $('#uname').val(),
+                    content: $('#content').val()
+                }
+            }).done(function(data) {
+                self.model.add(new Comment({
+                    uname: $('#uname').val(),
+                    content: $('#content').val(),
+                    timestamp: data.formatted_created_at
+                }));
+                $('#uname').val('');
+                $('#content').val('');
+                $().toastmessage('showToast', {
+                    text: 'コメントに成功しました！',
+                    position: 'top-center',
+                    type: 'success',
+                    stayTime: 3000,
+                    close: function() {}
+                });
+            }).fail(function(data) {
+                $().toastmessage('showToast', {
+                    text: 'コメントに失敗しました...。',
+                    position: 'top-center',
+                    type: 'error',
+                    stayTime: 3000,
+                    close: function() {}
+                });
             });
-            $('#comment').val('');
 
-            this.model.add(comment);
+            return false;
         }
     });
 
-    var commentListView = new CommentListView({ model: new CommentList() });
-    // Backbone code end
-
-    var addComment = function(uname, content, created_at) {
-        if ($('#comments > .comments').length) {
-            // 普通に追加する
-            console.debug('hi');
-            $('#comments').append('<div class="comments"><p>' + uname + '</p><p>' + content + '</p></div>');
-        } else {
-            // 中身を消してから追加する
-            console.debug('ho');
-        }
-    };
+    new CommentListView({ model: new CommentList() });
 
     $('#submit').submit(function() {
         $.ajax({

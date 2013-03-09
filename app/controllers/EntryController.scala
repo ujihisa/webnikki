@@ -13,6 +13,8 @@ import models.Member
 import models.Post
 import models.Comment
 
+import java.util.Date
+
 object EntryController extends Controller {
   val commentForm = Form(
       tuple(
@@ -33,19 +35,13 @@ object EntryController extends Controller {
 
   def indexPost = Action {
     implicit request => {
-//      val (post_id, uname, content) = commentForm.bindFromRequest().get
-//      try {
-//        Comment.create(post_id, 0, uname, content, true)
-//        Ok("ポストされると、ここにリクエストくるはず。")
-//      } catch {
-//        case e: Exception => BadRequest(s"エラー: $e")
-//      }
       commentForm.bindFromRequest.value map { case (post_id, uname, content) =>
         try {
           val created_at = Comment.create(post_id, 0, uname, content, true)
           Ok(Json.toJson(Map(
               "success" -> Json.toJson(1),
-              "created_at" -> Json.toJson(created_at)
+              "created_at" -> Json.toJson(created_at),
+              "formatted_created_at" -> Json.toJson("%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(created_at))
               )))
         } catch {
           case e: Exception => BadRequest(Json.toJson(Map(

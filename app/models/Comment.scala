@@ -31,7 +31,7 @@ object Comment {
   }
 
   def commentsByPostId(postId: Long) = {
-    val sql = "SELECT id, post_id, member_id, uname, content, is_public, created_at, modified_at FROM comment WHERE post_id = {post_id}"
+    val sql = "SELECT id, post_id, member_id, uname, content, is_public, created_at, modified_at FROM comment WHERE post_id = {post_id} ORDER BY id ASC"
 
     DB.withConnection {
       implicit c => SQL(sql).on("post_id" -> postId).as(comment *)
