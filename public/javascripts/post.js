@@ -13,15 +13,18 @@ $(function() {
             $('#created_at').val(data['created_at']);
             $('#link').html('<a href="' + data['url'] + '">ページを確認する</a>');
             $().toastmessage('showToast', {
-                text: '記事投稿に成功しました！',
+                text: '記事' + $('#submit-button').val() + 'に成功しました！',
                 position: 'top-center',
                 type: 'success',
                 stayTime: 3000,
                 close: function() {}
             });
+            if ($('#submit-button').val() !== '編集') {
+                $('#submit-button').val('編集');
+            }
         }).fail(function(data) {
             $().toastmessage('showToast', {
-                text: '記事投稿に失敗しました...。',
+                text: '記事' + $('#submit-button').val() + 'に失敗しました...。',
                 position: 'top-center',
                 type: 'error',
                 stayTime: 3000,
