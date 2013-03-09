@@ -17,11 +17,11 @@
     </head>
     <body>
          <div id="header">
-             <div id="header-left"><a href="">ホーム</a></div>
+             <div id="header-left"><a href="http://@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">ホーム</a></div>
              <div id="header-right">
                  こんにちは <a href="">xxx</a> さん
                  -
-                 <a href="">ログアウト</a>
+                 <a href="/logout">ログアウト</a>
              </div>
          </div>
         <div id="content">@content</div>
