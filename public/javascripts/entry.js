@@ -22,7 +22,6 @@ $(function() {
             });
 
             $(this.el).html(html);
-            console.debug('rendering in CommentView', $(this.el), html);
         }
     });
 
