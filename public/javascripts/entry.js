@@ -91,35 +91,4 @@ $(function() {
     });
 
     new CommentListView({ model: new CommentList() });
-
-    $('#submit').submit(function() {
-        $.ajax({
-            type: 'POST',
-            url: '/entry',
-            data: {
-                post_id: $('#post_id').val(),
-                uname: $('#uname').val(),
-                content: $('#content').val()
-            }
-        }).done(function(data) {
-            if (data.success) {
-                // TODO: コメントを同ページに追記
-                addComment($('#uname').val(),
-                           $('#content').val(),
-                           data.created_at);
-                $().toastmessage('showToast', {
-                    text: 'コメントに成功しました！',
-                    position: 'top-center',
-                    type: 'success',
-                    stayTime: 3000,
-                    close: function() {
-                    }
-                });
-            }
-        }).fail(function(data) {
-            alert('コメント投稿に失敗しちゃったみたい...');
-        }).always(function(data) {});
-
-        return false;
-    });
 });
