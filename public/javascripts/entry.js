@@ -58,17 +58,17 @@ $(function() {
                 url: '/entry',
                 data: {
                     post_id: $('#post_id').val(),
-                    uname: $('#uname').val(),
-                    content: $('#content').val()
+                    uname: $('#comment-uname').val(),
+                    content: $('#comment-content').val()
                 }
             }).done(function(data) {
                 self.model.add(new Comment({
-                    uname: $('#uname').val(),
-                    content: $('#content').val(),
+                    uname: $('#comment-uname').val(),
+                    content: $('#comment-content').val(),
                     timestamp: data.formatted_created_at
                 }));
-                $('#uname').val('');
-                $('#content').val('');
+                $('#comment-uname').val('');
+                $('#comment-content').val('');
                 $().toastmessage('showToast', {
                     text: 'コメントに成功しました！',
                     position: 'top-center',
