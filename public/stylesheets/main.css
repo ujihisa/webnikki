@@ -1,0 +1,22 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+div#header {
+    background: #ddd;
+    padding: 5px;
+}
+
+div#header-left {
+    text-align: left;
+    float: left;
+}
+
+div#header-right {
+    text-align: right;
+}
+
+div#content {
+    margin: 10px;
+}
