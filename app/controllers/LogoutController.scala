@@ -9,6 +9,6 @@ import views._
 
 object LogoutController extends Controller {
   def index = Action {
-    Ok("。・ﾟ・(つД｀)・ﾟ・。 ...またいつか遊びに来てくださいね!").withNewSession
+    Ok(html.logout("ログアウト")).withNewSession
   }
 }
