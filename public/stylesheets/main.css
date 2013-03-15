@@ -1,11 +1,20 @@
-body {
+@charset "utf-8";
+
+* {
     margin: 0px;
     padding: 0px;
 }
 
+html {
+    font-family: verdana, sans-serif;
+    font-size: 100%;
+    line-height: 1.5;
+}
+
 div#header {
-    background: #ddd;
-    padding: 5px;
+    background: #ccf;
+    padding: 5px 10px 5px 10px;
+    margin-bottom: 10px;
 }
 
 div#header-left {
@@ -18,5 +27,27 @@ div#header-right {
 }
 
 div#content {
-    margin: 10px;
+    width: 95%;
+    margin: 0 auto;
+}
+
+br#float-margin-trick {
+    clear: both;
+}
+
+footer {
+    background-color: #ccf;
+    margin-top: 10px;
+    padding: 5px 0 5px 0;
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    div#content #main,
+    div#content #sub {
+	float: left;
+	margin: 0 1%;
+    }
+    div#content #main { width: 65%; }
+    div#content #sub { width: 31%; }
 }

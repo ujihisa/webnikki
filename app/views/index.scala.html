@@ -2,14 +2,21 @@
 
 @main(message) {
 
-<ul>
-@if(uname) {
-  <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記</li>
-  <li><a href="/post">新しい記事の投稿</a></li>
-  <li><a href="/logout">ログアウト</a></li>
-} else {
-  <li><a href="/signup">ユーザー登録</a></li>
-  <li><a href="/login">ログイン</a></li>
-}
-</ul>
+<div id="main">
+  <p>ここは本当は</p>
+  <ul>
+    @if(uname) {
+      <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記</li>
+      <li><a href="/post">新しい記事の投稿</a></li>
+      <li><a href="/logout">ログアウト</a></li>
+    } else {
+      <li><a href="/signup">ユーザー登録</a></li>
+      <li><a href="/login">ログイン</a></li>
+    }
+  </ul>
+</div>
+
+<div id="sub">
+  <p>こんにちは!</p>
+</div>
 }
