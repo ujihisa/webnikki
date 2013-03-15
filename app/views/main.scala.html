@@ -22,11 +22,11 @@
                  こんにちは :-)
              </div>
          </div>
-         <div id="logo"><img src="@routes.Assets.at("images/logo-200-64.png")" alt="logo" /></div>
+         <div id="logo"><a href="http://@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}"><img src="@routes.Assets.at("images/logo-200-64.png")" alt="logo" /></a></div>
          <div id="content">@content</div>
          <br id="float-margin-trick" />
          <footer>
-             <p>web-nikki開発チームが提供しております</p>
+             <p>&copy; web-nikki開発チーム ヾ(*´∀｀*)ﾉ</p>
          </footer>
     </body>
 </html>

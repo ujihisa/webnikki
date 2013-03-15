@@ -31,6 +31,16 @@ div#content {
     margin: 0 auto;
 }
 
+nav ul.main-menu li {
+    font-size: x-large;
+    list-style: none;
+    text-shadow: 1px 1px 3px #000;
+}
+
+nav ul.main-menu li a {
+    text-decoration: none;
+}
+
 br#float-margin-trick {
     clear: both;
 }

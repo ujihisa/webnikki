@@ -3,20 +3,22 @@
 @main(message) {
 
 <div id="main">
-  <p>ここは本当は</p>
-  <ul>
-    @if(uname) {
-      <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記</li>
-      <li><a href="/post">新しい記事の投稿</a></li>
-      <li><a href="/logout">ログアウト</a></li>
-    } else {
-      <li><a href="/signup">ユーザー登録</a></li>
-      <li><a href="/login">ログイン</a></li>
-    }
-  </ul>
+  <p>ここにちょっとweb-nikkiオフィシャルのブログの記事を3つくらい載せておきたい。RSSパーサから取ってきて自動的に載るようにしておく。いや、どうだろう...最初はチュートリアル的な記事が出るようにした方がいいのかな...。</p>
 </div>
 
 <div id="sub">
-  <p>こんにちは!</p>
+  <nav>
+    <ul class="main-menu">
+      @if(uname) {
+        <li><a href="/post">新しい記事の投稿</a></li>
+        <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記</li>
+        <li><a href="/logout">ログアウト</a></li>
+      } else {
+        <li><a href="/signup">ユーザー登録</a></li>
+        <li><a href="/login">ログイン</a></li>
+      }
+    
+    </ul>
+  </nav>
 </div>
 }
