@@ -12,12 +12,12 @@
 <table>
   <tr id="title-tr">
     <td>タイトル</td>
-    <td><input id="title" type="text" name="title" size="48" placeholder="タイトルを入力してください" value="@postForm("title").value" /> <span id="title-info" class="form-info"></td>
+    <td><input id="post-title" type="text" name="title" size="48" placeholder="タイトルを入力してください" value="@postForm("title").value" /> <span id="title-info" class="form-info"></td>
   </tr>
   <tr id="content-tr">
     <td>記事</td>
     <td>
-      <textarea id="content" name="content" placeholder="記事を書いてください">@postForm("content").value</textarea>
+      <textarea id="post-content" name="content" placeholder="記事を書いてください">@postForm("content").value</textarea>
     </td>
   </tr>
   <tr>

@@ -5,8 +5,8 @@ $(function() {
             url: '/post',
             data: {
                 token: $('#token').val(),
-                title: $('#title').val(),
-                content: $('#content').val(),
+                title: $('#post-title').val(),
+                content: $('#post-content').val(),
                 created_at: $('#created_at').val()
             }
         }).done(function(data) {
