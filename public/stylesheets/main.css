@@ -26,6 +26,10 @@ div#header-right {
     text-align: right;
 }
 
+div#logo {
+    margin: 10px;
+}
+
 div#content {
     width: 95%;
     margin: 0 auto;

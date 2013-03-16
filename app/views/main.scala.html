@@ -16,17 +16,19 @@
 
     </head>
     <body>
+         <!--
          <div id="header">
              <div id="header-left"><a href="http://@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">ホーム</a></div>
              <div id="header-right">
                  こんにちは :-)
              </div>
          </div>
+         -->
          <div id="logo"><a href="http://@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}"><img src="@routes.Assets.at("images/logo-200-64.png")" alt="logo" /></a></div>
          <div id="content">@content</div>
          <br id="float-margin-trick" />
          <footer>
-             <p>&copy; web-nikki開発チーム ヾ(*´∀｀*)ﾉ</p>
+             <p>&copy; web日記チーム ヾ(*´∀｀*)ﾉ</p>
          </footer>
     </body>
 </html>
