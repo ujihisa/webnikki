@@ -1,0 +1,7 @@
+div#main h2 {
+    text-shadow: 1px 1px 2px #000;
+}
+
+div#main p {
+    margin: 10px 0 10px 0;
+}
