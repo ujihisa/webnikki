@@ -3,6 +3,10 @@
 * {
     margin: 0px;
     padding: 0px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
@@ -39,6 +43,7 @@ nav ul.main-menu li {
     font-size: x-large;
     list-style: none;
     text-shadow: 1px 1px 3px #000;
+    margin: 5px 0 5px 0;
 }
 
 nav ul.main-menu li a {

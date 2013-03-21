@@ -1,8 +1,2 @@
-span.form-info {
-    color: #ff0000;
-    font-weight: bold;
-}
+@charset "utf-8";
 
-tr.warning {
-    background-color: #ffaaaa;
-}

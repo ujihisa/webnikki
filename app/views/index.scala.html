@@ -4,24 +4,19 @@
 
 <div id="main">
   <h2>web日記とは</h2>
-  <p>ここにちょっとweb-nikkiオフィシャルのブログの記事を3つくらい載せておきたい。RSSパーサから取ってきて自動的に載るようにしておく。いや、どうだろう...最初はチュートリアル的な記事が出るようにした方がいいのかな...。</p>
-  <p>あ、いや、違うかな。web-nikkiについての説明があるべきかな。</p>
-
-  <h2>何かもう一つ</h2>
-  <p>麻生氏は、ＴＰＰを国論を二分するやっかいな問題とみて、昨年、民主党の野田政権に片づけてもらおうと動いたことがある。衆院選の最中の１２月、麻生氏は当時の野田首相に電話し、「ＴＰＰをやってくれ。それがあなたの最後の仕事だ」と迫った。
-  「参加表明したら、私を支持してくれますか」と問い返す野田氏に、麻生氏は「選挙をやってるんだから、批判するに決まってるだろ」と素っ気なかった。結局、野田氏は参加表明を見送った。</p>
+  <p>web日記は日記を簡単にインターネットで公開できるサービスです。</p>
 </div>
 
 <div id="sub">
   <nav>
     <ul class="main-menu">
       @if(uname) {
-        <li><a href="/post">新しい記事の投稿</a></li>
-        <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記</li>
-        <li><a href="/logout">ログアウト</a></li>
+        <li><a class="button" href="/post">記事の投稿</a></li>
+        <li><a class="button" href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記</a></li>
+        <li><a class="button" href="/logout">ログアウト</a></li>
       } else {
-        <li><a href="/signup">ユーザー登録</a></li>
-        <li><a href="/login">ログイン</a></li>
+        <li><a class="button" href="/signup">ユーザー登録</a></li>
+        <li><a class="button" href="/login">ログイン　</a></li>
       }
     
     </ul>
