@@ -4,26 +4,39 @@
 
 @main("記事投稿") {
 
-<p id="link"></p>
+<div id="main">
+  <p id="link"></p>
+  <form id="submit">
+    <input id="created_at" type="hidden" name="created_at" value="@postForm("created_at").value" />
+    @if(!postForm("token").value.isEmpty) { <input id="token" type="hidden" name="token" value="@postForm("token").value" /> }
+    <header>
+      <div><p>（´･∀･`） 記事書いて〜</p></div>
+    </header>
 
-<form id="submit">
-<input id="created_at" type="hidden" name="created_at" value="@postForm("created_at").value" />
-@if(!postForm("token").value.isEmpty) { <input id="token" type="hidden" name="token" value="@postForm("token").value" /> }
-<table>
-  <tr id="title-tr">
-    <td>タイトル</td>
-    <td><input id="post-title" type="text" name="title" size="48" placeholder="タイトルを入力してください" value="@postForm("title").value" /> <span id="title-info" class="form-info"></td>
-  </tr>
-  <tr id="content-tr">
-    <td>記事</td>
-    <td>
-      <textarea id="post-content" name="content" placeholder="記事を書いてください">@postForm("content").value</textarea>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2"><input id="submit-button" type="submit" value="@if(postForm("title").value) {編集} else {投稿}" /></td>
-  </tr>
-</table>
+    <div>
+      <label>タイトル</label>
+      <div>
+        <input id="post-title" type="text" name="title" size="48" placeholder="タイトルを入力してください" value="@postForm("title").value" />
+      </div>
+    </div>
 
+    <div>
+      <label>記事</label>
+      <div>
+        <textarea id="post-content" name="content" placeholder="記事を書いてください" rows="20">@postForm("content").value</textarea>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <input id="submit-button" type="submit" value="@if(postForm("title").value) {編集} else {投稿}" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id="sub"></div>
+
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/form.css")">
 <script src="@routes.Assets.at("javascripts/post.js")" type="text/javascript"></script>
 }
