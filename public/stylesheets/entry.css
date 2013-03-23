@@ -13,8 +13,13 @@ div#post-date {
     font-size: small;
 }
 
-div#post-date > span{
+div#post-date > span {
     font-style: italic;
+}
+
+div#comment-form-separator {
+    margin: 5px 0;
+    display: none;
 }
 
 div#initial-comments {
@@ -22,7 +27,7 @@ div#initial-comments {
 }
 
 div.comments {
-    border-style: dotted;
+    border: solid 1px #ccc;
     margin-top: 5px;
     padding: 5px;
 }

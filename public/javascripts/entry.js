@@ -50,6 +50,7 @@ $(function() {
                 view.render();
                 commentListEl.append(view.el);
             });
+            if (this.model.length) { $('#comment-form-separator').show(); }
         },
         _onAddInputClick: function() {
             var self = this;
