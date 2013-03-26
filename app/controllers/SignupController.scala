@@ -6,6 +6,9 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.json.Json
 
+import com.tristanhunt.knockoff.DefaultDiscounter._
+
+import scala.io.Source
 import views._
 import models.Member
 
@@ -20,6 +23,9 @@ object SignupController extends Controller {
       ))
 
   def index = Action {
+    // val txt = io.Source.fromFile("resource/terms-of-service.md").mkString
+    // println(txt)
+    // println(toXHTML(knockoff(txt)))
     Ok(html.signup(memberForm, None))
   }
 
