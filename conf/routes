@@ -5,6 +5,7 @@
 GET     /                                   controllers.IndexController.index
 GET     /signup                             controllers.SignupController.index
 POST    /signup                             controllers.SignupController.indexPost
+GET     /signup/tos                         controllers.SignupController.termsOfService
 GET     /login                              controllers.LoginController.index
 POST    /login                              controllers.LoginController.indexPost
 GET     /logout                             controllers.LogoutController.index

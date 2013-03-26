@@ -22,12 +22,13 @@ object SignupController extends Controller {
       "password" -> nonEmptyText(minLength = 4) // FIXME this should *not* be hard coded
       ))
 
-  def index = Action {
-    // val txt = io.Source.fromFile("resource/terms-of-service.md").mkString
-    // println(txt)
-    // println(toXHTML(knockoff(txt)))
+  def termsOfService = Action {
     val termsOfService = toXHTML(knockoff(io.Source.fromFile("resource/terms-of-service.md").mkString))
-    Ok(html.signup(memberForm, termsOfService.toString))
+    Ok(html.termsOfService(termsOfService.toString))
+  }
+
+  def index = Action {
+    Ok(html.signup(memberForm))
   }
 
   def indexPost = Action {
