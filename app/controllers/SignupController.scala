@@ -26,7 +26,8 @@ object SignupController extends Controller {
     // val txt = io.Source.fromFile("resource/terms-of-service.md").mkString
     // println(txt)
     // println(toXHTML(knockoff(txt)))
-    Ok(html.signup(memberForm, None))
+    val termsOfService = toXHTML(knockoff(io.Source.fromFile("resource/terms-of-service.md").mkString))
+    Ok(html.signup(memberForm, termsOfService.toString))
   }
 
   def indexPost = Action {
