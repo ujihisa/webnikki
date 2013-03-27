@@ -40,6 +40,15 @@ $(function() {
                     $('#password-info').html('');
                 }
 
+                // FIXME: every error check should be done with toast
+                if (!$('#terms-of-service').is(':checked')) {
+                    $().toastmessage('showToast', {
+                        text: '利用規約に同意してください!',
+                        position: 'top-center',
+                        type: 'error'
+                    });
+                }
+
                 if ($('#uname-info').html().trim() === '' &&
                     $('#email-info').html().trim() === '' &&
                     $('#password-info').html().trim() === '') {
