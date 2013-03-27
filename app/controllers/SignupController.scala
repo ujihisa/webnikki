@@ -18,7 +18,7 @@ object SignupController extends Controller {
   val memberForm = Form(
     tuple(
       "uname" -> nonEmptyText,
-      "email" -> email,
+      "email" -> email, // FIXME (the validation is not so good)
       "password" -> nonEmptyText(minLength = 4) // FIXME this should *not* be hard coded
       ))
 
