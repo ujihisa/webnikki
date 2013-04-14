@@ -15,6 +15,7 @@ POST    /post                               controllers.PostController.indexPost
 GET     /entry/:createdAt                   controllers.EntryController.index(createdAt)
 POST    /entry                              controllers.EntryController.indexPost
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
+GET     /da93e4kb.htm                       controllers.IndexController.ssl
 
 # this will be removed
 GET     /test                       controllers.IndexController.test

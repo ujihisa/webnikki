@@ -57,6 +57,10 @@ object IndexController extends Controller {
     }
   }
 
+  def ssl = Action {
+    Ok("p0NkXRtbwO5PvM4q1k1a")
+  }
+
   def getSubdomain(domain: String) = {
     domain.substring(0, domain.indexOf('.'))
   }
