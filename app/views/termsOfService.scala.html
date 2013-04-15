@@ -1,9 +1,11 @@
 @(termsOfService: String)
 
+@import com.tristanhunt.knockoff.DefaultDiscounter.{knockoff, toXHTML}
+
 @main("利用規約") {
 
 <div id="main">
-@Html(termsOfService)
+@(toXHTML(knockoff(termsOfService)))
 </div>
 
 <div id="sub"></div>

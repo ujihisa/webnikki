@@ -1,15 +1,15 @@
 @(message: String, post: models.Post, comments: List[models.Comment])
 
 @import java.util.Date
+@import com.tristanhunt.knockoff.DefaultDiscounter.{knockoff, toXHTML}
 
 @main(message) {
 
 <div id="main">
   <h2 id="post-title">@post.title<span id="post-edit"> - <a href="/post/@post.published_at">編集</a></span></h2>
 
-  <div id="post-content">@post.content</div>
+  <div id="post-content">@(toXHTML(knockoff(post.content)))</div>
   <div id="post-date">投稿日: <span>@{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(post.published_at)}</span></div>
-
 
   <hr />
 
