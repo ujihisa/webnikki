@@ -6,9 +6,11 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.libs.json.Json
 
-import library.Util
+import com.tristanhunt.knockoff.DefaultDiscounter._
 
+import library.Util
 import views._
+
 import models.Member
 import models.Post
 import models.Comment
@@ -27,7 +29,10 @@ object EntryController extends Controller {
     implicit request => {
       val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
       Post.postByMemberIdAndCreatedAt(memberId, createdAt.toLong) match {
-        case Some(entry) => Ok(html.entry("", entry, Comment.commentsByPostId(entry.id)))
+        case Some(entry) => Ok(html.entry(
+            "",
+            entry,
+            Comment.commentsByPostId(entry.id)))
         case None => BadRequest("その記事存在しないです...")
       }
     }

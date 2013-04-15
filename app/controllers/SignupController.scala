@@ -8,6 +8,7 @@ import play.api.libs.json.Json
 
 import com.tristanhunt.knockoff.DefaultDiscounter._
 
+
 import scala.io.Source
 import views._
 import models.Member

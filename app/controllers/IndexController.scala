@@ -17,7 +17,7 @@ object IndexController extends Controller {
           Ok(html.index("トップページ", request.session.get("uname")))
         case _ => {
           val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
-          Ok(html.myindex("各人のページ", request.session.get("uname"), Post.postsByMemberId(memberId)))
+          Ok(html.myindex("各人のページ", Util.getUnameFromSubdomain(request.domain), Post.postsByMemberId(memberId)))
         }
       }
     }
@@ -55,10 +55,6 @@ object IndexController extends Controller {
       println(request.session.get("login"))
       Ok("Hello" + request.session.get("login"))
     }
-  }
-
-  def ssl = Action {
-    Ok("p0NkXRtbwO5PvM4q1k1a")
   }
 
   def getSubdomain(domain: String) = {
