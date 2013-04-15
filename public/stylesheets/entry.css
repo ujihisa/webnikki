@@ -8,6 +8,13 @@ div#post-content {
     padding: 0px 0 10px;
 }
 
+div#post-content > p,
+div#post-content > ul,
+div#post-content > pre,
+div#post-content > blockquote {
+    margin: 5px 0 10px 0;
+}
+
 div#post-date {
     color: #555;
     font-size: small;
@@ -42,4 +49,9 @@ span.comment-timestamp {
 
 span.comment-content {
     display: block;
+}
+
+li {
+    margin: 0 0 0 1em;
+    padding: 0;
 }
