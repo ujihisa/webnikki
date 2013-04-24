@@ -17,11 +17,15 @@ object RssController extends Controller {
         <rss version="2.0">
           <channel>
             <title>{uname} のRSS</title>
-            <link></link>
+            <link>http://{request.domain}/</link>
+            <description>{uname} のRSS</description>
+            <language>ja</language>
           </channel>
         </rss>
 
-      Ok("<dummy>Trying to </dummy>").as("application/rss+xml")
+      // Ok("<dummy>Trying to </dummy>").as("application/rss+xml")
+      // Ok("<dummy>Trying to </dummy>")
+      Ok(rss)
     }
   }
 }
