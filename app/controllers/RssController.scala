@@ -1,13 +1,31 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.data._
-import play.api.data.Forms._
-import play.api.libs.json.Json
+//import play.api._
+import play.api.mvc.{Action, Controller}
+import library.Util
+import models.Member
+import models.Post
 
 object RssController extends Controller {
-  def rss(name: String) = Action {
-    Ok("Hello, this should be RSS feed, actually. " + name)
+  def rss = Action {
+    implicit request => {
+      val uname = Util.getUnameFromSubdomain(request.domain)
+      val memberId = Member.selectByUname(uname).get.id
+      val posts = Post.postsByMemberId(memberId)
+      // println(posts)
+      val rss = 
+        <rss version="2.0">
+          <channel>
+            <title>{uname} のRSS</title>
+            <link>http://{request.domain}/</link>
+            <description>{uname} のRSS</description>
+            <language>ja</language>
+          </channel>
+        </rss>
+
+      // Ok("<dummy>Trying to </dummy>").as("application/rss+xml")
+      // Ok("<dummy>Trying to </dummy>")
+      Ok(rss)
+    }
   }
 }
