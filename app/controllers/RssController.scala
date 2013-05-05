@@ -21,6 +21,22 @@ object RssController extends Controller {
             <description>{uname} のRSS</description>
             <language>ja</language>
           </channel>
+          <item>
+            <title>title</title>
+            <link>https://twitter.com/mahata</link>
+            <description>Hello, world!</description>
+            <pubData>2013-11-14</pubData>
+          </item>
+          { posts map {
+              p =>
+              <item>
+                <title>title</title>
+                <link>https://twitter.com/mahata</link>
+                <description>Hello, world!</description>
+                <pubData>2013-11-14</pubData>
+              </item>
+            }
+          }
         </rss>
 
       // Ok("<dummy>Trying to </dummy>").as("application/rss+xml")
