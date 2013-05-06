@@ -22,8 +22,4 @@ object ApiController extends Controller {
       case Left(message) => BadRequest(Json.toJson(Map("error" -> message)))
     }
   }
-
-  def passRemind(email: String) = Action {
-    Ok("Hello: " + email)
-  }
 }

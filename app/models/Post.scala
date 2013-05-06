@@ -3,7 +3,7 @@ package models
 import anorm._
 import anorm.SqlParser._
 
-import play.api.db._
+import play.api.db.DB
 import play.api.Play.current
 
 case class Post(
@@ -22,7 +22,7 @@ object Post {
     get[String]("content") ~
     get[Long]("created_at") ~
     get[Long]("published_at") map {
-      case id ~ member_id ~ title ~ content ~ created_at ~ published_at => Post(id, member_id, title, content, created_at, published_at)
+      case id~member_id~title~content~created_at~published_at => Post(id, member_id, title, content, created_at, published_at)
     }
   }
 
