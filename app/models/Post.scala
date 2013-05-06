@@ -26,8 +26,12 @@ object Post {
     }
   }
 
-  def postsByMemberId(memberId: Long) = {
-    val sql = "SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id}"
+  def postsByMemberId(memberId: Long, limit: Int = 0) = {
+    val sql =
+      if (limit == 0)
+        "SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id} ORDER BY id DESC"
+      else
+        s"SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id} ORDER BY id DESC LIMIT $limit"
 
     DB.withConnection {
       implicit c => SQL(sql).on("member_id" -> memberId).as(post *)
