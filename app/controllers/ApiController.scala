@@ -1,8 +1,6 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.data._
+import play.api.mvc.{Controller, Action}
 import play.api.libs.json.Json
 
 import models.Member
@@ -23,5 +21,9 @@ object ApiController extends Controller {
       case Right(json) => Ok(json)
       case Left(message) => BadRequest(Json.toJson(Map("error" -> message)))
     }
+  }
+
+  def passRemind(email: String) = Action {
+    Ok("Hello: " + email)
   }
 }

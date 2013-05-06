@@ -15,6 +15,7 @@ POST    /post                               controllers.PostController.indexPost
 GET     /entry/:createdAt                   controllers.EntryController.index(createdAt)
 POST    /entry                              controllers.EntryController.indexPost
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
+GET     /api/pass-remind/:email             controllers.ApiController.passRemind(email)
 GET     /rss                                controllers.RssController.rss
 
 # this will be removed
