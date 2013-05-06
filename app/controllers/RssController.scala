@@ -1,10 +1,11 @@
 package controllers
 
-//import play.api._
 import play.api.mvc.{Action, Controller}
 import library.Util
 import models.Member
 import models.Post
+import java.text.SimpleDateFormat
+import java.util.Date
 import com.tristanhunt.knockoff.DefaultDiscounter.{knockoff, toXHTML}
 
 object RssController extends Controller {
@@ -21,23 +22,22 @@ object RssController extends Controller {
             <description>{uname} のRSS</description>
             <language>ja</language>
           </channel>
-          <item>
-            <title>title</title>
-            <link>https://twitter.com/mahata</link>
-            <description>Hello, world!</description>
-            <pubData>2013-11-14</pubData>
-          </item>
           { posts map {
               p =>
               <item>
                 <title>{p.title}</title>
-                <link>https://twitter.com/mahata</link>
+                <link>http://{ request.domain }/entry/{ p.created_at }</link>
                 <description>
                 { "__CDATA_START__" }
                 { toXHTML(knockoff(p.content)) }
+
                 { "__CDATA_END__" }
                 </description>
-                <pubData>2013-11-14</pubData>
+                <pubData>{
+                  val d = new Date(p.published_at.toLong)
+                  val output = new SimpleDateFormat("yyyy/MM/dd (E) HH:mm:ss z")
+                  output.format(d)
+                }</pubData>
               </item>
             }
           }
