@@ -24,7 +24,21 @@ object Pass {
     }
   }
 
-  def addOnetimeToken = {
-    
+  def addOnetimeToken(email: String, token: String) = {
+    val sql =
+      "INSERT INTO pass_remind (email, token, created_at) " +
+      "VALUES ({email}, {token}, {created_at})"
+    val created_at = System.currentTimeMillis
+
+    DB.withConnection {
+      implicit c =>
+        SQL(sql).on(
+          "email" -> email,
+          "token" -> token,
+          "created_at" -> created_at
+        ).executeUpdate
+    }
+
+    created_at
   }
 }

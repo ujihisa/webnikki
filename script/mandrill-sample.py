@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from sys import argv
 from mailsnake import MailSnake
 from mailsnake.exceptions import *
 
@@ -9,7 +13,7 @@ try:
                                       'subject':'email subject',
                                       'from_email':'from@example.com',
                                       'from_name':'From Name',
-                                      'to':[{'email': 'nori@mahata.net',
+                                      'to':[{'email': argv[1],
                                              'name':'To Name'}]}) # returns 'PONG!'
 
 except MailSnakeException:
