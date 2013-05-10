@@ -1,11 +1,41 @@
-@()
+@(passForm: Form[(String, String)])
 
 @main("パスワード再設定") {
 
 <div id="main">
-こんにちは。
+  <form id="submit">
+    <header>
+      <div><p>パスワード再設定フォーム</p></div>
+    </header>
+
+    <div>
+      <label>メールアドレス</label>
+      <div>
+        <input id="email" type="hidden" name="email" value="@passForm("email").value" />
+        <span><strong>@passForm("email").value</strong></span>
+      </div>
+    </div>
+
+    <div>
+      <label>パスワード</label>
+      <div>
+        <input id="password" type="password" name="password" size="48" placeholder="8文字以上のパスワードを入力してください" /> <span class="alert" id="password-info"></span>
+      </div>
+      <div>
+        <input id="password-check" type="checkbox" /> <span>パスワードを確認しますか?</span>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <input type="submit" value="登録" />
+      </div>
+    </div>
+  </form>
 </div>
 
 <div id="sub"></div>
 
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/form.css")">
+<script src="@routes.Assets.at("javascripts/reset.js")" type="text/javascript"></script>
 }

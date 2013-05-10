@@ -1,7 +1,6 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
+import play.api.mvc.{Controller, Action}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
@@ -17,7 +16,7 @@ object SignupController extends Controller {
     tuple(
       "uname" -> nonEmptyText,
       "email" -> email, // FIXME (the validation is not so good)
-      "password" -> nonEmptyText(minLength = 4) // FIXME this should *not* be hard coded
+      "password" -> nonEmptyText(minLength = 8) // FIXME this should *not* be hard coded
       ))
 
   def termsOfService = Action {

@@ -1,4 +1,4 @@
-// FIXME: "4" should *not* be hard-coded.  use 'data-' property instead
+// FIXME: "8" should *not* be hard-coded.  use 'data-' property instead
 $(function() {
     $('#password-check').change(function() {
         $('#password').attr('type', $(this).is(':checked') ? 'text' : 'password');
@@ -34,8 +34,8 @@ $(function() {
                     $('#email-info').html('');
                 }
 
-                if ($('#password').val().trim().length < 4) {
-                    $('#password-info').html('パスワードは 4 文字以上で入力してください。');
+                if ($('#password').val().trim().length < 8) {
+                    $('#password-info').html('パスワードは 8 文字以上で入力してください。');
                 } else {
                     $('#password-info').html('');
                 }
