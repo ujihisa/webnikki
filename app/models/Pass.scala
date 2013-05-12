@@ -24,6 +24,8 @@ object Pass {
     }
   }
 
+  val twoHours = 7200000
+
   def addOnetimeToken(email: String, token: String) = {
     val sql =
       "INSERT INTO pass_reset (email, token, created_at) " +
@@ -42,16 +44,32 @@ object Pass {
     created_at
   }
 
-  def isValidToken(token: String) = {
-    val sql = "SELECT validity, created_at FROM pass_reset WHERE token = {token}"
+  def checkTokenValidity(token: String) = {
+    val sql = "SELECT id, email, token, validity, created_at FROM pass_reset WHERE token = {token}"
 
-    val foo = DB.withConnection {
+    val passReset = DB.withConnection {
       implicit c =>
         SQL(sql).on(
           "token" -> token
         ).as(pass *).headOption
     }
 
-    println(foo)
+    val errorMessage = passReset match {
+      case Some(x) => {
+        if (!x.validity) {
+          "使用済みの token です"
+        } else if (twoHours < (System.currentTimeMillis - x.created_at)) {
+          "期限切れの token です"
+        } else {
+          ""
+        }
+      }
+      case _ => "存在しない token です"
+    }
+
+    errorMessage match {
+      case "" => Map("isValid" -> true)
+      case _  => Map("isValid" -> false, "message" -> errorMessage)
+    }
   }
 }

@@ -30,13 +30,19 @@ object PassController extends Controller {
   }
 
   def reset(token: String) = Action {
-    // TODO: token の妥当性の確認と対応する email の取得
-    
+    println("reset controller")
+    val validity = Pass.checkTokenValidity(token)
 
-    Ok(html.pass(passForm.bind(Map(
-        "token" -> token,
-        "email" -> "test@example.com"
-        ))))
+    println(validity, validity("isValid"))
+    validity("isValid") match {
+      case true => Ok(html.pass(
+        passForm.bind(Map(
+          "token" -> token,
+          "email" -> "test@example.com"
+        )),
+        validity))
+      case false => Ok(html.passFailure(validity("message").toString))
+    }
   }
 
   def resetPost = Action {
