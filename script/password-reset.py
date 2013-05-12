@@ -18,9 +18,9 @@ text = text.replace("__PASSWORD_RESET_URL__", argv[2])
 
 try:
     response = mapi.messages.send(message={'html': text,
-                                           'subject': 'webnikki.jp パスワード',
+                                           'subject': 'webnikki.jp パスワード再設定',
                                            'from_email': 'admin@webnikki.jp',
-                                           'from_name': 'webnikki.jp アドミニストレーター',
+                                           'from_name': 'webnikki.jp 管理者',
                                            'to':[{'email': argv[1],
                                                   'name': argv[1]}]})
     # response == 'PONG!'

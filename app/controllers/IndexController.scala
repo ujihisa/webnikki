@@ -14,10 +14,10 @@ object IndexController extends Controller {
     implicit request => {
       Play.current.configuration.getString("service.domain") match {
         case Some(x) if request.domain.startsWith(x) =>
-          Ok(html.index("トップページ", request.session.get("uname")))
+          Ok(html.index("トップ - web日記", request.session.get("uname")))
         case _ => {
           val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
-          Ok(html.myindex("各人のページ", Util.getUnameFromSubdomain(request.domain), Post.postsByMemberId(memberId)))
+          Ok(html.myindex("ユーザーページ - web日記", Util.getUnameFromSubdomain(request.domain), Post.postsByMemberId(memberId)))
         }
       }
     }

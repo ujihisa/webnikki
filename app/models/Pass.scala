@@ -26,7 +26,7 @@ object Pass {
 
   def addOnetimeToken(email: String, token: String) = {
     val sql =
-      "INSERT INTO pass_remind (email, token, created_at) " +
+      "INSERT INTO pass_reset (email, token, created_at) " +
       "VALUES ({email}, {token}, {created_at})"
     val created_at = System.currentTimeMillis
 
@@ -40,5 +40,18 @@ object Pass {
     }
 
     created_at
+  }
+
+  def isValidToken(token: String) = {
+    val sql = "SELECT validity, created_at FROM pass_reset WHERE token = {token}"
+
+    val foo = DB.withConnection {
+      implicit c =>
+        SQL(sql).on(
+          "token" -> token
+        ).as(pass *).headOption
+    }
+
+    println(foo)
   }
 }
