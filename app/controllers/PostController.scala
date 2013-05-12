@@ -1,8 +1,8 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.data._
+import play.api.Play.current
+import play.api.mvc.{Controller, Action}
+import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
 
@@ -67,8 +67,8 @@ object PostController extends Controller {
   private def createEntryUrl(uname: String, createdAt: Long) = {
     "http://%s.%s%s/entry/%s" format
         (uname,
-         Play.current.configuration.getString("service.domain").getOrElse(""),
-         Play.current.configuration.getString("service.port").map { x => ":%s" format x }.getOrElse(""),
+         current.configuration.getString("service.domain").getOrElse(""),
+         current.configuration.getString("service.port").map { x => ":%s" format x }.getOrElse(""),
          createdAt.toString)
   }
 }

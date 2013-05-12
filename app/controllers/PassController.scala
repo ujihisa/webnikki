@@ -5,6 +5,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.Play.current
 import play.Play
+import play.api.libs.json.Json
 import views.html
 import sys.runtime
 import models.Pass
@@ -13,6 +14,7 @@ import library.Random
 object PassController extends Controller {
   val passForm = Form(
       tuple(
+        "token" -> text,
         "email" -> email, // FIXME (the validation is not so good)
         "password" -> nonEmptyText(minLength = 8)
         ))
@@ -31,11 +33,27 @@ object PassController extends Controller {
     // TODO: token の妥当性の確認と対応する email の取得
 
     Ok(html.reset(passForm.bind(Map(
+        "token" -> token,
         "email" -> "test@example.com"
         ))))
   }
 
-  def resetPost() = Action {
-    Ok("Hey")
+  def resetPost = Action {
+    implicit request => {
+      try {
+        val (token, email, password) = passForm.bindFromRequest.get
+        Ok(Json.toJson(Map(
+            "success" -> Json.toJson(1),
+            "message" -> Json.toJson("パスワードの再設定が完了しました")
+            )))
+      } catch {
+        case e: Exception => {
+          BadRequest(Json.toJson(Map(
+            "success" -> Json.toJson(0),
+            "message" -> Json.toJson("予期しないエラー " + e))
+            ))
+        }
+      }
+    }
   }
 }
