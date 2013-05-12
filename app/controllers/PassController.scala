@@ -31,8 +31,9 @@ object PassController extends Controller {
 
   def reset(token: String) = Action {
     // TODO: token の妥当性の確認と対応する email の取得
+    
 
-    Ok(html.reset(passForm.bind(Map(
+    Ok(html.pass(passForm.bind(Map(
         "token" -> token,
         "email" -> "test@example.com"
         ))))

@@ -2,7 +2,7 @@
 
 @import helper._
 
-@main("記事投稿") {
+@main("記事投稿 - web日記") {
 
 <div id="main">
   <p id="link"></p>
@@ -10,7 +10,7 @@
     <input id="created_at" type="hidden" name="created_at" value="@postForm("created_at").value" />
     @if(!postForm("token").value.isEmpty) { <input id="token" type="hidden" name="token" value="@postForm("token").value" /> }
     <header>
-      <div><p>（´･∀･`） 記事書いて〜</p></div>
+      <div><p>記事投稿</p></div>
     </header>
 
     <div>

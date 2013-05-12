@@ -1,12 +1,12 @@
 @(passForm: Form[(String, String, String)])
 
-@main("パスワード再設定") {
+@main("パスワード再設定 - web日記") {
 
 <div id="main">
   <form id="submit">
     <input id="token" type="hidden" name="token" value="@passForm("token").value" />
     <header>
-      <div><p>パスワード再設定フォーム</p></div>
+      <div><p>パスワード再設定</p></div>
     </header>
 
     <div>
