@@ -73,6 +73,20 @@ object Member {
     }
   }
 
+  def updatePassword(email: String, password: String) = {
+    val salt = Random.randomPrintableString(saltLength)
+    val stretchedPassword = stretch(password + salt, stretchNum)
+    val sql = "UPDATE member SET password = {password}, salt = {salt} WHERE email = {email}"
+
+    DB.withConnection {
+      implicit c =>
+        SQL(sql).on(
+          "password" -> stretchedPassword,
+          "salt" -> salt
+        ).executeUpdate
+    }
+  }
+
   def delete(id: Long) {
     DB.withConnection {
       implicit c =>

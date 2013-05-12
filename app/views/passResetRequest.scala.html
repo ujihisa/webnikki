@@ -1,0 +1,31 @@
+@()
+
+@main("パスワード再設定依頼 - web日記") {
+<div id="main">
+  <form id="submit">
+    <header>
+      <div><p>パスワード再設定依頼</p></div>
+    </header>
+
+    <div>
+      <label>メールアドレス</label>
+      <div>
+        <input id="email" type="hidden" name="email" value="@passForm("email").value" />
+        <span><strong>@passForm("email").value</strong></span>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <input type="submit" value="送信" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id="sub"></div>
+
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/form.css")">
+<script src="@routes.Assets.at("javascripts/request.js")" type="text/javascript"></script>
+
+}

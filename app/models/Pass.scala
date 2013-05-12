@@ -68,8 +68,18 @@ object Pass {
     }
 
     errorMessage match {
-      case "" => Map("isValid" -> true)
+      case "" => Map("isValid" -> true, "email" -> passReset.get.email)
       case _  => Map("isValid" -> false, "message" -> errorMessage)
+    }
+  }
+
+  def invalidateToken(token: String) = {
+    val sql = "UPDATE pass_reset SET validity = false WHERE token = {token}"
+    DB.withConnection {
+      implicit c =>
+        SQL(sql).on(
+          "token" -> token
+        ).executeUpdate
     }
   }
 }
