@@ -27,7 +27,8 @@ object IndexController extends Controller {
     val robotsTxt =
       "User-agent: *\n" +
       "Disallow: /login\n" +
-      "Disallow: /signup\n"
+      "Disallow: /signup\n" +
+      "Disallow: /manage\n"
     Ok(robotsTxt)
   }
 

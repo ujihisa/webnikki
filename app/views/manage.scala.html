@@ -2,22 +2,13 @@
 
 @main("管理 - web日記") {
 
-<div id="main">
-  <form id="submit">
-    <header>
-      <div><p>管理</p></div>
-    </header>
-    <div>
-      <label>記事</label>
-      <div>
-        <p>なにがしかの記事情報など</p>
-      </div>
-    </div>
-  </form>
-</div>
+<ul id="manage-list">
+  <li><a href="javascript:void(0)">一覧ページの CSS 編集</a></li>
+  <li><a href="javascript:void(0)">一覧ページの JavaScript 編集</a></li>
+  <li><a href="javascript:void(0)">個別記事ページの CSS 編集</a></li>
+  <li><a href="javascript:void(0)">個別記事ページの JavaScript 編集</a></li>
+</ul>
 
-<div id="sub"></div>
-
-<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/form.css")">
+<script src="@routes.Assets.at("javascripts/manage.js")" type="text/javascript"></script>
 
 }
