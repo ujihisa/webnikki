@@ -1,18 +1,18 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
+import play.api.Play.current
+import play.api.mvc.{Controller, Action}
 import library.Random
 import library.Util
 
-import views._
+import views.html
 import models.Member
 import models.Post
 
 object IndexController extends Controller {
   def index = Action {
     implicit request => {
-      Play.current.configuration.getString("service.domain") match {
+      current.configuration.getString("service.domain") match {
         case Some(x) if request.domain.startsWith(x) =>
           Ok(html.index("トップ - web日記", request.session.get("uname")))
         case _ => {

@@ -10,6 +10,7 @@ GET     /signup/tos                         controllers.SignupController.termsOf
 GET     /login                              controllers.LoginController.index
 POST    /login                              controllers.LoginController.indexPost
 GET     /logout                             controllers.LogoutController.index
+GET     /manage                             controllers.ManageController.index
 GET     /post                               controllers.PostController.index
 GET     /post/:createdAt                    controllers.PostController.indexEdit(createdAt)
 POST    /post                               controllers.PostController.indexPost
