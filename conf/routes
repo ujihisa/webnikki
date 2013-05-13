@@ -2,6 +2,7 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET     /robots.txt                         controllers.IndexController.robots
 GET     /                                   controllers.IndexController.index
 GET     /signup                             controllers.SignupController.index
 POST    /signup                             controllers.SignupController.indexPost

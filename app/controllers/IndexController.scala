@@ -23,6 +23,14 @@ object IndexController extends Controller {
     }
   }
 
+  def robots = Action {
+    val robotsTxt =
+      "User-agent: *\n" +
+      "Disallow: /login\n" +
+      "Disallow: /signup\n"
+    Ok(robotsTxt)
+  }
+
   def test = Action {
     implicit request => {
       Ok(html.test("Hello, this is..., whatever :-)"))
