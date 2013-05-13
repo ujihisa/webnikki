@@ -29,7 +29,7 @@ $(function() {
                 if (email[0].exist) {
                     $('#email-info').html('そのメールアドレスはすでに使われています。');
                 } else if ($('#email').val().indexOf('@') < 0) {
-                    $('#email-info').html('そのようなメールアドレスは存在しません... (´・ω・｀)');
+                    $('#email-info').html('そのようなメールアドレスは存在しません...');
                 } else {
                     $('#email-info').html('');
                 }

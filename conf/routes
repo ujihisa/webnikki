@@ -15,7 +15,8 @@ POST    /post                               controllers.PostController.indexPost
 GET     /entry/:createdAt                   controllers.EntryController.index(createdAt)
 POST    /entry                              controllers.EntryController.indexPost
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
-GET     /pass/reset-request/:email          controllers.PassController.resetRequest(email)
+GET     /pass/reset-request                 controllers.PassController.resetRequest
+POST    /pass/reset-request                 controllers.PassController.resetRequestPost
 GET     /pass/reset/:token                  controllers.PassController.reset(token)
 POST    /pass/reset                         controllers.PassController.resetPost
 GET     /rss                                controllers.RssController.rss

@@ -82,7 +82,8 @@ object Member {
       implicit c =>
         SQL(sql).on(
           "password" -> stretchedPassword,
-          "salt" -> salt
+          "salt" -> salt,
+          "email" -> email
         ).executeUpdate
     }
   }

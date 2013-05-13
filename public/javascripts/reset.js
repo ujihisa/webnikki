@@ -19,7 +19,7 @@ $(function() {
                     '&password=' + $('#password').val().trim()
             }).done(function(data) {
                 $().toastmessage('showToast', {
-                    text: 'パスワードの再設定に成功しました！<br />ログインページに移動します！',
+                    text: 'パスワード再設定に成功しました！<br />ログインページに移動します！',
                     position: 'top-center',
                     type: 'success',
                     stayTime: 3000,
@@ -29,7 +29,7 @@ $(function() {
                 });
             }).fail(function(data) {
                 $().toastmessage('showToast', {
-                    text: 'パスワードの再設定に失敗しました... エラー: ' + (data.message ? data.message : '不明なエラー'),
+                    text: 'パスワード再設定に失敗しました... エラー: ' + (data.message ? data.message : '不明なエラー'),
                     position: 'top-center',
                     type: 'error'
                 });
