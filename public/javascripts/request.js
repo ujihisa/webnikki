@@ -17,9 +17,7 @@ $(function() {
                     position: 'top-center',
                     type: 'success',
                     stayTime: 3000,
-                    close: function() {
-                        location.href = '/login';
-                    }
+                    close: function() {}
                 });
             }).fail(function(data) {
                 $().toastmessage('showToast', {

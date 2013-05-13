@@ -24,7 +24,7 @@ $(function() {
                     type: 'success',
                     stayTime: 3000,
                     close: function() {
-                        // location.href = '/';
+                        location.href = '/login';
                     }
                 });
             }).fail(function(data) {
