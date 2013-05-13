@@ -55,15 +55,9 @@ object Pass {
     }
 
     val errorMessage = passReset match {
-      case Some(x) => {
-        if (!x.validity) {
-          "使用済みの token です"
-        } else if (twoHours < (System.currentTimeMillis - x.created_at)) {
-          "期限切れの token です"
-        } else {
-          ""
-        }
-      }
+      case Some(x) if !x.validity => "使用済みの token です"
+      case Some(x) if twoHours < (System.currentTimeMillis - x.created_at) => "期限切れの token です"
+      case Some(_) => ""
       case _ => "存在しない token です"
     }
 
