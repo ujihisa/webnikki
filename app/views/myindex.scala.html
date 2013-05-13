@@ -1,10 +1,12 @@
 @(message: String, uname: String, posts: List[models.Post])
 
+@import play.api.Play.current
+
 @main(message) {
 
 <ul>
 @for(post <- posts) {
-  <li><a href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}/entry/@post.created_at">@post.title</a> / @post.content</li>
+  <li><a href="http://@{uname}.@{current.configuration.getString("service.domain")}/entry/@post.created_at">@post.title</a> / @post.content</li>
 } 
 </ul>
 

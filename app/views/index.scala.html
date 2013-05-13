@@ -1,5 +1,7 @@
 @(message: String, uname: Option[String])
 
+@import play.api.Play.current
+
 @main(message) {
 
 <div id="main">
@@ -12,7 +14,7 @@
     <ul class="main-menu">
       @if(uname) {
         <li><a class="button" href="/post">記事の投稿</a></li>
-        <li><a class="button" href="http://@{uname}.@{play.api.Play.current.configuration.getString("service.domain")}@if(play.api.Play.current.configuration.getString("service.port")) {:@play.api.Play.current.configuration.getString("service.port")}">自分の日記</a></li>
+        <li><a class="button" href="http://@{uname}.@{current.configuration.getString("service.domain")}">自分の日記</a></li>
         <li><a class="button" href="/logout">ログアウト</a></li>
       } else {
         <li><a class="button" href="/signup">ユーザー登録</a></li>
