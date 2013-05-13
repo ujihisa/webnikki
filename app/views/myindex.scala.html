@@ -6,7 +6,11 @@
 
 <ul>
 @for(post <- posts) {
-  <li><a href="http://@{uname}.@{current.configuration.getString("service.domain")}/entry/@post.created_at">@post.title</a> / @post.content</li>
+  <li>
+    <a href="http://@{uname}.@{current.configuration.getString("service.domain")}/entry/@post.created_at">@if(post.title.isEmpty) {(タイトル未設定)} else {@post.title}</a>
+    /
+    @post.content
+  </li>
 } 
 </ul>
 
