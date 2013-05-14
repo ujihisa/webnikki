@@ -22,4 +22,14 @@ object ApiController extends Controller {
       case Left(message) => BadRequest(Json.toJson(Map("error" -> message)))
     }
   }
+
+  def css(purpose: String, memberId: String) = Action {
+    // cssType は "list" ないし "page" のどちらか
+    Ok("Hello")
+  }
+
+  def cssPost = TODO
+
+  def js(purpose: String, memberId: String) = TODO
+  def jsPost = TODO
 }

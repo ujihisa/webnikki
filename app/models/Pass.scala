@@ -20,7 +20,8 @@ object Pass {
     get[String]("token") ~
     get[Boolean]("validity") ~
     get[Long]("created_at") map {
-      case id~email~token~validity~created_at => Pass(id, email, token, validity, created_at)
+      case id~email~token~validity~created_at =>
+        Pass(id, email, token, validity, created_at)
     }
   }
 

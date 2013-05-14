@@ -17,6 +17,10 @@ POST    /post                               controllers.PostController.indexPost
 GET     /entry/:createdAt                   controllers.EntryController.index(createdAt)
 POST    /entry                              controllers.EntryController.indexPost
 GET     /api/exist/:category/$name<[^\s]*>  controllers.ApiController.exist(category, name)
+GET     /api/css/:purpose/:memberId         controllers.ApiController.css(purpose, memberId)
+POST    /api/css                            controllers.ApiController.cssPost
+GET     /api/js/:purpose/:memberId          controllers.ApiController.js(purpose, memberId)
+POST    /api/js                             controllers.ApiController.jsPost
 GET     /pass/reset-request                 controllers.PassController.resetRequest
 POST    /pass/reset-request                 controllers.PassController.resetRequestPost
 GET     /pass/reset/:token                  controllers.PassController.reset(token)
