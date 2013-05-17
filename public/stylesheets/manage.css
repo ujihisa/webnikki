@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+span#code-target {
+    color: #f00;
+    font-weight: bold;
+}
+
+div#sub li {
+    margin-left: 20px;
+}

@@ -1,22 +1,5 @@
 $(function() {
     $('#manage-list > li > a').click(function () {
-        // switch ($(this).data('type')) {
-        // case 'list-css-edit':
-        //     console.debug('list-css-edit');
-        //     break;
-        // case 'page-css-edit':
-        //     console.debug('page-css-edit');
-        //     break;
-        // case 'list-js-edit':
-        //     console.debug('list-js-edit');
-        //     break;
-        // case 'page-js-edit':
-        //     console.debug('page-js-edit');
-        //     break;
-        // default:
-        //     break;
-        // }
-
         // var type = $(this).data('type');
         // $.ajax({
         //     url: '/api/'
@@ -25,6 +8,26 @@ $(function() {
         // });
 
         var type = $(this).data('type');
-        $('#edit-div').show();
+        $('#code-div').show();
+        $('#submit-div').show();
+
+        var targetText = '';
+        switch (type) {
+        case 'list-css-edit':
+            targetText = '(一覧ページの CSS 編集)';
+            break;
+        case 'page-css-edit':
+            targetText = '(個別記事ページの CSS 編集)';
+            break;
+        case 'list-js-edit':
+            targetText = '(一覧ページの JavaScript 編集)';
+            break;
+        case 'page-js-edit':
+            targetText = '(個別記事ページの JavaScript 編集)';
+            break;
+        default:
+            break;
+        }
+        $('#code-target').text(targetText);
     });
 });

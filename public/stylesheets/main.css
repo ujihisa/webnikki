@@ -64,8 +64,8 @@ footer {
 @media screen and (min-width: 768px) {
     div#content #main,
     div#content #sub {
-    float: left;
-    margin: 0 1%;
+        float: left;
+        margin: 0 1%;
     }
     div#content #main { width: 65%; }
     div#content #sub { width: 31%; }
