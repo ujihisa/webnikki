@@ -1,6 +1,8 @@
 package controllers
 
 import play.api.mvc.{Controller, Action}
+import play.api.data.Form
+import play.api.data.Forms._
 import play.api.libs.json.Json
 
 import models.Member
@@ -28,7 +30,17 @@ object ApiController extends Controller {
     Ok("Hello")
   }
 
-  def cssPost = TODO
+  val form = Form(tuple(
+      "token" -> text,
+      "text"  -> text
+      ))
+  def cssPost = Action {
+    implicit request => {
+      val (token, text) = form.bindFromRequest.get
+       if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。") // TODO: エラーは JSON で返す
+      Ok("yo")
+    }
+  }
 
   def js(purpose: String, memberId: String) = TODO
   def jsPost = TODO
