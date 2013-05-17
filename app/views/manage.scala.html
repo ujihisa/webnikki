@@ -2,20 +2,40 @@
 
 @main("管理 - web日記") {
 
-<ul id="manage-list">
-  <li><a href="javascript:void(0)" data-type="list-css-edit">一覧ページの CSS 編集</a></li>
-  <li><a href="javascript:void(0)" data-type="page-css-edit">個別記事ページの CSS 編集</a></li>
-  <li><a href="javascript:void(0)" data-type="list-js-edit">一覧ページの JavaScript 編集</a></li>
-  <li><a href="javascript:void(0)" data-type="page-js-edit">個別記事ページの JavaScript 編集</a></li>
-</ul>
+<div id="main">
+  <form id="submit">
+    <header>
+      <div><p>CSS / JavaScript 編集</p></div>
+    </header>
 
-<div id="edit-div" style="display: none;">
-<form>
-<textarea id="edit-textarea"></textarea>
-<input type="submit" />
-</form>
+    <div>
+      <label>コード編集</label>
+      <div>
+        <textarea id="post-code" name="code" placeholder="メニューから選択してください" rows="20"></textarea>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <input id="submit-button" type="submit" value="送信" />
+      </div>
+    </div>
+  </form>
 </div>
 
+
+<div id="sub">
+  <nav>
+    <ul id="manage-list">
+      <li><a href="javascript:void(0)" data-type="list-css-edit">一覧ページの CSS 編集</a></li>
+      <li><a href="javascript:void(0)" data-type="page-css-edit">個別記事ページの CSS 編集</a></li>
+      <li><a href="javascript:void(0)" data-type="list-js-edit">一覧ページの JavaScript 編集</a></li>
+      <li><a href="javascript:void(0)" data-type="page-js-edit">個別記事ページの JavaScript 編集</a></li>
+    </ul>
+  </nav>
+</div>
+
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/form.css")">
 <script src="@routes.Assets.at("javascripts/manage.js")" type="text/javascript"></script>
 
 }
