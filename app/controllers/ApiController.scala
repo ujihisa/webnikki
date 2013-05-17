@@ -6,6 +6,7 @@ import play.api.data.Forms._
 import play.api.libs.json.Json
 
 import models.Member
+import models.CssCustom
 
 object ApiController extends Controller {
   def exist(category: String, name: String) = Action {
@@ -30,14 +31,20 @@ object ApiController extends Controller {
     Ok("Hello")
   }
 
-  val form = Form(tuple(
+  val cssJsForm = Form(tuple(
       "token" -> text,
+      "purpose" -> text,
       "text"  -> text
       ))
   def cssPost = Action {
     implicit request => {
-      val (token, text) = form.bindFromRequest.get
-       if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。") // TODO: エラーは JSON で返す
+      val (token, purpose, text) = cssJsForm.bindFromRequest.get
+      val uname = request.session.get("uname").getOrElse("")
+      val memberId = Member.selectByUname(uname).get.id
+
+      // if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
+
+      CssCustom.saveCss(memberId.toLong, purpose, text)
       Ok("yo")
     }
   }

@@ -16,11 +16,15 @@ $(function() {
         // default:
         //     break;
         // }
+
+        // var type = $(this).data('type');
+        // $.ajax({
+        //     url: '/api/'
+        // }).done(function(data) {
+        //     console.debug(data);
+        // });
+
         var type = $(this).data('type');
-        $.ajax({
-            url: '/api/'
-        }).done(function(data) {
-            console.debug(data);
-        });
+        $('#edit-div').show();
     });
 });
