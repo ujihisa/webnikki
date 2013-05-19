@@ -43,13 +43,13 @@ object CssCustom {
   }
 
   def saveCss(memberId: Long, purpose: String, css: String) = {
-    // TODO: css が空文字であれば何もしないか例外を投げる 
+    if (css.isEmpty) throw new Exception("CSS の内容を入力してください。")
 
     val oldCss = loadCss(memberId, purpose)
 
     val sql = oldCss match {
       case "" => "INSERT INTO css_custom (member_id, purpose, content, modified_at) VALUES ({member_id}, CAST({purpose} AS css_purpose), {content}, {modified_at})"
-      case _  => "UPDATE css_custom SET content = {content}, modified = {modified} WHERE member_id = {member_id} AND purpose = CAST({purpose} AS css_purpose)"
+      case _  => "UPDATE css_custom SET content = {content}, modified_at = {modified_at} WHERE member_id = {member_id} AND purpose = CAST({purpose} AS css_purpose)"
     }
 
     DB.withConnection {

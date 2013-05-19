@@ -42,10 +42,15 @@ object ApiController extends Controller {
       val uname = request.session.get("uname").getOrElse("")
       val memberId = Member.selectByUname(uname).get.id
 
-      // if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
+      try {
+        if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
 
-      CssCustom.saveCss(memberId.toLong, purpose, text)
-      Ok("yo")
+        CssCustom.saveCss(memberId.toLong, purpose, text)
+        Ok(Json.toJson(Map("success" -> Json.toJson(1))))
+      } catch {
+        case e: Exception =>
+          BadRequest(Json.toJson(Map("success" -> Json.toJson(0), "message" -> Json.toJson("エラー: " + e))))
+      }
     }
   }
 
