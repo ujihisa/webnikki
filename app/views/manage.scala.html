@@ -1,9 +1,10 @@
-@()
+@(token: String)
 
 @main("管理 - web日記") {
 
 <div id="main">
   <form id="submit">
+    <input id="token" type="hidden" name="token" value="@token" />
     <header>
       <div>
         <p>CSS / JavaScript 編集 <span id="code-target"></span></p>
@@ -13,7 +14,7 @@
     <div id="code-div" style="display: none;">
       <label>コード編集</label>
       <div>
-        <textarea id="code-textarea" name="code" rows="20"></textarea>
+        <textarea id="code-content" name="code" rows="20"></textarea>
       </div>
     </div>
 

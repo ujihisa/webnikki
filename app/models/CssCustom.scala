@@ -26,7 +26,7 @@ object CssCustom {
   }
 
   def loadCss(memberId: Long, purpose: String) = {
-    val sql = "SELECT id, member_id, purpose, content, modified_at FROM css-custom WHERE member_id = {member_id} AND purpose = {purpose}"
+    val sql = "SELECT id, member_id, CAST(purpose AS TEXT), content, modified_at FROM css_custom WHERE member_id = {member_id} AND purpose = CAST({purpose} AS css_purpose)"
 
     val css = DB.withConnection {
       implicit c =>
@@ -45,10 +45,11 @@ object CssCustom {
   def saveCss(memberId: Long, purpose: String, css: String) = {
     // TODO: css が空文字であれば何もしないか例外を投げる 
 
-    val css = loadCss(memberId, purpose)
-    val sql = css match {
-      case "" => "INSERT INTO css_custom (member_id, purpose, content, modified_at) VALUES ({member_id}, {purpose}, {content}, {modified_at})"
-      case _  => "UPDATE css_custom SET content = {content}, modified = {modified} WHERE member_id = {member_id} AND purpose = {purpose}"
+    val oldCss = loadCss(memberId, purpose)
+
+    val sql = oldCss match {
+      case "" => "INSERT INTO css_custom (member_id, purpose, content, modified_at) VALUES ({member_id}, CAST({purpose} AS css_purpose), {content}, {modified_at})"
+      case _  => "UPDATE css_custom SET content = {content}, modified = {modified} WHERE member_id = {member_id} AND purpose = CAST({purpose} AS css_purpose)"
     }
 
     DB.withConnection {
@@ -62,3 +63,6 @@ object CssCustom {
     }
   }
 }
+
+
+

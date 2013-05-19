@@ -5,6 +5,7 @@ import views.html
 
 object ManageController extends Controller {
   def index = Action {
-    Ok(html.manage())
+    implicit request =>
+      Ok(html.manage(request.session.get("token").getOrElse("")))
   }
 }
