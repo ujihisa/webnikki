@@ -26,10 +26,15 @@ object ApiController extends Controller {
     }
   }
 
-  def css(memberId: String, name: String) = Action {
-    // cssType は "list" ないし "page" のどちらか
-    // CssCustom.loadCss(memberId, purpose)
-    Ok("Hello")
+  def css(purpose: String, name: String) = Action {
+    // TODO: cssType は "list" ないし "page" のどちらか
+
+    val memberId = Member.selectByUname(name).get.id
+    Ok(Json.toJson(
+        Map(
+            "success" -> Json.toJson(1),
+            "code" -> Json.toJson(CssCustom.loadCss(memberId, purpose))
+        )))
   }
 
   val cssJsForm = Form(tuple(
