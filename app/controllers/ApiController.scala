@@ -6,7 +6,7 @@ import play.api.data.Forms._
 import play.api.libs.json.Json
 
 import models.Member
-import models.CssCustom
+import models.CustomData
 
 object ApiController extends Controller {
   def exist(category: String, name: String) = Action {
@@ -33,7 +33,7 @@ object ApiController extends Controller {
     Ok(Json.toJson(
         Map(
             "success" -> Json.toJson(1),
-            "code" -> Json.toJson(CssCustom.loadCss(memberId, purpose))
+            "code" -> Json.toJson(CustomData.loadCss(memberId, purpose))
         )))
   }
 
@@ -51,7 +51,7 @@ object ApiController extends Controller {
       try {
         if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
 
-        CssCustom.saveCss(memberId.toLong, purpose, text)
+        CustomData.saveCss(memberId.toLong, purpose, text)
         Ok(Json.toJson(Map("success" -> Json.toJson(1))))
       } catch {
         case e: Exception =>
@@ -62,4 +62,11 @@ object ApiController extends Controller {
 
   def js(purpose: String, name: String) = TODO
   def jsPost = TODO
+
+  private def getCssOrJs(purpose: String, name: String, contentType: String) = {
+    if (purpose != "list" && purpose != "page")     throw new Exception("purpose は list か page のみサポートしています。")
+    if (contentType != "css" && contentType!= "js") throw new Exception("contentType は css か jsのみサポートしています。")
+
+    // TO BE FIXED LATER
+  }
 }
