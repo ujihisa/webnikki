@@ -26,8 +26,9 @@ object ApiController extends Controller {
     }
   }
 
-  def css(purpose: String, memberId: String) = Action {
+  def css(memberId: String, name: String) = Action {
     // cssType は "list" ないし "page" のどちらか
+    // CssCustom.loadCss(memberId, purpose)
     Ok("Hello")
   }
 
@@ -54,6 +55,6 @@ object ApiController extends Controller {
     }
   }
 
-  def js(purpose: String, memberId: String) = TODO
+  def js(purpose: String, name: String) = TODO
   def jsPost = TODO
 }
