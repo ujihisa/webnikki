@@ -10,9 +10,8 @@ CREATE TABLE custom_data (
     content_type ctype NOT NULL,
     content TEXT NOT NULL,
     modified_at BIGINT NOT NULL,
-    UNIQUE (member_id, content_purpose)
+    UNIQUE (member_id, content_purpose, content_type)
 );
-CREATE INDEX member_id_purpose_idx ON custom_data (member_id, content_purpose);
 
 # --- !Downs
 

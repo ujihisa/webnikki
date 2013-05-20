@@ -27,14 +27,7 @@ object ApiController extends Controller {
   }
 
   def css(purpose: String, name: String) = Action {
-    if (purpose != "list" && purpose != "page") throw new Exception("purpose は list か page のみサポートしています。")
-
-    val memberId = Member.selectByUname(name).get.id
-    Ok(Json.toJson(
-        Map(
-            "success" -> Json.toJson(1),
-            "code" -> Json.toJson(CustomData.loadCss(memberId, purpose))
-        )))
+    getCssOrJs(purpose, name, "css")
   }
 
   val cssJsForm = Form(tuple(
@@ -60,13 +53,24 @@ object ApiController extends Controller {
     }
   }
 
-  def js(purpose: String, name: String) = TODO
+  def js(purpose: String, name: String) = Action {
+    getCssOrJs(purpose, name, "js")
+  }
+
   def jsPost = TODO
 
   private def getCssOrJs(purpose: String, name: String, contentType: String) = {
+    // TODO: ここで例外を吐くよりはJSONでエラーを返す方がベター
     if (purpose != "list" && purpose != "page")     throw new Exception("purpose は list か page のみサポートしています。")
     if (contentType != "css" && contentType!= "js") throw new Exception("contentType は css か jsのみサポートしています。")
 
-    // TO BE FIXED LATER
+    val memberId = Member.selectByUname(name).get.id
+    Ok(Json.toJson(
+        Map(
+            "success" -> Json.toJson(1),
+            "code" -> Json.toJson(
+                if (contentType == "css") CustomData.loadCss(memberId, purpose) else CustomData.loadJs(memberId, purpose)
+            )
+        )))
   }
 }

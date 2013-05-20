@@ -28,31 +28,49 @@ object CustomData {
   }
 
   def loadCss(memberId: Long, purpose: String) = {
-    val sql = "SELECT id, member_id, CAST(content_purpose AS TEXT), CAST(content_type AS TEXT), content, modified_at FROM custom_data WHERE member_id = {member_id} AND content_purpose = CAST({content_purpose} AS purpose)"
+    loadCustomData(memberId, purpose, "css")
+  }
 
-    val css = DB.withConnection {
+  def loadJs(memberId: Long, purpose: String) = {
+    loadCustomData(memberId, purpose, "js")
+  }
+
+  private def loadCustomData(memberId: Long, purpose: String, contentType: String) = {
+    if (purpose != "list" && purpose != "page")     throw new Exception("purpose は list か page のみサポートしています。")
+    if (contentType != "css" && contentType!= "js") throw new Exception("contentType は css か jsのみサポートしています。")
+
+    val sql = "SELECT id, member_id, CAST(content_purpose AS TEXT), CAST(content_type AS TEXT), content, modified_at FROM custom_data WHERE member_id = {member_id} AND content_purpose = CAST({content_purpose} AS purpose) " + (if (contentType == "css") "AND content_type = CAST('css' AS ctype)" else "AND content_type = CAST('js' AS ctype)")
+
+    val code = DB.withConnection {
       implicit c =>
         SQL(sql).on(
           "member_id" -> memberId,
           "content_purpose" -> purpose
         ).as(customData *).headOption
     }
-    println(sql, memberId, purpose)
 
-    css match {
+    code match {
       case Some(x) => x.content
       case _ => ""
     }
   }
 
-  def saveCss(memberId: Long, purpose: String, css: String) = {
-    if (css.isEmpty) throw new Exception("CSS の内容を入力してください。")
+  def saveCss(memberId: Long, purpose: String, content: String) = {
+    saveCustomData(memberId, purpose, content, "css")
+  }
 
-    val oldCss = loadCss(memberId, purpose)
+  def saveJs(memberId: Long, purpose: String, content: String) = {
+    saveCustomData(memberId, purpose, content, "js")
+  }
 
-    val sql = oldCss match {
-      case "" => "INSERT INTO custom_data (member_id, content_purpose, content_type, content, modified_at) VALUES ({member_id}, CAST({content_purpose} AS purpose), 'css', {content}, {modified_at})"
-      case _  => "UPDATE custom_data SET content = {content}, modified_at = {modified_at} WHERE member_id = {member_id} AND content_purpose = CAST({content_purpose} AS purpose)"
+  private def saveCustomData(memberId: Long, purpose: String, content: String, contentType: String) = {
+    if (content.isEmpty) throw new Exception("content の内容を入力してください。")
+
+    val oldContent = loadCustomData(memberId, purpose, contentType)
+
+    val sql = oldContent match {
+      case "" => "INSERT INTO custom_data (member_id, content_purpose, content_type, content, modified_at) VALUES ({member_id}, CAST({content_purpose} AS purpose), CAST({content_type} AS ctype), {content}, {modified_at})"
+      case _  => "UPDATE custom_data SET content = {content}, modified_at = {modified_at} WHERE member_id = {member_id} AND content_purpose = CAST({content_purpose} AS purpose) AND content_type = CAST({content_type} AS ctype)"
     }
 
     DB.withConnection {
@@ -60,7 +78,8 @@ object CustomData {
         SQL(sql).on(
           "member_id" -> memberId,
           "content_purpose" -> purpose,
-          "content" -> css,
+          "content_type" -> contentType,
+          "content" -> content,
           "modified_at" -> System.currentTimeMillis
         ).executeUpdate
     }
