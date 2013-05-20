@@ -24,12 +24,24 @@ $(function() {
         }
         $('#code-target').text(targetText);
         $('#code-target').data('type', type);
-        // TODO: AJAX Loading
+
+        $('#code-content').attr('disabled', 'disabled');
+        var apiUrl = '/api' +
+            (type.contains('css')  ? '/css' : '/js') +
+            (type.contains('list') ? '/list' : '/page') +
+            '/' + $('#uname').val();
+            
+        $.ajax({
+            url: apiUrl
+        }).done(function(data) {
+            $('#code-content').html(data['code']);
+        }).always(function(data) {
+            $('#code-content').removeAttr('disabled');
+        });
     });
 
     $('#submit').submit(function() {
         var type = $('#code-target').data('type');
-        // console.debug('code-content', $('#code-content').val());
 
         $.ajax({
             type: 'POST',
