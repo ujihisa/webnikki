@@ -27,7 +27,7 @@ object ApiController extends Controller {
   }
 
   def css(purpose: String, name: String) = Action {
-    // TODO: cssType は "list" ないし "page" のどちらか
+    if (purpose != "list" && purpose != "page") throw new Exception("purpose は list か page のみサポートしています。")
 
     val memberId = Member.selectByUname(name).get.id
     Ok(Json.toJson(
