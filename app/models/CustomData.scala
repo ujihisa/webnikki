@@ -27,13 +27,8 @@ object CustomData {
     }
   }
 
-  def loadCss(memberId: Long, purpose: String) = {
-    loadCustomData(memberId, purpose, "css")
-  }
-
-  def loadJs(memberId: Long, purpose: String) = {
-    loadCustomData(memberId, purpose, "js")
-  }
+  def loadCss(memberId: Long, purpose: String) = loadCustomData(memberId, purpose, "css")
+  def loadJs(memberId: Long, purpose: String) = loadCustomData(memberId, purpose, "js")
 
   private def loadCustomData(memberId: Long, purpose: String, contentType: String) = {
     if (purpose != "list" && purpose != "page")     throw new Exception("purpose は list か page のみサポートしています。")
@@ -55,13 +50,8 @@ object CustomData {
     }
   }
 
-  def saveCss(memberId: Long, purpose: String, content: String) = {
-    saveCustomData(memberId, purpose, content, "css")
-  }
-
-  def saveJs(memberId: Long, purpose: String, content: String) = {
-    saveCustomData(memberId, purpose, content, "js")
-  }
+  def saveCss(memberId: Long, purpose: String, content: String) = saveCustomData(memberId, purpose, content, "css")
+  def saveJs(memberId: Long, purpose: String, content: String) = saveCustomData(memberId, purpose, content, "js")
 
   private def saveCustomData(memberId: Long, purpose: String, content: String, contentType: String) = {
     if (content.isEmpty) throw new Exception("content の内容を入力してください。")

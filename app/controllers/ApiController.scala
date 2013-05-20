@@ -26,25 +26,27 @@ object ApiController extends Controller {
     }
   }
 
-  def css(purpose: String, name: String) = Action {
-    getCssOrJs(purpose, name, "css")
-  }
-
   val cssJsForm = Form(tuple(
       "token" -> text,
       "purpose" -> text,
-      "text"  -> text
+      "contentType" -> text,
+      "content"  -> text
       ))
-  def cssPost = Action {
+  def cssOrJsPost = Action {
     implicit request => {
-      val (token, purpose, text) = cssJsForm.bindFromRequest.get
+      val (token, purpose, contentType, content) = cssJsForm.bindFromRequest.get
       val uname = request.session.get("uname").getOrElse("")
       val memberId = Member.selectByUname(uname).get.id
 
       try {
         if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
 
-        CustomData.saveCss(memberId.toLong, purpose, text)
+        contentType match {
+          case "css" => CustomData.saveCss(memberId.toLong, purpose, content)
+          case "js"  => CustomData.saveJs(memberId.toLong, purpose, content)
+          case _     => throw new Exception("contentType が不正です。")
+        }
+
         Ok(Json.toJson(Map("success" -> Json.toJson(1))))
       } catch {
         case e: Exception =>
@@ -53,9 +55,8 @@ object ApiController extends Controller {
     }
   }
 
-  def js(purpose: String, name: String) = Action {
-    getCssOrJs(purpose, name, "js")
-  }
+  def css(purpose: String, name: String) = Action { getCssOrJs(purpose, name, "css") }
+  def js(purpose: String, name: String) = Action { getCssOrJs(purpose, name, "js") }
 
   def jsPost = TODO
 

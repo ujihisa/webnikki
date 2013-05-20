@@ -45,11 +45,12 @@ $(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/api/' + (type.contains('css') ? 'css' : 'js'),
+            url: '/api/css-js',
             data: {
                 token: $('#token').val(),
                 purpose: type.contains('list') ? 'list' : 'page',
-                text: $('#code-content').val()
+                contentType: (type.contains('css') ? 'css' : 'js'),
+                content: $('#code-content').val()
             }
         }).done(function(data) {
             $().toastmessage('showToast', {
