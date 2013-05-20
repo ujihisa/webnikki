@@ -7,7 +7,8 @@ CREATE TABLE css_custom (
     member_id INTEGER DEFAULT NULL,
     purpose css_purpose NOT NULL,
     content TEXT NOT NULL,
-    modified_at BIGINT NOT NULL
+    modified_at BIGINT NOT NULL,
+    UNIQUE (member_id, purpose)
 );
 CREATE INDEX member_id_purpose_idx ON css_custom (member_id, purpose);
 

@@ -51,6 +51,7 @@ object CssCustom {
       case "" => "INSERT INTO css_custom (member_id, purpose, content, modified_at) VALUES ({member_id}, CAST({purpose} AS css_purpose), {content}, {modified_at})"
       case _  => "UPDATE css_custom SET content = {content}, modified_at = {modified_at} WHERE member_id = {member_id} AND purpose = CAST({purpose} AS css_purpose)"
     }
+    println("sql: ", sql)
 
     DB.withConnection {
       implicit c =>
