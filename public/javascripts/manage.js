@@ -34,7 +34,7 @@ $(function() {
         $.ajax({
             url: apiUrl
         }).done(function(data) {
-            $('#code-content').html(data['code']);
+            $('#code-content').val(data['code']);
         }).always(function(data) {
             $('#code-content').removeAttr('disabled');
         });
@@ -52,9 +52,22 @@ $(function() {
                 text: $('#code-content').val()
             }
         }).done(function(data) {
-            console.debug('done', data);
+            $().toastmessage('showToast', {
+                text: (type.contains('css') ? 'CSS' : 'JavaScript') +
+                    ' の保存に成功しました！',
+                position: 'top-center',
+                type: 'success',
+                stayTime: 3000,
+                close: function() {}
+            });
         }).fail(function(data) {
-            console.debug('fail', data);
+            $().toastmessage('showToast', {
+                text: (type.contains('css') ? 'CSS' : 'JavaScript') +
+                    ' の保存に失敗しました: ' +
+                    (data.message ? data.message : '不明なエラー'),
+                position: 'top-center',
+                type: 'error'
+            });
         });
 
         return false;
