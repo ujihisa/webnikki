@@ -1,5 +1,7 @@
 @(title: String, loginName: Option[String])(content: Html)
 
+@import play.api.Play.current
+
 <!DOCTYPE html>
 
 <html>
@@ -16,7 +18,25 @@
 
     </head>
     <body>
-         <div id="header">Hello, world!</div>
+         <div id="header">
+           <div id="header-left">web日記へようこそ!</div>
+           <div id="header-right">
+             @{
+             loginName match {
+               case Some(x) => {
+                 val userUrl = current.configuration.getString("service.scheme").get + "://" + x + current.configuration.getString("session.domain").get
+                 val manageUrl = current.configuration.getString("service.url").get + "manage"
+                 val logoutUrl = current.configuration.getString("service.url").get + "logout"
+                 Html(s"""こんにちは <a href="$userUrl">$x</a> さん - <a href="$manageUrl">管理</a> - <a href="$logoutUrl">ログアウト</a>""")
+               }
+               case _ => {
+                 val loginUrl = current.configuration.getString("service.url").get + "login"
+                 val signupUrl = current.configuration.getString("service.url").get + "signup"
+                 Html(s"""<a href="$loginUrl">ログイン</a> - <a href="$signupUrl">ユーザー登録</a>""")
+               }
+             }}
+           </div>
+         </div>
          <div id="logo"><a href="/"><img src="@routes.Assets.at("images/logo-200-64.png")" alt="logo" /></a></div>
          <div id="content">@content</div>
          <br id="float-margin-trick" />
