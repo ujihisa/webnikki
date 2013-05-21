@@ -1,6 +1,6 @@
-@(passForm: Form[(String, String, String)], validity: Map[String, Any])
+@(loginName: Option[String], passForm: Form[(String, String, String)], validity: Map[String, Any])
 
-@main("パスワード再設定 - web日記") {
+@main("パスワード再設定 - web日記", loginName) {
 
 <div id="main">
   <form id="submit">

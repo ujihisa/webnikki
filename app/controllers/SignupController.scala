@@ -20,11 +20,15 @@ object SignupController extends Controller {
       ))
 
   def termsOfService = Action {
-    Ok(html.termsOfService(io.Source.fromFile("resource/terms-of-service-20130329.md").mkString))
+    implicit request => {
+      Ok(html.termsOfService(request.session.get("uname"), io.Source.fromFile("resource/terms-of-service-20130329.md").mkString))
+    }
   }
 
   def index = Action {
-    Ok(html.signup(memberForm))
+    implicit request => {
+      Ok(html.signup(request.session.get("uname"), memberForm))
+    }
   }
 
   def indexPost = Action {

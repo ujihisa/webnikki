@@ -1,6 +1,6 @@
-@(memberForm: Form[(String, String)], errorMessage: Option[String])
+@(loginName: Option[String], memberForm: Form[(String, String)], errorMessage: Option[String])
 
-@main("ログイン - web日記") {
+@main("ログイン - web日記", loginName) {
 
 <div id="main">
   <form id="submit">

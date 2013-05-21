@@ -21,7 +21,7 @@ object PostController extends Controller {
 
   def index = Action {
     implicit request =>
-      Ok(html.post(postForm.bind(Map("token" -> request.session.get("token").getOrElse("")))))
+      Ok(html.post(request.session.get("uname"), postForm.bind(Map("token" -> request.session.get("token").getOrElse("")))))
   }
 
   def indexEdit(createdAt: String) = Action {
@@ -29,7 +29,9 @@ object PostController extends Controller {
       val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
 
       val post = Post.postByMemberIdAndCreatedAt(member.get.id, createdAt.toLong).get
-      Ok(html.post(postForm.bind(Map(
+      Ok(html.post(
+          request.session.get("uname"),
+          postForm.bind(Map(
           "token" -> request.session.get("token").getOrElse(""),
           "title" -> post.title,
           "content" -> post.content,

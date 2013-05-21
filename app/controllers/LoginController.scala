@@ -19,7 +19,9 @@ object LoginController extends Controller {
         ))
 
   def index = Action {
-    Ok(html.login(memberForm, None))
+    implicit request => {
+      Ok(html.login(request.session.get("uname"), memberForm, None))
+    }
   }
 
   def indexPost = Action {

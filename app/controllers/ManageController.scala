@@ -7,8 +7,8 @@ object ManageController extends Controller {
   def index = Action {
     implicit request =>
       Ok(html.manage(
-          request.session.get("token").getOrElse(""),
-          request.session.get("uname").getOrElse("")
+          request.session.get("uname"),
+          request.session.get("token").getOrElse("")
           ))
   }
 }

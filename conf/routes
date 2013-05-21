@@ -26,12 +26,5 @@ GET     /pass/reset/:token                  controllers.PassController.reset(tok
 POST    /pass/reset                         controllers.PassController.resetPost
 GET     /rss                                controllers.RssController.rss
 
-# this will be removed
-GET     /test                       controllers.IndexController.test
-GET     /test2                      controllers.IndexController.test2
-GET     /test3                      controllers.IndexController.test3
-GET     /test4                      controllers.IndexController.test4
-GET     /test5                      controllers.IndexController.test5
-
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,8 +1,8 @@
-@(message: String, uname: String, posts: List[models.Post])
+@(loginName: Option[String], uname: String, posts: List[models.Post])
 
 @import play.api.Play.current
 
-@main(message) {
+@main(s"$uname のトップページ - web日記", loginName) {
 
 <ul>
 @for(post <- posts) {

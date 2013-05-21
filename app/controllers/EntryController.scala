@@ -27,11 +27,8 @@ object EntryController extends Controller {
     implicit request => {
       val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
       Post.postByMemberIdAndCreatedAt(memberId, createdAt.toLong) match {
-        case Some(entry) => Ok(html.entry(
-            "",
-            entry,
-            Comment.commentsByPostId(entry.id)))
-        case None => BadRequest("その記事存在しないです...")
+        case Some(entry) => Ok(html.entry(request.session.get("uname"), entry, Comment.commentsByPostId(entry.id)))
+        case None        => BadRequest("その記事存在しないです...")
       }
     }
   }

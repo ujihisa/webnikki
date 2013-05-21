@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, loginName: Option[String])(content: Html)
 
 <!DOCTYPE html>
 
@@ -16,6 +16,7 @@
 
     </head>
     <body>
+         <div id="header">Hello, world!</div>
          <div id="logo"><a href="/"><img src="@routes.Assets.at("images/logo-200-64.png")" alt="logo" /></a></div>
          <div id="content">@content</div>
          <br id="float-margin-trick" />

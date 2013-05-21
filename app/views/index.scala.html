@@ -1,8 +1,8 @@
-@(message: String, uname: Option[String])
+@(loginName: Option[String])
 
 @import play.api.Play.current
 
-@main(message) {
+@main("トップ - web日記", loginName) {
 
 <div id="main">
   <h2>web日記とは</h2>
@@ -12,9 +12,9 @@
 <div id="sub">
   <nav>
     <ul class="main-menu">
-      @if(uname) {
+      @if(loginName) {
         <li><a class="button" href="/post">記事の投稿</a></li>
-        <li><a class="button" href="http://@{uname}.@{current.configuration.getString("service.domain")}">自分の日記</a></li>
+        <li><a class="button" href="http://@{loginName}.@{current.configuration.getString("service.domain")}">自分の日記</a></li>
         <li><a class="button" href="/logout">ログアウト</a></li>
       } else {
         <li><a class="button" href="/signup">ユーザー登録</a></li>

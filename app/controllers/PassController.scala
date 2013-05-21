@@ -21,7 +21,9 @@ object PassController extends Controller {
         ))
 
   def resetRequest = Action {
-    Ok(html.passResetRequest())
+    implicit request => {
+      Ok(html.passResetRequest(request.session.get("uname")))
+    }
   }
 
   def resetRequestPost = Action {
@@ -47,16 +49,19 @@ object PassController extends Controller {
   }
 
   def reset(token: String) = Action {
-    val validity = Pass.checkTokenValidity(token)
+    implicit request => {
+      val validity = Pass.checkTokenValidity(token)
 
-    validity("isValid") match {
-      case true => Ok(html.passReset(
-        passForm.bind(Map(
-          "token" -> token,
-          "email" -> validity("email").toString
-        )),
-        validity))
-      case false => Ok(html.passResetFailure(validity("message").toString))
+      validity("isValid") match {
+        case true => Ok(html.passReset(
+          request.session.get("uname"),
+          passForm.bind(Map(
+            "token" -> token,
+            "email" -> validity("email").toString
+          )),
+          validity))
+        case false => Ok(html.passResetFailure(request.session.get("uname"), validity("message").toString))
+      }
     }
   }
 

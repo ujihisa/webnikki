@@ -1,8 +1,8 @@
-@(termsOfService: String)
+@(loginName: Option[String], termsOfService: String)
 
 @import com.tristanhunt.knockoff.DefaultDiscounter.{knockoff, toXHTML}
 
-@main("利用規約 - web日記") {
+@main("利用規約 - web日記", loginName) {
 
 <div id="main">
 @(toXHTML(knockoff(termsOfService)))

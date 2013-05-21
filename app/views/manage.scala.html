@@ -1,11 +1,11 @@
-@(token: String, uname: String)
+@(loginName: Option[String], token: String)
 
-@main("管理 - web日記") {
+@main("管理 - web日記", loginName) {
 
 <div id="main">
   <form id="submit">
     <input id="token" type="hidden" name="token" value="@token" />
-    <input id="uname" type="hidden" name="uname" value="@uname" />
+    <input id="uname" type="hidden" name="uname" value="@loginName" />
     <header>
       <div>
         <p>CSS / JavaScript 編集 <span id="code-target"></span></p>

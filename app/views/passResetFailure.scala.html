@@ -1,6 +1,6 @@
-@(errorMessage: String)
+@(loginName: Option[String], errorMessage: String)
 
-@main("パスワード再設定 (エラー) - web日記") {
+@main("パスワード再設定 (エラー) - web日記", loginName) {
 
 <div id="main">
 <p>パスワード再設定できません: <strong>@errorMessage</strong></p>
