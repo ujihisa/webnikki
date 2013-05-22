@@ -1,4 +1,4 @@
-@(loginName: Option[String], uname: String, posts: List[models.Post])
+@(loginName: Option[String], css: String, js: String, uname: String, posts: List[models.Post])
 
 @import play.api.Play.current
 
@@ -14,4 +14,6 @@
 } 
 </ul>
 
+<style type="text/css">@css</style>
+<script type="text/javascript">@js</script>
 }

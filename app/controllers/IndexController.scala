@@ -8,6 +8,7 @@ import library.Util
 import views.html
 import models.Member
 import models.Post
+import models.CustomData
 
 object IndexController extends Controller {
   def index = Action {
@@ -17,7 +18,9 @@ object IndexController extends Controller {
           Ok(html.index(request.session.get("uname")))
         case _ => {
           val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
-          Ok(html.myindex(request.session.get("uname"), Util.getUnameFromSubdomain(request.domain), Post.postsByMemberId(memberId)))
+          val css = CustomData.loadCss(memberId, "list")
+          val js = CustomData.loadJs(memberId, "list")
+          Ok(html.myindex(request.session.get("uname"), css, js, Util.getUnameFromSubdomain(request.domain), Post.postsByMemberId(memberId)))
         }
       }
     }

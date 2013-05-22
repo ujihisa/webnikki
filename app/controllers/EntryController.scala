@@ -1,8 +1,8 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.data._
+// import play.api._
+import play.api.mvc.{Controller, Action}
+import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
 
@@ -12,6 +12,7 @@ import views._
 import models.Member
 import models.Post
 import models.Comment
+import models.CustomData
 
 import java.util.Date
 
@@ -27,7 +28,11 @@ object EntryController extends Controller {
     implicit request => {
       val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
       Post.postByMemberIdAndCreatedAt(memberId, createdAt.toLong) match {
-        case Some(entry) => Ok(html.entry(request.session.get("uname"), entry, Comment.commentsByPostId(entry.id)))
+        case Some(entry) => {
+          val css = CustomData.loadCss(memberId, "page")
+          val js = CustomData.loadJs(memberId, "page")
+          Ok(html.entry(request.session.get("uname"), css, js, entry, Comment.commentsByPostId(entry.id)))
+        }
         case None        => BadRequest("その記事存在しないです...")
       }
     }
