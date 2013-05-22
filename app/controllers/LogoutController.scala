@@ -10,7 +10,7 @@ import views._
 object LogoutController extends Controller {
   def index = Action {
     implicit request => {
-      Ok(html.logout(request.session.get("uname"))).withNewSession
+      Ok(html.logout(Option(null))).withNewSession
     }
   }
 }
