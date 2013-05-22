@@ -11,17 +11,7 @@
 
 <div id="sub">
   <nav>
-    <ul class="main-menu">
-      @if(loginName) {
-        <li><a class="button" href="/post">記事の投稿</a></li>
-        <li><a class="button" href="http://@{loginName}.@{current.configuration.getString("service.domain")}">自分の日記</a></li>
-        <li><a class="button" href="/logout">ログアウト</a></li>
-      } else {
-        <li><a class="button" href="/signup">ユーザー登録</a></li>
-        <li><a class="button" href="/login">ログイン　</a></li>
-      }
-    
-    </ul>
+    <ul class="main-menu"></ul>
   </nav>
 </div>
 
