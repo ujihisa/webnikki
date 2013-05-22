@@ -38,7 +38,7 @@
              }}
            </div>
          </div>
-         <div id="logo"><a href="@{current.configuration.getString("service.url").get}"><img src="@routes.Assets.at("images/logo-200-64.png")" alt="logo" /></a></div>
+         <div id="logo"><a id="logo-url" href="@{current.configuration.getString("service.url").get}"><img id="logo-img" src="@routes.Assets.at("images/logo-200-64.png")" alt="logo" /></a></div>
          <div id="content">@content</div>
          <br id="float-margin-trick" />
          <footer>

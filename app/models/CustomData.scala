@@ -54,8 +54,6 @@ object CustomData {
   def saveJs(memberId: Long, purpose: String, content: String) = saveCustomData(memberId, purpose, content, "js")
 
   private def saveCustomData(memberId: Long, purpose: String, content: String, contentType: String) = {
-    if (content.isEmpty) throw new Exception("content の内容を入力してください。")
-
     val oldContent = loadCustomData(memberId, purpose, contentType)
 
     val sql = oldContent match {
