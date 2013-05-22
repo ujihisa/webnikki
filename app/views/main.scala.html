@@ -19,7 +19,7 @@
     </head>
     <body>
          <div id="header">
-           <div id="header-left">web日記へようこそ!</div>
+           <div id="header-left"><a href="@{current.configuration.getString("service.url").get}">web日記</a> へようこそ!</div>
            <div id="header-right">
              @{
              loginName match {
