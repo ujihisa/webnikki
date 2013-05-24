@@ -27,8 +27,8 @@ $(function() {
 
         $('#code-content').attr('disabled', 'disabled');
         var apiUrl = '/api' +
-            (type.contains('css')  ? '/css' : '/js') +
-            (type.contains('list') ? '/list' : '/page') +
+            (type.indexOf('css') < 0 ? '/js' : '/css') +
+            (type.indexOf('list') < 0 ? '/page' : '/list') +
             '/' + $('#uname').val();
             
         $.ajax({
@@ -48,13 +48,13 @@ $(function() {
             url: '/api/css-js',
             data: {
                 token: $('#token').val(),
-                purpose: type.contains('list') ? 'list' : 'page',
-                contentType: (type.contains('css') ? 'css' : 'js'),
+                purpose: type.indexOf('list') < 0 ? 'page' : 'list',
+                contentType: (type.indexOf('css') < 0 ? 'js' : 'css'),
                 content: $('#code-content').val()
             }
         }).done(function(data) {
             $().toastmessage('showToast', {
-                text: (type.contains('css') ? 'CSS' : 'JavaScript') +
+                text: (type.indexOf('css') < 0 ? 'JavaScript' : 'CSS') +
                     ' の保存に成功しました！',
                 position: 'top-center',
                 type: 'success',
@@ -63,7 +63,7 @@ $(function() {
             });
         }).fail(function(data) {
             $().toastmessage('showToast', {
-                text: (type.contains('css') ? 'CSS' : 'JavaScript') +
+                text: (type.indexOf('css') < 0 ? 'JavaScript' : 'CSS') +
                     ' の保存に失敗しました: ' +
                     (data.message ? data.message : '不明なエラー'),
                 position: 'top-center',
