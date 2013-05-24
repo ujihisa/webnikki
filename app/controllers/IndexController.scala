@@ -26,6 +26,26 @@ object IndexController extends Controller {
     }
   }
 
+  def test = Action {
+    implicit request => {
+      Ok(html.test(request.session.get("uname")))
+    }
+  }
+
+  def testPost = Action(parse.multipartFormData) {
+    implicit request => {
+      request.body.file("picture").map { picture =>
+        import java.io.File
+        val filename = picture.filename 
+        val contentType = picture.contentType
+        picture.ref.moveTo(new File("/tmp/picture"))
+        Ok("File uploaded")
+      }.getOrElse {
+        BadRequest("File upload failed")
+      }
+    }
+  }
+
   def robots = Action {
     val robotsTxt =
       "User-agent: *\n" +

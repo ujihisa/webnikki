@@ -1,0 +1,14 @@
+@(loginName: Option[String])
+
+@main("テスト - web日記", loginName) {
+
+<p>
+ファイルアップ
+</p>
+
+<form action="/test" method="POST" enctype="multipart/form-data">
+  <input type="file" name="picture" />
+  <input type="submit" />
+</form>
+
+}
