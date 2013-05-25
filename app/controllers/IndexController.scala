@@ -34,7 +34,7 @@ object IndexController extends Controller {
 
   def testPost = Action(parse.multipartFormData) {
     implicit request => {
-      request.body.file("picture").map { picture =>
+      request.body.file("file").map { picture =>
         import java.io.File
         val filename = picture.filename 
         val contentType = picture.contentType
