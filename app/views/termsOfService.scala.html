@@ -2,7 +2,7 @@
 
 @import com.tristanhunt.knockoff.DefaultDiscounter.{knockoff, toXHTML}
 
-@main("利用規約 - web日記", loginName) {
+@main("利用規約 - web日記", loginName, None) {
 
 <div id="main">
 @(toXHTML(knockoff(termsOfService)))

@@ -12,7 +12,14 @@ div#post-content > p,
 div#post-content > ul,
 div#post-content > pre,
 div#post-content > blockquote {
-    margin: 5px 0 10px 0;
+    margin: 5px 0 10px 10px;
+}
+
+div#post-content > pre,
+div#post-content > blockquote {
+    background-color: #f6f6f6;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 div#post-date {

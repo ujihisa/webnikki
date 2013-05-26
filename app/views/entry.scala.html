@@ -1,9 +1,9 @@
-@(loginName: Option[String], css: String, js: String, post: models.Post, comments: List[models.Comment])
+@(loginName: Option[String], css: String, js: String, uname: String, post: models.Post, comments: List[models.Comment])
 
 @import java.util.Date
 @import com.tristanhunt.knockoff.DefaultDiscounter.{knockoff, toXHTML}
 
-@main("記事 - web日記", loginName) {
+@main("記事 - web日記", loginName, Option(uname)) {
 
 <div id="main">
   <h2 id="post-title">@post.title<span id="post-edit"> - <a href="/post/@post.published_at">編集</a></span></h2>

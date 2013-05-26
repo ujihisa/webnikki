@@ -51,7 +51,8 @@ object IndexController extends Controller {
       "User-agent: *\n" +
       "Disallow: /login\n" +
       "Disallow: /signup\n" +
-      "Disallow: /manage\n"
+      "Disallow: /manage\n" +
+      "Disallow: /rss\n"
     Ok(robotsTxt)
   }
 }

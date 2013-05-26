@@ -2,7 +2,7 @@
 
 @import play.api.Play.current
 
-@main(s"$uname のトップページ - web日記", loginName) {
+@main(s"$uname のトップページ - web日記", loginName, Option(uname)) {
 
 <ul>
 @for(post <- posts) {
