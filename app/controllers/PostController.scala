@@ -5,7 +5,9 @@ import play.api.mvc.{Controller, Action}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
+import play.Play
 
+import library.Util
 import views._
 import models.Member
 import models.Post
@@ -65,6 +67,31 @@ object PostController extends Controller {
       }
     }
   }
+
+  def imagePost = Action(parse.multipartFormData) {
+    implicit request => {
+      request.body.file("file").map { picture =>
+        import java.io.File
+        val filename = picture.filename 
+        val contentType = picture.contentType
+
+        val copyDir = Play.application.path + "/public/images/users/" + request.session.get("uname").get
+        val copyPath = Util.calcUniquifiedFilePath(copyDir + "/" + filename)
+        (new File(copyDir)).mkdirs
+        picture.ref.moveTo(new File(copyPath))
+
+        Ok(Json.toJson(Map(
+          "success" -> Json.toJson(1),
+          "path" -> Json.toJson(Util.urlifyFilePath(copyPath))
+        )))
+      }.getOrElse {
+        BadRequest(Json.toJson(Map(
+          "success" -> Json.toJson(0)
+        )))
+      }
+    }
+  }
+
 
   private def createEntryUrl(uname: String, createdAt: Long) = {
     "http://%s.%s%s/entry/%s" format

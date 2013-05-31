@@ -6,11 +6,12 @@ import play.api.data.Forms._
 import play.api.Play.current
 import play.api.libs.json.Json
 import play.Play
-import views.html
 import sys.runtime
+
+import library.Random
 import models.Pass
 import models.Member
-import library.Random
+import views.html
 
 object PassController extends Controller {
   val passForm = Form(

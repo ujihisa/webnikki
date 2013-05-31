@@ -2,13 +2,14 @@ package controllers
 
 import play.api.Play.current
 import play.api.mvc.{Controller, Action}
+import play.api.libs.json.Json
+
 import library.Random
 import library.Util
-
-import views.html
 import models.Member
 import models.Post
 import models.CustomData
+import views.html
 
 object IndexController extends Controller {
   def index = Action {
@@ -22,26 +23,6 @@ object IndexController extends Controller {
           val js = CustomData.loadJs(memberId, "list")
           Ok(html.myindex(request.session.get("uname"), css, js, Util.getUnameFromSubdomain(request.domain), Post.postsByMemberId(memberId)))
         }
-      }
-    }
-  }
-
-  def test = Action {
-    implicit request => {
-      Ok(html.test(request.session.get("uname")))
-    }
-  }
-
-  def testPost = Action(parse.multipartFormData) {
-    implicit request => {
-      request.body.file("file").map { picture =>
-        import java.io.File
-        val filename = picture.filename 
-        val contentType = picture.contentType
-        picture.ref.moveTo(new File("/tmp/picture"))
-        Ok("File uploaded")
-      }.getOrElse {
-        BadRequest("File upload failed")
       }
     }
   }
