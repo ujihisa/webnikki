@@ -35,12 +35,12 @@ $(function() {
         return false;
     });
 
-	var myDropzone = new Dropzone("#drag-drop",{
-		url: "/image-post",
-		parallelUploads: 1,
-		maxThumbnailFilesize: 1,
-		maxFilesize: 0.5
-	});
+    var myDropzone = new Dropzone("#drag-drop",{
+        url: "/image-post",
+        parallelUploads: 1,
+        maxThumbnailFilesize: 1,
+        maxFilesize: 0.5
+    });
 
     myDropzone.on('finished', function(file, json) {
         $('#post-content').val($('#post-content').val() + "![画像](" + json.path + ")\n");

@@ -30,5 +30,5 @@ object Util {
   }
 
   def urlifyFilePath(originalPath: String) =
-    originalPath.substring(Play.application.path.toString.length, originalPath.length).replace("/public/", "/assets/")
+    originalPath.substring(Play.application.path.toString.length, originalPath.length).replace("/public/", "/")
 }
