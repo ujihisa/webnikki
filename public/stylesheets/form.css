@@ -46,6 +46,10 @@ textarea:focus {
     border-color: #4697e4;
 }
 
+#drag-drop {
+    display: block;
+}
+
 @media (max-width: 768px) {
     form > div {
         margin: 0 0 15px 0; 
@@ -65,5 +69,8 @@ textarea:focus {
     textarea,
     select {
         width: 100%; 
+    }
+    #drag-drop {
+        display: none;
     }
 }
