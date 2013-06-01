@@ -18,3 +18,5 @@ bin
 .DS_Store
 /.settings
 /.target
+public/images/users/*
+
