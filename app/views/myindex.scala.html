@@ -20,7 +20,7 @@
     paging.getOrElse("prev", false) match {
       case true => {
         val prevPageNum = page - 1
-        Html(s"""<a href="$prevPageNum">&laquo; 古い記事</a>""")
+        Html(s"""<a href="/page/$prevPageNum">&laquo; 古い記事</a>""")
       }
       case false => Html("&laquo; 古い記事")
     }
@@ -31,7 +31,7 @@
     paging.getOrElse("next", false) match {
       case true => {
         val nextPageNum = page + 1
-        Html(s"""<a href="$nextPageNum">新しい記事 &raquo;</a>""")
+        Html(s"""<a href="/page/$nextPageNum">新しい記事 &raquo;</a>""")
       }
       case false => Html("新しい記事 &raquo;")
     }
