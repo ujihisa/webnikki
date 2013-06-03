@@ -1,4 +1,4 @@
-@(loginName: Option[String], css: String, js: String, uname: String, posts: List[models.Post])
+@(loginName: Option[String], css: String, js: String, uname: String, posts: List[models.Post], page: Int, paging: Map[String, Boolean])
 
 @import play.api.Play.current
 
@@ -13,6 +13,31 @@
   <div id="post-date">投稿日: <span>@{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(post.published_at)}</span></div>
   <hr class="entry-separator" />
 } 
+
+<div id="paging">
+  <div id="paging-left">
+  @{
+    paging.getOrElse("prev", false) match {
+      case true => {
+        val prevPageNum = page - 1
+        Html(s"""<a href="$prevPageNum">&laquo; 古い記事</a>""")
+      }
+      case false => Html("&laquo; 古い記事")
+    }
+  }
+  </div>
+  <div id="paging-right">
+  @{
+    paging.getOrElse("next", false) match {
+      case true => {
+        val nextPageNum = page + 1
+        Html(s"""<a href="$nextPageNum">新しい記事 &raquo;</a>""")
+      }
+      case false => Html("新しい記事 &raquo;")
+    }
+  }
+  </div>
+</div>
 
 <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/entry.css")">
 <style type="text/css">@Html(css)</style>

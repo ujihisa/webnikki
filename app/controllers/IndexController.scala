@@ -22,11 +22,15 @@ object IndexController extends Controller {
           val css = CustomData.loadCss(memberId, "list")
           val js = CustomData.loadJs(memberId, "list")
           println("counts", Post.countPostsByMemberId(memberId))
-          Ok(html.myindex(request.session.get("uname"),
+          Ok(html.myindex(
+            request.session.get("uname"),
             css,
             js,
             Util.getUnameFromSubdomain(request.domain),
-            Post.postsByMemberId(memberId, Some(0))))
+            Post.postsByMemberId(memberId, Some(0)),
+            1,
+            Map("prev" -> false, "next" -> false)
+          ))
         }
       }
     }
