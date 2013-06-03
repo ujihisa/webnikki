@@ -13,7 +13,7 @@ object RssController extends Controller {
     implicit request => {
       val uname = Util.getUnameFromSubdomain(request.domain)
       val memberId = Member.selectByUname(uname).get.id
-      val posts = Post.postsByMemberId(memberId)
+      val posts = Post.postsByMemberId(memberId, null)
       val rss =
         <rss version="2.0">
           <channel>

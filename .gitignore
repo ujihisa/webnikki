@@ -12,6 +12,8 @@ dist
 /.classpath
 /.project
 /RUNNING_PID
+/.ensime
+/.ensime_lucene
 
 bin
 .cache
@@ -19,4 +21,4 @@ bin
 /.settings
 /.target
 public/images/users/*
-
+logfile

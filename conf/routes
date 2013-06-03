@@ -4,6 +4,7 @@
 
 GET     /robots.txt                         controllers.IndexController.robots
 GET     /                                   controllers.IndexController.index
+GET     /page/:pageNum                      controllers.PageController.index(pageNum)
 GET     /signup                             controllers.SignupController.index
 POST    /signup                             controllers.SignupController.indexPost
 GET     /signup/tos                         controllers.SignupController.termsOfService

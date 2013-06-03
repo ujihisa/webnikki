@@ -21,7 +21,12 @@ object IndexController extends Controller {
           val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
           val css = CustomData.loadCss(memberId, "list")
           val js = CustomData.loadJs(memberId, "list")
-          Ok(html.myindex(request.session.get("uname"), css, js, Util.getUnameFromSubdomain(request.domain), Post.postsByMemberId(memberId)))
+          println("counts", Post.countPostsByMemberId(memberId))
+          Ok(html.myindex(request.session.get("uname"),
+            css,
+            js,
+            Util.getUnameFromSubdomain(request.domain),
+            Post.postsByMemberId(memberId, Some(0))))
         }
       }
     }

@@ -2,18 +2,19 @@
 
 @import play.api.Play.current
 
+@import java.util.Date
+@import com.tristanhunt.knockoff.DefaultDiscounter.{knockoff, toXHTML}
+
 @main(s"$uname のトップページ - web日記", loginName, Option(uname)) {
 
-<ul>
 @for(post <- posts) {
-  <li>
-    <a href="http://@{uname}.@{current.configuration.getString("service.domain")}/entry/@post.created_at">@if(post.title.isEmpty) {(タイトル未設定)} else {@post.title}</a>
-    /
-    @post.content
-  </li>
+  <h2 id="post-title"><a href="http://@{uname}.@{current.configuration.getString("service.domain")}/entry/@post.created_at">@if(post.title.isEmpty) {(タイトル未設定)} else {@post.title}</a></h2>
+  <div id="post-content">@(toXHTML(knockoff(post.content)))</div>
+  <div id="post-date">投稿日: <span>@{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(post.published_at)}</span></div>
+  <hr class="entry-separator" />
 } 
-</ul>
 
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/entry.css")">
 <style type="text/css">@Html(css)</style>
 <script type="text/javascript">@Html(js)</script>
 }

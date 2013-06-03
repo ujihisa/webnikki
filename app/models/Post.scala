@@ -25,16 +25,23 @@ object Post {
       case id~member_id~title~content~created_at~published_at => Post(id, member_id, title, content, created_at, published_at)
     }
   }
+  val articlesPerPage = 3
 
-  def postsByMemberId(memberId: Long, limit: Int = 0) = {
+  def postsByMemberId(memberId: Long, offset: Option[Int]) = {
     val sql =
-      if (limit == 0)
-        "SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id} ORDER BY id DESC"
-      else
-        s"SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id} ORDER BY id DESC LIMIT $limit"
+      offset match {
+        case Some(offset) => s"SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id} ORDER BY id DESC OFFSET $offset LIMIT $articlesPerPage"
+        case _ => "SELECT id, member_id, title, content, created_at, published_at FROM post WHERE member_id = {member_id} ORDER BY id DESC LIMIT $articlesPerPage"
+      }
 
     DB.withConnection {
       implicit c => SQL(sql).on("member_id" -> memberId).as(post *)
+    }
+  }
+
+  def countPostsByMemberId(memberId: Long) = {
+    DB.withConnection {
+      implicit c => SQL("SELECT COUNT(id) FROM post WHERE member_id = {member_id}").on("member_id" -> memberId).as(scalar[Long].single)
     }
   }
 
