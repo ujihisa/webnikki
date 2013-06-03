@@ -39,7 +39,7 @@ object Post {
     }
   }
 
-  def countPostsByMemberId(memberId: Long) = {
+  private def countPostsByMemberId(memberId: Long) = {
     DB.withConnection {
       implicit c => SQL("SELECT COUNT(id) FROM post WHERE member_id = {member_id}").on("member_id" -> memberId).as(scalar[Long].single)
     }
@@ -101,5 +101,11 @@ object Post {
     }
 
     created_at
+  }
+
+  def isNextPage(memberId: Long, currentPageNum: Int) = {
+    val count = countPostsByMemberId(memberId)
+
+    count > (currentPageNum * articlesPerPage)
   }
 }

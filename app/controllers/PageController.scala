@@ -21,10 +21,12 @@ object PageController extends Controller {
         css,
         js,
         Util.getUnameFromSubdomain(request.domain),
-        Post.postsByMemberId(memberId, Some(pageNum.toInt * Post.articlesPerPage)),
+        Post.postsByMemberId(memberId, Some((pageNum.toInt - 1) * Post.articlesPerPage)),
         pageNum.toInt,
-        Map("prev" -> false, "next" -> false)
-      ))
+        Map( 
+         "prev" -> (1 < pageNum.toInt),
+         "next" -> Post.isNextPage(memberId, pageNum.toInt)))
+      )
     }
   }
 }
