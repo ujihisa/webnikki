@@ -6,7 +6,14 @@
 @main("記事 - web日記", loginName, Option(uname)) {
 
 <div id="main">
-  <h2 id="post-title">@post.title<span id="post-edit"> - <a href="/post/@post.published_at">編集</a></span></h2>
+  <h2 id="post-title">@post.title
+    @{
+      loginName match {
+        case Some(name) if name == uname => Html(s"""<span id="post-edit"> - <a href="/post/${post.published_at}">編集</a></span>""")
+        case _ => ""
+      }
+    }
+  </h2>
 
   <div id="post-content">@(toXHTML(knockoff(post.content)))</div>
   <div id="post-date">投稿日: <span>@{"%tY/%<tm/%<td %<tH:%<tM:%<tS" format new Date(post.published_at)}</span></div>
