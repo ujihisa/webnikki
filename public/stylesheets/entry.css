@@ -9,10 +9,14 @@ div#post-content {
 }
 
 div#post-content > p,
-div#post-content > ul,
 div#post-content > pre,
 div#post-content > blockquote {
     margin: 5px 0 10px 10px;
+}
+
+div#post-content > ul,
+div#post-content > ol {
+    margin: 5px 0 10px 40px;
 }
 
 div#post-content > pre,
