@@ -22,7 +22,6 @@ $(function() {
                 });
             }
         }).fail(function(data) {
-            // shouldn't come here
             alert('エラー: ' + (data.message ? data.message : '不明なエラー'));
         });
 

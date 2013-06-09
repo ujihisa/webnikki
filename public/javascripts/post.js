@@ -35,6 +35,37 @@ $(function() {
         return false;
     });
 
+    $("#delete-article").click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/post/delete',
+            data: {
+                token: $('#token').val(),
+                title: 'dummy',
+                content: 'dummy',
+                created_at: $('#created_at').val()
+            }
+        }).done(function(data) {
+            if (data['success']) {
+                $().toastmessage('showToast', {
+                    text: '記事の削除に成功しました！',
+                    position: 'top-center',
+                    type: 'success',
+                    stayTime: 3000,
+                    close: function() { location.href = '/'; }
+                });
+            }
+        }).fail(function(data) {
+            $().toastmessage('showToast', {
+                text: '記事の削除に失敗しました...。',
+                position: 'top-center',
+                type: 'error',
+                stayTime: 3000,
+                close: function() {}
+            });
+        });
+    });
+
     var myDropzone = new Dropzone("#drag-drop",{
         url: "/image-post",
         parallelUploads: 1,

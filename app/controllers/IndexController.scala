@@ -21,7 +21,6 @@ object IndexController extends Controller {
           val memberId = Member.selectByUname(Util.getUnameFromSubdomain(request.domain)).get.id
           val css = CustomData.loadCss(memberId, "list")
           val js = CustomData.loadJs(memberId, "list")
-          // println("counts", Post.countPostsByMemberId(memberId))
           Ok(html.myindex(
             request.session.get("uname"),
             css,
@@ -31,7 +30,7 @@ object IndexController extends Controller {
             1,
             Map(
               "prev" -> false,
-              "next" -> Post.isNextPage(memberId, 1)))
+              "next" -> Post.hasNextPage(memberId, 1)))
           )
         }
       }

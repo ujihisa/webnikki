@@ -25,7 +25,7 @@ object PageController extends Controller {
         pageNum.toInt,
         Map( 
          "prev" -> (1 < pageNum.toInt),
-         "next" -> Post.isNextPage(memberId, pageNum.toInt)))
+         "next" -> Post.hasNextPage(memberId, pageNum.toInt)))
       )
     }
   }

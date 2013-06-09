@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+span#delete-article {
+    font-size: small;
+}
+
 div#drag-drop {
     border: solid 1px #ccc;
     padding: 10px;

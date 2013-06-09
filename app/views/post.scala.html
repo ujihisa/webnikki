@@ -28,6 +28,12 @@
     <div>
       <div>
         <input id="submit-button" type="submit" value="@if(postForm("title").value) {編集} else {投稿}" />
+        @{
+          postForm("created_at").value match {
+            case Some(x) => Html("""<span id="delete-article"><a href="javascript:void(0)">記事の削除</a></span>""")
+            case _ => ""
+          }
+        }
       </div>
     </div>
   </form>

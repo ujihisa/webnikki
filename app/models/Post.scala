@@ -103,7 +103,21 @@ object Post {
     created_at
   }
 
-  def isNextPage(memberId: Long, currentPageNum: Int) = {
+  def delete(member_id: Long, created_at: Long) = {
+    val sql = "DELETE FROM post WHERE member_id = {member_id} AND created_at = {created_at}"
+
+    DB.withConnection {
+      implicit c =>
+        SQL(sql).on(
+          "member_id" -> member_id,
+          "created_at" -> created_at
+        ).executeUpdate
+    }
+
+    true
+  }
+
+  def hasNextPage(memberId: Long, currentPageNum: Int) = {
     val count = countPostsByMemberId(memberId)
 
     count > (currentPageNum * articlesPerPage)

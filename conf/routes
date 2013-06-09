@@ -15,6 +15,7 @@ GET     /manage                             controllers.ManageController.index
 GET     /post                               controllers.PostController.index
 GET     /post/:createdAt                    controllers.PostController.indexEdit(createdAt)
 POST    /post                               controllers.PostController.indexPost
+POST    /post/delete                        controllers.PostController.deletePost
 POST    /image-post                         controllers.PostController.imagePost
 GET     /entry/:createdAt                   controllers.EntryController.index(createdAt)
 POST    /entry                              controllers.EntryController.indexPost

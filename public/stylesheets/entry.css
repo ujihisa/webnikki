@@ -15,7 +15,8 @@ div#post-content > blockquote {
 }
 
 div#post-content > ul,
-div#post-content > ol {
+div#post-content > ol,
+div#post-content > img {
     margin: 5px 0 10px 40px;
 }
 

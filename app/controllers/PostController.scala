@@ -23,7 +23,11 @@ object PostController extends Controller {
 
   def index = Action {
     implicit request =>
-      Ok(html.post(request.session.get("uname"), postForm.bind(Map("token" -> request.session.get("token").getOrElse("")))))
+      Ok(html.post(
+        request.session.get("uname"),
+        postForm.bind(Map(
+          "token" -> request.session.get("token").getOrElse("")
+        ))))
   }
 
   def indexEdit(createdAt: String) = Action {
@@ -68,6 +72,27 @@ object PostController extends Controller {
     }
   }
 
+  def deletePost = Action {
+    implicit request => {
+      try {
+        val (token, _, _, created_at) = postForm.bindFromRequest.get
+        if (token != (request.session.get("token").getOrElse(""))) throw new Exception("CSRFトークンが一致しません。")
+
+        val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
+        Post.delete(member.get.id, created_at.toLong)
+
+        Ok(Json.toJson(Map(
+          "success" -> Json.toJson(1)
+        )))
+      } catch {
+        case e: Exception => BadRequest(Json.toJson(Map(
+          "success" -> Json.toJson(0),
+          "message" -> Json.toJson("予期しないエラー " + e)
+        )))
+      }
+    }
+  }
+
   def imagePost = Action(parse.multipartFormData) {
     implicit request => {
       request.body.file("file").map { picture =>
@@ -91,7 +116,6 @@ object PostController extends Controller {
       }
     }
   }
-
 
   private def createEntryUrl(uname: String, createdAt: Long) = {
     "http://%s.%s%s/entry/%s" format
