@@ -35,17 +35,17 @@ object PostController extends Controller {
       try {
         val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
         val post = Post.postByMemberIdAndCreatedAt(member.get.id, createdAt.toLong).get
+        Ok(html.post(
+          request.session.get("uname"),
+          postForm.bind(Map(
+            "token" -> request.session.get("token").getOrElse(""),
+            "title" -> post.title,
+            "content" -> post.content,
+            "created_at" -> post.created_at.toString
+          ))))
       } catch {
         case e: Exception => BadRequest("編集する記事が存在しません。")
       }
-      Ok(html.post(
-          request.session.get("uname"),
-          postForm.bind(Map(
-          "token" -> request.session.get("token").getOrElse(""),
-          "title" -> post.title,
-          "content" -> post.content,
-          "created_at" -> post.created_at.toString
-          ))))
     }
   }
 
