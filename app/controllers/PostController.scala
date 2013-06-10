@@ -32,9 +32,12 @@ object PostController extends Controller {
 
   def indexEdit(createdAt: String) = Action {
     implicit request => {
-      val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
-
-      val post = Post.postByMemberIdAndCreatedAt(member.get.id, createdAt.toLong).get
+      try {
+        val member = Member.selectByUname(request.session.get("uname").getOrElse(""))
+        val post = Post.postByMemberIdAndCreatedAt(member.get.id, createdAt.toLong).get
+      } catch {
+        case e: Exception => BadRequest("編集する記事が存在しません。")
+      }
       Ok(html.post(
           request.session.get("uname"),
           postForm.bind(Map(
