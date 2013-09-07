@@ -1,5 +1,5 @@
 $(function() {
-    $('#manage-list > li > a').click(function () {
+    $('#css-js-manage-list > li > a').click(function () {
         var type = $(this).data('type');
         $('#code-div').show();
         $('#submit-div').show();
@@ -30,7 +30,7 @@ $(function() {
             (type.indexOf('css') < 0 ? '/js' : '/css') +
             (type.indexOf('list') < 0 ? '/page' : '/list') +
             '/' + $('#uname').val();
-            
+
         $.ajax({
             url: apiUrl
         }).done(function(data) {

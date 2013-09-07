@@ -1,19 +1,14 @@
-@(loginName: Option[String])
-
-@main("テスト - web日記", loginName, None) {
+@()
 
 <p>
-ファイルアップ
+Hey, totally new template!
 </p>
 
-<form action="/test" method="POST" enctype="multipart/form-data">
-  <input type="file" name="picture" />
-  <input type="submit" />
-</form>
+<ul>
+<li>@Messages("hello.world")</li>
+<li>@Messages("hello.world")(Lang("ja"))</li>
+<li>@Messages("hello.world")(Lang("en"))</li>
 
-<form action="/test" class="dropzone">
-</form>
-
-<script src="@routes.Assets.at("javascripts/dropzone-3.1.0.js")" type="text/javascript"></script>
-
-}
+<li>@Messages("login")(Lang("ja"))</li>
+<li>@Messages("Login")(Lang("ja"))</li>
+</ul>

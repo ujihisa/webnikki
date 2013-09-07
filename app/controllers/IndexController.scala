@@ -46,4 +46,9 @@ object IndexController extends Controller {
       "Disallow: /rss\n"
     Ok(robotsTxt)
   }
+
+  def test = Action {
+    // Ok("Hello")
+    Ok(html.test())
+  }
 }

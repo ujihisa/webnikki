@@ -1,0 +1,5 @@
+service.name="ウェブ日記"
+service.login="ログイン"
+
+login=ログイン1
+Login=ログイン2
