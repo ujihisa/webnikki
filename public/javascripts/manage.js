@@ -1,4 +1,6 @@
 $(function() {
+    $('#personal-setting > li > a').click(function () { /* TODO: implement new event. */ });
+
     $('#css-js-manage-list > li > a').click(function () {
         var type = $(this).data('type');
         $('#code-div').show();
@@ -8,16 +10,16 @@ $(function() {
         var purpose = '';
         switch (type) {
         case 'list-css-edit':
-            targetText = '(一覧ページの CSS 編集)';
+            targetText = '一覧ページの CSS 編集';
             break;
         case 'page-css-edit':
-            targetText = '(個別記事ページの CSS 編集)';
+            targetText = '個別記事ページの CSS 編集';
             break;
         case 'list-js-edit':
-            targetText = '(一覧ページの JavaScript 編集)';
+            targetText = '一覧ページの JavaScript 編集';
             break;
         case 'page-js-edit':
-            targetText = '(個別記事ページの JavaScript 編集)';
+            targetText = '個別記事ページの JavaScript 編集';
             break;
         default:
             break;

@@ -8,7 +8,8 @@
     <input id="uname" type="hidden" name="uname" value="@loginName" />
     <header>
       <div>
-        <p>CSS / JavaScript 編集 <span id="code-target"></span></p>
+        <!-- <p>CSS / JavaScript 編集 <span id="code-target"></span></p> -->
+        <p><span id="code-target">メニューから操作を選択してください</span></p>
       </div>
     </header>
 
@@ -29,6 +30,14 @@
 
 
 <div id="sub">
+  <h3>設定</h3>
+  <nav>
+    <ul id="personal-setting">
+      <li><a href="javascript:void(0)">個人設定</a></li>
+    </ul>
+  </nav>
+
+  <h3>CSS / JS 編集</h3>
   <nav>
     <ul id="css-js-manage-list">
       <li><a href="javascript:void(0)" data-type="list-css-edit">一覧ページの CSS 編集</a></li>
@@ -37,6 +46,7 @@
       <li><a href="javascript:void(0)" data-type="page-js-edit">個別記事ページの JavaScript 編集</a></li>
     </ul>
   </nav>
+
 </div>
 
 <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/form.css")">
