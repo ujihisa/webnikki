@@ -23,7 +23,7 @@ Add following lines to /etc/hosts
 
 ### Deploy and Run
 
-    $ git clone https://github.com/mahata/webnikki.git
+    $ git clone git@github.com:mahata/webnikki.git
     $ cd webnikki
     $ play "run 9005"
 

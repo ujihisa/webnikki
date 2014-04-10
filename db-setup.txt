@@ -1,3 +1,0 @@
-$ pg_ctl -D /Users/mahata/postgres -l logfile start
-$ createdb -O mahata -U mahata -E utf8 web-nikki
-$ psql -d web-nikki
