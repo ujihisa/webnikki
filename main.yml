@@ -1,10 +1,10 @@
 ---
 - hosts: default
   user: vagrant
-  sudo: yes
+  sudo: true
   tasks:
-    name: Dummy
-    shell: touch /tmp/dummy
+    - name: Dummy
+      shell: touch /tmp/dummy
 
-    name: Dummy2
-    debug: msg="Hello, world!"
+    - name: Dummy2
+      debug: msg="Hello, world!"
