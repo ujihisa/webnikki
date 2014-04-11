@@ -3,8 +3,31 @@
   user: vagrant
   sudo: true
   tasks:
-    - name: Dummy
-      shell: touch /tmp/dummy
+    - name: Install apt-packages
+      apt: pkg={{item}} state=latest update_cache=yes
+      with_items:
+        - postgresql-9.1
+        - postgresql-contrib-9.1
+        - python-psycopg2
+
+    - name: update postgres password
+      command: sudo -u postgres psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'dbpass';"
+
+    - name: Create Postgres user
+      postgresql_user: login_host=127.0.0.1 login_password=dbpass name=dbuser password=dbpass
+
+    - name: Create Postgres database
+      postgresql_db: login_host=127.0.0.1 login_password=dbpass name=dbname owner=dbuser encoding='UTF-8'
+
+    - name: Grant Posgres permissions
+      postgresql_privs: >
+        login_host=127.0.0.1
+        login_password=dbpass
+        db=dbname
+        privs=ALL
+        type=database
+        obj=dbname
+        role=dbuser
 
     - name: Dummy2
       debug: msg="Hello, world!"
