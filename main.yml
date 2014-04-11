@@ -1,0 +1,10 @@
+---
+- hosts: default
+  user: vagrant
+  sudo: yes
+  tasks:
+    name: Dummy
+    shell: touch /tmp/dummy
+
+    name: Dummy2
+    debug: msg="Hello, world!"
