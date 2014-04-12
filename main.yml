@@ -40,6 +40,3 @@
         type=database
         obj=dbname
         role=dbuser
-
-    - name: Dummy2
-      debug: msg="Hello, world!"
