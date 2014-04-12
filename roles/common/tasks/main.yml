@@ -1,0 +1,12 @@
+---
+- name: Add Locale
+  lineinfile: dest=/etc/locale.gen create=yes line="en_US.UTF-8 UTF-8" regexp="^en_US.UTF-8" insertafter=EOF
+
+- name: Regen locale
+  command: /usr/sbin/locale-gen
+
+- name: Install apt-packages
+  apt: pkg={{item}} state=latest update_cache=yes
+  with_items:
+    - zip
+    - unzip
