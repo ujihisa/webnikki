@@ -2,7 +2,15 @@
 - hosts: default
   user: vagrant
   sudo: true
+  vars:
+    locale: en_US.UTF-8
   tasks:
+    - name: Add Locale
+      lineinfile: dest=/etc/locale.gen create=yes line="en_US.UTF-8 UTF-8" regexp="^en_US.UTF-8" insertafter=EOF
+
+    - name: Regen locale
+      command: /usr/sbin/locale-gen
+
     - name: Install apt-packages
       apt: pkg={{item}} state=latest update_cache=yes
       with_items:
@@ -12,6 +20,10 @@
 
     - name: update postgres password
       command: sudo -u postgres psql -c "ALTER USER postgres WITH ENCRYPTED PASSWORD 'dbpass';"
+
+    - name: postgresql - create db
+      sudo_user: postgres
+      postgresql_db: name=dbname encoding="UTF-8" lc_collate="en_US.UTF-8" lc_ctype="en_US.UTF-8" template='template0'
 
     - name: Create Postgres user
       postgresql_user: login_host=127.0.0.1 login_password=dbpass name=dbuser password=dbpass
