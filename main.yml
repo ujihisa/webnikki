@@ -5,5 +5,6 @@
   vars:
     locale: en_US.UTF-8
   roles:
+    - { role: common }
     - { role: postgres }
     - { role: playframework }
