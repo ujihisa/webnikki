@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "webnikki"
   config.ssh.username = "vagrant"
   config.vm.network :private_network, ip: "192.168.37.24"
-  config.vm.synced_folder "www", "/home/vagrant/www", :nfs => true
+  config.vm.synced_folder "www", "/home/vagrant/playframework", :nfs => true
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", 2048]
