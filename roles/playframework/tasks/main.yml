@@ -1,0 +1,23 @@
+---
+- name: Install apt-packages
+  apt: pkg={{item}} state=latest update_cache=yes
+  with_items:
+    - openjdk-7-jdk
+
+- name: Download Play Framework
+  get_url: url="https://dl.dropboxusercontent.com/s/uu22h9j4u72jpz6/play-2.1.5.zip" dest=/tmp
+
+- name: Make sure /usr/local/ansible directory exists
+  file: path=/usr/local/ansible state=directory mode=0755
+
+- name: Unzip Play Framework
+  shell: unzip -u /tmp/play-2.1.5.zip -d /usr/local/ansible
+
+- name: Build Play Framework
+  shell: cd /usr/local/ansible/play-2.1.5/framework; ./build publish-local
+
+- name: Change Play Framework owner
+  shell: chown -R vagrant:vagrant /usr/local/ansible/play-2.1.5
+
+- name: Dummy
+  debug: msg="Hey"
