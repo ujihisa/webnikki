@@ -8,6 +8,8 @@
 - name: Install apt-packages
   apt: pkg={{item}} state=latest update_cache=yes
   with_items:
+    - vim
+    - zsh
     - git
     - zip
     - unzip
