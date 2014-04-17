@@ -13,3 +13,9 @@
     - git
     - zip
     - unzip
+
+- name: Copy .zshrc
+  copy: src=.zshrc dest=/home/vagrant/.zshrc
+
+- name: Change login shell to ZSH
+  user: name=vagrant shell=/usr/bin/zsh
