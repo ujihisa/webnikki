@@ -25,7 +25,7 @@ Add following lines to /etc/hosts
 
     $ git clone git@github.com:mahata/webnikki.git
     $ cd webnikki
-    $ play "run 9005"
+    $ play "run -Dconfig.file=conf/dev.conf 9005"
 
 Now, you can access to the service via http://localhost.com:9005
 
