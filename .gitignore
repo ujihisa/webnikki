@@ -23,3 +23,7 @@ bin
 /.target
 public/images/users/*
 logfile
+
+.idea
+.idea_modules
+playframework.iml
