@@ -43,3 +43,7 @@ SAVEHIST=5000000
 # Alias
 alias -g L="| less"
 alias -g G="| grep"
+
+# Path
+export PATH=/usr/local/ansible/play-2.1.5:$PATH
+export PATH=.:$PATH
