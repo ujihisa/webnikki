@@ -27,3 +27,5 @@ logfile
 .idea
 .idea_modules
 playframework.iml
+
+/play/play-2.1.5
