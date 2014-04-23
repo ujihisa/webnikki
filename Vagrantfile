@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
   config.ssh.username = "vagrant"
   config.vm.network :private_network, ip: "192.168.37.24"
   config.vm.synced_folder "src", "/home/vagrant/src", :nfs => true
+  config.vm.synced_folder "play", "/home/vagrant/play", :nfs => true
 
   config.vm.network :forwarded_port, guest: 9005, host: 9005
 
