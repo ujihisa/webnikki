@@ -1,32 +1,45 @@
 # webnikki Starting Guide
 
-## Setup for localhost
+## What's webnikki
 
-It requires following software:
+nikki (日記) is a word which means diary. webnikki is a service to publish your nikki on web :)
 
-* Play Framework (version 2.1.0 or above)
-* PostgreSQL (version 9.1.8 or above)
+## Requirements
 
-### Modify /etc/hosts
+* Vagrant 1.4.3 (or above)
+* Ansible 1.5.4 (or above)
+* Play Framework 2.1.5
 
-Add following lines to /etc/hosts
+## How to setup
 
-    127.0.0.1	localhost.com
-    127.0.0.1	foo.localhost.com
-    127.0.0.1	bar.localhost.com
+```
+(local) git clone https://github.com/mahata/webnikki.git
+(local) cd webnikki
+(local) vagrant up
+(local) vagrant provision
+(local) vagrant ssh
+(vm) cd ~/src
+(vm) play "run -Dconfig.file=conf/dev.conf"
+```
 
-*foo.localhost.com* and *bar.localhost.com* allow you to create user "foo" and "bar".  If you want to make other users, please add lines for the users.
+You'll be access to http://localhost:9000/ now!
 
-### Create Database for webnikki
+## How to hack
 
-    $ createdb -O YOURUSERNAME -U YOURUSERNAME -E utf8 webnikki
+You can change Scala code under `PATH/TO/webnikki/src` directly since it's NFS mounted.
 
-### Deploy and Run
+### How to hack with IntelliJ
 
-    $ git clone git@github.com:mahata/webnikki.git
-    $ cd webnikki
-    $ play "run -Dconfig.file=conf/dev.conf 9005"
+Provided you have Play Framework 2.1.5 in your `$PATH` and yoru IntelliJ has Scala plugin, run following commands:
 
-Now, you can access to the service via http://localhost.com:9005
+```
+(local) cd /PATH/TO/webnikki/src
+(local) play
+(play) idea with-sources=yes
+```
 
+Once it's done, do followings:
 
+* Open IntelliJ
+* Open Project -> /PATH/TO/webnikki/src
+* Happy Hacking!
