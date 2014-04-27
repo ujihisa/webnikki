@@ -1,7 +1,6 @@
 # webnikki Starting Guide
 
-![Build Status](https://secure.travis-ci.org/mahata/webnikki.png?branch=master)](https://travis-ci.org/mahata/webnikki)
-
+[![Build Status](https://secure.travis-ci.org/mahata/webnikki.png?branch=master)](https://travis-ci.org/mahata/webnikki)
 
 ## What's webnikki
 
