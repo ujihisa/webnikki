@@ -1,0 +1,8 @@
+language: scala
+script:
+  - play test
+notifications:
+  email:
+    recipients:
+      - mahata777@gmail.com
+    on_failure: always

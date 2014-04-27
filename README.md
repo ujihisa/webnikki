@@ -1,5 +1,7 @@
 # webnikki Starting Guide
 
+[![Build Status](https://secure.travis-ci.org/mahata/webnikki.png?branch=master](https://travis-ci.org/mahata/webnikki)
+
 ## What's webnikki
 
 nikki (日記) is a word which means diary. webnikki is a service to publish your nikki on web :)
