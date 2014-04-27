@@ -24,6 +24,16 @@ nikki (日記) is a word which means diary. webnikki is a service to publish you
 
 You'll be access to http://localhost:9000/ now!
 
+## How to run tests
+
+```
+(local) vagrant up
+(local) vagrant provision  # If it's not provisioned yet
+(local) vagrant ssh
+(vm) cd ~/src
+(vm) play test
+```
+
 ## How to hack
 
 You can change Scala code under `PATH/TO/webnikki/src` directly since it's NFS mounted.
