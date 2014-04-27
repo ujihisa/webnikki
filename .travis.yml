@@ -1,6 +1,11 @@
 language: scala
+env:
+  - PLAY_VERSION=2.1.5
+before_script:
+  - wget https://dl.dropboxusercontent.com/s/uu22h9j4u72jpz6/play-${PLAY_VERSION}.zip
+  - unzip -q play-${PLAY_VERSION}.zip
 script:
-  - play test
+  - play-${PLAY_VERSION}/play test
 notifications:
   email:
     recipients:
