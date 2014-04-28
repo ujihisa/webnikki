@@ -18,6 +18,7 @@ class ApplicationSpec extends Specification {
         status(failureAccess) must equalTo(NOT_FOUND)
       }
     }
+  }
 
 //    "render the index page" in {
 //      running(FakeApplication()) {
@@ -28,5 +29,4 @@ class ApplicationSpec extends Specification {
 //        contentAsString(home) must contain ("Your new application is ready.")
 //      }
 //    }
-  }
 }
